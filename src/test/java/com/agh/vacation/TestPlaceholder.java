@@ -1,4 +1,4 @@
-package com.agh;
+package com.agh.vacation;
 
 public class TestPlaceholder {
 }
