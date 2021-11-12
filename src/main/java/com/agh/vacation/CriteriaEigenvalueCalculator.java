@@ -7,8 +7,8 @@ import org.apache.commons.math3.linear.RealVector;
 import java.util.EnumMap;
 import java.util.Map;
 
-import static com.agh.vacation.MathUtilFunctions.*;
 import static com.agh.vacation.MathUtilFunctions.maxElementIndex;
+import static com.agh.vacation.MathUtilFunctions.truncateDouble;
 
 /**
  * @author Filip Piwosz
@@ -70,7 +70,7 @@ class CriteriaEigenvalueCalculator {
             sum += entry;
         }
         if (sum == 0.) {
-            throw new IllegalArgumentException();
+            return;
         }
         for (int i = 0; i < vectorDimension; i++) {
             double entry = vector.getEntry(i);
