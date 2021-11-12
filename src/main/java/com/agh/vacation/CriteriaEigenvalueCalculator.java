@@ -7,6 +7,7 @@ import org.apache.commons.math3.linear.RealVector;
 import java.util.EnumMap;
 import java.util.Map;
 
+import static com.agh.vacation.MathUtilFunctions.*;
 import static com.agh.vacation.MathUtilFunctions.maxElementIndex;
 
 /**
@@ -46,7 +47,7 @@ class CriteriaEigenvalueCalculator {
         for (Criterion criterion : indexMap.keySet()) {
             int index = indexMap.get(criterion);
             double priorityValue = vector.getEntry(index);
-            priorityValue = MathUtilFunctions.truncateDouble(priorityValue, truncation);
+            priorityValue = truncateDouble(priorityValue, truncation);
             result.put(criterion, priorityValue);
         }
 
