@@ -28,7 +28,6 @@ class MathUtilFunctions {
     }
 
     private static boolean arrayIsProper(double[] arr) {
-        boolean result = arr != null && arr.length != 0;
-        return result;
+        return arr != null && arr.length != 0;
     }
 }
