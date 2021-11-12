@@ -2,7 +2,6 @@ package com.agh.vacation;
 
 import org.apache.commons.math3.linear.Array2DRowRealMatrix;
 import org.apache.commons.math3.linear.RealMatrix;
-import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.util.EnumMap;
