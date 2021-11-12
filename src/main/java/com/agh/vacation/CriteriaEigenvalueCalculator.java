@@ -62,8 +62,8 @@ class CriteriaEigenvalueCalculator {
 
     private void applyScaling(RealVector vector) {
         double sum = 0;
-        int n = vector.getDimension();
-        for (int i = 0; i < n; i++) {
+        int vectorDimension = vector.getDimension();
+        for (int i = 0; i < vectorDimension; i++) {
             double entry = vector.getEntry(i);
             entry = Math.abs(entry);
             vector.setEntry(i, entry);
@@ -72,7 +72,7 @@ class CriteriaEigenvalueCalculator {
         if (sum == 0.) {
             throw new IllegalArgumentException();
         }
-        for (int i = 0; i < n; i++) {
+        for (int i = 0; i < vectorDimension; i++) {
             double entry = vector.getEntry(i);
             vector.setEntry(i, entry / sum);
         }
