@@ -7,7 +7,7 @@ import org.apache.commons.math3.linear.RealVector;
 import java.util.EnumMap;
 import java.util.Map;
 
-import static java.lang.Math.*;
+import static java.lang.Math.floor;
 import static java.lang.Math.pow;
 
 /**
