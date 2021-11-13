@@ -7,7 +7,7 @@ import java.util.Arrays;
 /**
  * @author Filip Piwosz
  */
-record ComparisonMatrix(RealMatrix matrix, IndexMap indexMap) {
+record ComparisonMatrix<T extends PairwiseComparableObject>(RealMatrix matrix, IndexMap<T> indexMap) {
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();

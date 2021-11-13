@@ -12,10 +12,10 @@ class FinalScoreCalculator {
         Map<VacationDestination, Double> result = new HashMap<>();
         for (VacationDestination destination : destinationCriteriaRatingsMap.keySet()) {
             CriteriaScores scores = destinationCriteriaRatingsMap.get(destination);
-            Double sum = 0.;
-            for (Criterion criterion : criteriaPriorities.keySet()) {
-                Double score = scores.scoreFor(criterion);
-                Double priority = criteriaPriorities.get(criterion);
+            double sum = 0.;
+            for (Map.Entry<Criterion, Double> entry : criteriaPriorities.entrySet()) {
+                Double score = scores.scoreFor(entry.getKey());
+                Double priority = entry.getValue();
 
                 sum += score * priority;
             }

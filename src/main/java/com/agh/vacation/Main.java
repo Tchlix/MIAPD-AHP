@@ -25,13 +25,13 @@ public class Main {
                 {1. / 7., 1. / 5., 1. / 3., 1, 3},
                 {1. / 9., 1. / 7., 1. / 5., 1. / 3., 1}
         });
-        IndexMap indexMap = new IndexMap(new HashMap<>());
+        IndexMap<Criterion> indexMap = new IndexMap<>(new HashMap<>());
         indexMap.put(vfm, 0);
         indexMap.put(sights, 1);
         indexMap.put(museums, 2);
         indexMap.put(food, 3);
         indexMap.put(nl, 4);
-        ComparisonMatrix criteriaComparisonMatrix = new ComparisonMatrix(criteriaMatrix, indexMap);
+        ComparisonMatrix<Criterion> criteriaComparisonMatrix = new ComparisonMatrix<>(criteriaMatrix, indexMap);
 
         //Load destinations
         VacationDestination lisbon = lisbon();
@@ -40,9 +40,19 @@ public class Main {
         //Create a map of PC matrices based on destination ratings for each criterion
 
         CriteriaComparisonMatricesCreator creator = new CriteriaComparisonMatricesCreator();
-        Map<Criterion, ComparisonMatrix> criterionComparisonMatrixMap =
+        Map<Criterion, ComparisonMatrix<VacationDestination>> criterionComparisonMatrixMap =
                 creator.create(List.of(vfm, sights, museums, food, nl), List.of(lisbon, munich));
         System.out.println(criterionComparisonMatrixMap);
+
+        CriteriaScoreCalculator calculator = new CriteriaScoreCalculator();
+
+        Map<VacationDestination, CriteriaScores> criteriaScoresMap = calculator.calculateCriteriaScores(List.of(lisbon, munich), criterionComparisonMatrixMap);
+
+        FinalScoreCalculator calculator1 = new FinalScoreCalculator();
+        EigenvalueCalculator calculator2 = new EigenvalueCalculator();
+        var z =calculator2.calculateEigenvalues(criteriaComparisonMatrix,3);
+        System.out.println(calculator1.finalScore(z,criteriaScoresMap));
+
 
         //create empty map<Destination, FinalScore>
         //for each destination

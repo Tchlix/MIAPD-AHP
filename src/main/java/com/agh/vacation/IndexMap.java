@@ -6,22 +6,22 @@ import java.util.Set;
 /**
  * @author Filip Piwosz
  */
-class IndexMap {
-    private final Map<PairwiseComparableObject, Integer> map;
+class IndexMap <T extends PairwiseComparableObject> {
+    final Map<T, Integer> map;
 
-    public IndexMap(Map<PairwiseComparableObject, Integer> map) {
+    public IndexMap(Map<T, Integer> map) {
         this.map = map;
     }
 
-    public void put(PairwiseComparableObject key, Integer value) {
+    public void put(T key, Integer value) {
         this.map.put(key, value);
     }
 
-    public Integer get(PairwiseComparableObject key) {
+    public Integer get(Object key) {
         return this.map.get(key);
     }
 
-    public Set<PairwiseComparableObject> keySet() {
+    public Set<T> keySet() {
         return this.map.keySet();
     }
 

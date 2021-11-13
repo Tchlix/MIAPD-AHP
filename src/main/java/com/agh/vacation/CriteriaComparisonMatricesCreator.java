@@ -17,8 +17,8 @@ import static java.lang.Math.abs;
  */
 class CriteriaComparisonMatricesCreator {
 
-    Map<Criterion, ComparisonMatrix> create(List<Criterion> criteria, List<VacationDestination> destinations) {
-        Map<Criterion, ComparisonMatrix> result = new HashMap<>();
+    Map<Criterion, ComparisonMatrix<VacationDestination>> create(List<Criterion> criteria, List<VacationDestination> destinations) {
+        Map<Criterion, ComparisonMatrix<VacationDestination>> result = new HashMap<>();
         IndexMap indexMap = creteIndexMap(destinations);
         for (Criterion criterion : criteria) {
             ComparisonMatrix matrix = createComparisonMatrix(criterion, destinations, indexMap);

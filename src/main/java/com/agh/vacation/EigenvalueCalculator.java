@@ -35,16 +35,15 @@ class EigenvalueCalculator {
      * @return Map of criteria with respective scaled priorities
      */
 
-    Map<PairwiseComparableObject, Double> calculateEigenvalues(ComparisonMatrix comparisonMatrix, int truncation) {
+    <T extends PairwiseComparableObject> Map<T, Double> calculateEigenvalues(ComparisonMatrix<T> comparisonMatrix, int truncation) {
         RealMatrix matrix = comparisonMatrix.matrix();
-        IndexMap indexMap = comparisonMatrix.indexMap();
+        IndexMap<T> indexMap = comparisonMatrix.indexMap();
         EigenDecomposition decomposition = new EigenDecomposition(matrix);
-        Map<PairwiseComparableObject, Double> result = new HashMap<>();
+        Map<T, Double> result = new HashMap<>();
 
         RealVector vector = maxEigenValueVector(decomposition);
         applyScaling(vector);
-
-        for (PairwiseComparableObject obj : indexMap.keySet()) {
+        for (T obj : indexMap.keySet()) {
             int index = indexMap.get(obj);
             double value = vector.getEntry(index);
             value = truncateDouble(value, truncation);

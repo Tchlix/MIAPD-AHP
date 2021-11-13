@@ -16,4 +16,8 @@ class CriteriaScores {
         return this.criteriaScores.get(criterion);
     }
 
+    void putScoreFor(Criterion criterion, Double score) {
+        this.criteriaScores.put(criterion, score);
+    }
+
 }
