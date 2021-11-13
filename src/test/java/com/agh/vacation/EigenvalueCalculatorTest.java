@@ -44,7 +44,7 @@ public class EigenvalueCalculatorTest {
         expected.put(MUSEUMS, .063);
         expected.put(FOOD, .033);
         // When
-        Map<EnumKeys, Double> actual = calculator.calculateCriteriaPriorities(comparisonMatrix, 3);
+        Map<EnumKeys, Double> actual = calculator.calculatePriorities(comparisonMatrix, 3);
         // Then
         assertEquals(actual, expected);
     }

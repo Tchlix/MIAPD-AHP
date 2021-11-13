@@ -35,7 +35,7 @@ class EigenvalueCalculator {
      * @return Map of criteria with respective scaled priorities
      */
 
-    Map<EnumKeys, Double> calculateCriteriaPriorities(ComparisonMatrix comparisonMatrix, int truncation) {
+    Map<EnumKeys, Double> calculatePriorities(ComparisonMatrix comparisonMatrix, int truncation) {
         RealMatrix matrix = comparisonMatrix.matrix();
         Map<EnumKeys, Integer> indexMap = comparisonMatrix.indexMap();
         EigenDecomposition decomposition = new EigenDecomposition(matrix);

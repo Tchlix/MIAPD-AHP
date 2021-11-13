@@ -13,12 +13,12 @@ public class Matrixes {
             {1, 1, 1, 1, 1}
     });
     final static RealMatrix matrixValueForMoney = new Array2DRowRealMatrix(new double[][]{
-                    //Venice    Rome    Lisbon     Madrid     Warsaw
-            /*Venice*/{1,       1./3,       1./4,      1./4,      1./4},
-            /*Rome*/  {3./1,      1,        3./4,      3./4,      3./4},
-            /*Lisbon*/{4./1,      4./3,       1,       4./4,      4./4},
-            /*Madrid*/{4./1,      4./3,       4./4,      1,       4./4},
-            /*Warsaw*/{4./1,      4./3,       4./4,      4./4,       1},
+                    //Venice     Rome       Lisbon     Madrid     Warsaw
+            /*Venice*/{1,        1./3,       1./4,      1./4,      1./4},
+            /*Rome*/  {3./1,      1,         3./4,      3./4,      3./4},
+            /*Lisbon*/{4./1,     4./3,        1,        4./4,      4./4},
+            /*Madrid*/{4./1,     4./3,       4./4,       1,        4./4},
+            /*Warsaw*/{4./1,     4./3,       4./4,      4./4,         1},
     });
     final static RealMatrix matrixNightLife = new Array2DRowRealMatrix(new double[][]{
                     //Venice    Rome      Lisbon     Madrid      Warsaw
