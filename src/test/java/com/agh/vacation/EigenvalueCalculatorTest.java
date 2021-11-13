@@ -4,7 +4,7 @@ import org.apache.commons.math3.linear.Array2DRowRealMatrix;
 import org.apache.commons.math3.linear.RealMatrix;
 import org.testng.annotations.Test;
 
-import java.util.EnumMap;
+import java.util.HashMap;
 import java.util.Map;
 
 import static org.testng.Assert.assertEquals;
@@ -12,7 +12,7 @@ import static org.testng.Assert.assertEquals;
 /**
  * @author Filip Piwosz
  */
-public class CriteriaEigenvalueCalculatorTest {
+public class EigenvalueCalculatorTest {
 
     @Test
     public void calculateCriteriaPriorities_properCriteriaComparisonMatrix_calculatesExpectedMap() {
@@ -24,24 +24,30 @@ public class CriteriaEigenvalueCalculatorTest {
                 {1. / 7., 1. / 5., 1. / 3., 1, 3},
                 {1. / 9., 1. / 7., 1. / 5., 1. / 3., 1}
         });
-        Map<Criterion, Integer> criterionIndexMap = new EnumMap<>(Criterion.class);
-        criterionIndexMap.put(Criterion.VALUE_FOR_MONEY, 0);
-        criterionIndexMap.put(Criterion.NIGHT_LIFE, 1);
-        criterionIndexMap.put(Criterion.SIGHTS, 2);
-        criterionIndexMap.put(Criterion.MUSEUMS, 3);
-        criterionIndexMap.put(Criterion.FOOD, 4);
+        Criterion vfm = new Criterion("Value for money");
+        Criterion sights = new Criterion("Sights");
+        Criterion museums = new Criterion("Museums");
+        Criterion food = new Criterion("Food");
+        Criterion nl = new Criterion("Night life");
+
+        Map<Criterion, Integer> criterionIndexMap = new HashMap<>();
+        criterionIndexMap.put(vfm, 0);
+        criterionIndexMap.put(sights, 1);
+        criterionIndexMap.put(museums, 2);
+        criterionIndexMap.put(food, 3);
+        criterionIndexMap.put(nl, 4);
 
         CriteriaComparisonMatrix comparisonMatrix = new CriteriaComparisonMatrix(matrix, criterionIndexMap);
 
-        CriteriaEigenvalueCalculator calculator = new CriteriaEigenvalueCalculator();
+        EigenvalueCalculator calculator = new EigenvalueCalculator();
 
         //calculated with matrixcalc.org
-        Map<Criterion, Double> expected = new EnumMap<>(Criterion.class);
-        expected.put(Criterion.VALUE_FOR_MONEY, .512);
-        expected.put(Criterion.NIGHT_LIFE, .261);
-        expected.put(Criterion.SIGHTS, .128);
-        expected.put(Criterion.MUSEUMS, .063);
-        expected.put(Criterion.FOOD, .033);
+        Map<Criterion, Double> expected = new HashMap<>();
+        expected.put(vfm, .512);
+        expected.put(sights, .261);
+        expected.put(museums, .128);
+        expected.put(food, .063);
+        expected.put(nl, .033);
         // When
         Map<Criterion, Double> actual = calculator.calculateCriteriaPriorities(comparisonMatrix, 3);
         // Then

@@ -5,6 +5,7 @@ import org.apache.commons.math3.linear.RealMatrix;
 import org.apache.commons.math3.linear.RealVector;
 
 import java.util.EnumMap;
+import java.util.HashMap;
 import java.util.Map;
 
 import static com.agh.vacation.MathUtilFunctions.maxElementIndex;
@@ -13,7 +14,7 @@ import static com.agh.vacation.MathUtilFunctions.truncateDouble;
 /**
  * @author Filip Piwosz
  */
-class CriteriaEigenvalueCalculator {
+class EigenvalueCalculator {
 
     /**
      * https://en.wikipedia.org/wiki/Perron%E2%80%93Frobenius_theorem
@@ -39,7 +40,7 @@ class CriteriaEigenvalueCalculator {
         RealMatrix matrix = comparisonMatrix.matrix();
         Map<Criterion, Integer> indexMap = comparisonMatrix.indexMap();
         EigenDecomposition decomposition = new EigenDecomposition(matrix);
-        Map<Criterion, Double> result = new EnumMap<>(Criterion.class);
+        Map<Criterion, Double> result = new HashMap<>();
 
         RealVector vector = maxEigenValueVector(decomposition);
         applyScaling(vector);
