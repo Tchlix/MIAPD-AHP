@@ -40,8 +40,9 @@ public class Main {
         //Create a map of PC matrices based on destination ratings for each criterion
 
         CriteriaComparisonMatricesCreator creator = new CriteriaComparisonMatricesCreator();
-
-        System.out.println(creator.create(List.of(vfm, sights, museums, food, nl), List.of(lisbon, munich)));
+        Map<Criterion, ComparisonMatrix> criterionComparisonMatrixMap =
+                creator.create(List.of(vfm, sights, museums, food, nl), List.of(lisbon, munich));
+        System.out.println(criterionComparisonMatrixMap);
 
         //create empty map<Destination, FinalScore>
         //for each destination

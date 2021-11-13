@@ -46,9 +46,9 @@ class EigenvalueCalculator {
 
         for (PairwiseComparableObject obj : indexMap.keySet()) {
             int index = indexMap.get(obj);
-            double priorityValue = vector.getEntry(index);
-            priorityValue = truncateDouble(priorityValue, truncation);
-            result.put(obj, priorityValue);
+            double value = vector.getEntry(index);
+            value = truncateDouble(value, truncation);
+            result.put(obj, value);
         }
 
         return result;
