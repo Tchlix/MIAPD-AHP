@@ -14,6 +14,7 @@ import static com.agh.vacation.MathUtilFunctions.truncateDouble;
  * @author Filip Piwosz
  */
 class EigenvalueCalculator {
+    private static final int DEFAULT_TRUNCATION = 3;
 
     /**
      * https://en.wikipedia.org/wiki/Perron%E2%80%93Frobenius_theorem
@@ -31,11 +32,10 @@ class EigenvalueCalculator {
      * we can do this, since the respective scale of 2 comparable object values doesn't change
      *
      * @param comparisonMatrix - Pairwise Comparison matrix for criteria
-     * @param truncation       - truncation for double type values
      * @return Map of criteria with respective scaled priorities
      */
 
-    <T extends PairwiseComparableObject> Map<T, Double> calculateEigenvalues(ComparisonMatrix<T> comparisonMatrix, int truncation) {
+    <T extends PairwiseComparableObject> Map<T, Double> calculateEigenvalues(ComparisonMatrix<T> comparisonMatrix) {
         RealMatrix matrix = comparisonMatrix.matrix();
         IndexMap<T> indexMap = comparisonMatrix.indexMap();
         EigenDecomposition decomposition = new EigenDecomposition(matrix);
@@ -46,7 +46,7 @@ class EigenvalueCalculator {
         for (T obj : indexMap.keySet()) {
             int index = indexMap.get(obj);
             double value = vector.getEntry(index);
-            value = truncateDouble(value, truncation);
+            value = truncateDouble(value, DEFAULT_TRUNCATION);
             result.put(obj, value);
         }
 

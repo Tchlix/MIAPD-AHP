@@ -3,6 +3,7 @@ package com.agh.vacation;
 import org.apache.commons.math3.linear.Array2DRowRealMatrix;
 import org.apache.commons.math3.linear.RealMatrix;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -18,47 +19,34 @@ public class Main {
     public static void main(String[] args) {
 
         //Load criteria
-        RealMatrix criteriaMatrix = new Array2DRowRealMatrix(new double[][]{
-                {1, 3, 5, 7, 9},
-                {1. / 3., 1, 3, 5, 7},
-                {1. / 5., 1. / 3., 1, 3, 5},
-                {1. / 7., 1. / 5., 1. / 3., 1, 3},
-                {1. / 9., 1. / 7., 1. / 5., 1. / 3., 1}
-        });
-        IndexMap<Criterion> indexMap = new IndexMap<>(new HashMap<>());
-        indexMap.put(vfm, 0);
-        indexMap.put(sights, 1);
-        indexMap.put(museums, 2);
-        indexMap.put(food, 3);
-        indexMap.put(nl, 4);
-        ComparisonMatrix<Criterion> criteriaComparisonMatrix = new ComparisonMatrix<>(criteriaMatrix, indexMap);
+        //TODO: load this from json and remove this example static object
+        ComparisonMatrix<Criterion> criteriaComparisonMatrix = criteriaComparisonMatrix();
 
+        //calculate priorities for criteria
+        EigenvalueCalculator eigenvalueCalculator = new EigenvalueCalculator();
+        Map<Criterion, Double> criteriaPriorities = eigenvalueCalculator.calculateEigenvalues(criteriaComparisonMatrix);
+        List<Criterion> criteria = new ArrayList<>(List.of(vfm, sights, museums, food, nl));
         //Load destinations
+        //TODO: load this from json and remove those example static objects
         VacationDestination lisbon = lisbon();
         VacationDestination munich = munich();
+        List<VacationDestination> destinations = new ArrayList<>(List.of(lisbon, munich));
 
         //Create a map of PC matrices based on destination ratings for each criterion
+        VacationDestinationComparisonMatricesCreator creator = new VacationDestinationComparisonMatricesCreator();
+        Map<Criterion, ComparisonMatrix<VacationDestination>> comparisonsBasedOnCriteria =
+                creator.create(criteria, destinations);
 
-        CriteriaComparisonMatricesCreator creator = new CriteriaComparisonMatricesCreator();
-        Map<Criterion, ComparisonMatrix<VacationDestination>> criterionComparisonMatrixMap =
-                creator.create(List.of(vfm, sights, museums, food, nl), List.of(lisbon, munich));
-        System.out.println(criterionComparisonMatrixMap);
-
-        CriteriaScoreCalculator calculator = new CriteriaScoreCalculator();
-
-        Map<VacationDestination, CriteriaScores> criteriaScoresMap = calculator.calculateCriteriaScores(List.of(lisbon, munich), criterionComparisonMatrixMap);
+        //for each criterion calculate individual score of each destination
+        //(score is not yet multiplied with proper criteria priority value)
+        ScoreCalculator calculator = new ScoreCalculator();
+        Map<VacationDestination, CriteriaScores> criteriaScoresMap =
+                calculator.calculateCriteriaScores(destinations, comparisonsBasedOnCriteria);
 
         FinalScoreCalculator calculator1 = new FinalScoreCalculator();
-        EigenvalueCalculator calculator2 = new EigenvalueCalculator();
-        var z =calculator2.calculateEigenvalues(criteriaComparisonMatrix,3);
-        System.out.println(calculator1.finalScore(z,criteriaScoresMap));
 
+        System.out.println(calculator1.finalScore(criteriaPriorities, criteriaScoresMap));
 
-        //create empty map<Destination, FinalScore>
-        //for each destination
-        // for each criterion
-        //  calculate final score criterionPriority * eigenvalue of PC matrix for this dest
-        // put result in a map
     }
 
     private static VacationDestination lisbon() {
@@ -80,5 +68,23 @@ public class Main {
         munichRatings.put(museums, 3);
 
         return new VacationDestination("Munich", munichRatings);
+    }
+
+    private static ComparisonMatrix<Criterion> criteriaComparisonMatrix() {
+        RealMatrix criteriaMatrix = new Array2DRowRealMatrix(new double[][]{
+                {1, 3, 5, 7, 9},
+                {1. / 3., 1, 3, 5, 7},
+                {1. / 5., 1. / 3., 1, 3, 5},
+                {1. / 7., 1. / 5., 1. / 3., 1, 3},
+                {1. / 9., 1. / 7., 1. / 5., 1. / 3., 1}
+        });
+        IndexMap<Criterion> indexMap = new IndexMap<>(new HashMap<>());
+        indexMap.put(vfm, 0);
+        indexMap.put(sights, 1);
+        indexMap.put(museums, 2);
+        indexMap.put(food, 3);
+        indexMap.put(nl, 4);
+
+        return new ComparisonMatrix<>(criteriaMatrix, indexMap);
     }
 }

@@ -13,23 +13,26 @@ import static java.lang.Math.abs;
 /**
  * Given a list of criteria and list of possible vacation destinations
  * creates a map with key being a criterion and value being a pairwise comparison matrix between destinations
+ *
  * @author Filip Piwosz
  */
-class CriteriaComparisonMatricesCreator {
+class VacationDestinationComparisonMatricesCreator {
 
     Map<Criterion, ComparisonMatrix<VacationDestination>> create(List<Criterion> criteria, List<VacationDestination> destinations) {
         Map<Criterion, ComparisonMatrix<VacationDestination>> result = new HashMap<>();
-        IndexMap indexMap = creteIndexMap(destinations);
-        for (Criterion criterion : criteria) {
-            ComparisonMatrix matrix = createComparisonMatrix(criterion, destinations, indexMap);
-            result.put(criterion, matrix);
-        }
+        IndexMap<VacationDestination> indexMap = creteIndexMap(destinations);
+        criteria
+                .forEach(criterion -> {
+                    ComparisonMatrix<VacationDestination> matrix =
+                            createComparisonMatrix(criterion, destinations, indexMap);
+                    result.put(criterion, matrix);
+                });
         return result;
     }
 
-    private IndexMap creteIndexMap(List<VacationDestination> destinations) {
+    private IndexMap<VacationDestination> creteIndexMap(List<VacationDestination> destinations) {
         int destinationSize = destinations.size();
-        IndexMap indexMap = new IndexMap(new HashMap<>());
+        IndexMap<VacationDestination> indexMap = new IndexMap<>(new HashMap<>());
         for (int i = 0; i < destinationSize; i++) {
             VacationDestination destination = destinations.get(i);
             indexMap.put(destination, i);
@@ -37,8 +40,8 @@ class CriteriaComparisonMatricesCreator {
         return indexMap;
     }
 
-    private ComparisonMatrix createComparisonMatrix(Criterion criterion, List<VacationDestination> destinations,
-                                                    IndexMap indexMap) {
+    private ComparisonMatrix<VacationDestination> createComparisonMatrix(Criterion criterion, List<VacationDestination> destinations,
+                                                                         IndexMap<VacationDestination> indexMap) {
         int destinationSize = destinations.size();
         double[][] array = new double[destinationSize][destinationSize];
         for (int i = 0; i < destinationSize; i++) {
@@ -47,7 +50,7 @@ class CriteriaComparisonMatricesCreator {
             }
         }
         RealMatrix matrix = new Array2DRowRealMatrix(array);
-        return new ComparisonMatrix(matrix, indexMap);
+        return new ComparisonMatrix<>(matrix, indexMap);
     }
 
     private void fillSinglePair(Criterion criterion, double[][] array, int firstIndex, int secondIndex,

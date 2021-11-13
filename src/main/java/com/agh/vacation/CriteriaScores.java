@@ -3,6 +3,7 @@ package com.agh.vacation;
 import java.util.Map;
 
 /**
+ *
  * @author Filip Piwosz
  */
 class CriteriaScores {
