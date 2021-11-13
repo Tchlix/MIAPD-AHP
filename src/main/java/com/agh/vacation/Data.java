@@ -22,7 +22,7 @@ class Data {
             WARSAW, 4
     ));
 
-    static final ComparisonMatrix matrixCriterions = new ComparisonMatrix(Matrix.CRITERION, criterionIndexMap);
+    static final ComparisonMatrix matrixCriteria = new ComparisonMatrix(Matrix.CRITERION, criterionIndexMap);
     static final ComparisonMatrix matrixValueForMoney = new ComparisonMatrix(Matrix.VALUE_FOR_MONEY, cityIndexMap);
     static final ComparisonMatrix matrixNightLife = new ComparisonMatrix(Matrix.NIGHT_LIFE, cityIndexMap);
     static final ComparisonMatrix matrixSights = new ComparisonMatrix(Matrix.SIGHTS, cityIndexMap);
