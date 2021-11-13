@@ -3,7 +3,7 @@ package com.agh.vacation;
 import org.apache.commons.math3.linear.Array2DRowRealMatrix;
 import org.apache.commons.math3.linear.RealMatrix;
 
-enum Matrix {
+enum PairwiseMatrix {
     CRITERIA(new Array2DRowRealMatrix(new double[][]{
             {1, 1, 1, 1, 1},
             {1, 1, 1, 1, 1},
@@ -53,7 +53,7 @@ enum Matrix {
     }));
     final RealMatrix matrix;
 
-    Matrix(Array2DRowRealMatrix matrix) {
+    PairwiseMatrix(Array2DRowRealMatrix matrix) {
         this.matrix = matrix;
     }
 }

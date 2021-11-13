@@ -2,6 +2,8 @@ package com.agh.vacation;
 
 import java.util.*;
 
+import static com.agh.vacation.IndexMap.*;
+
 public class Result {
     private final Map<EnumKeys, Double> result = new EnumMap<>(EnumKeys.class);
 
@@ -11,7 +13,7 @@ public class Result {
 
     private void clean() {
         result.clear();
-        for (EnumKeys city : IndexMap.CITIES.map.keySet()) {
+        for (EnumKeys city : CITIES.map.keySet()) {
             result.put(city, 0.);
         }
     }
@@ -20,13 +22,13 @@ public class Result {
                    Map<EnumKeys, Map<EnumKeys, Double>> criteriaMatricesMap) {
         clean();
         //For each criterion
-        for (EnumKeys criterion : IndexMap.CRITERIA.map.keySet()) {
+        for (EnumKeys criterion : CRITERIA.map.keySet()) {
             //We get its priority
             double priority = criteriaPriorities.get(criterion);
             //And matrix with result of every city
             Map<EnumKeys, Double> criteriaValues = criteriaMatricesMap.get(criterion);
             //Then we update result value for each city by priority * cityCriterionValue
-            for (EnumKeys city : IndexMap.CITIES.map.keySet()) {
+            for (EnumKeys city : CITIES.map.keySet()) {
                 result.put(city, result.get(city) + priority * criteriaValues.get(city));
             }
         }
