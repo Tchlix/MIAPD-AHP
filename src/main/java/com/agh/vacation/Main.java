@@ -24,7 +24,8 @@ public class Main {
 
         //calculate priorities for criteria
         EigenvalueCalculator eigenvalueCalculator = new EigenvalueCalculator();
-        Map<Criterion, Double> criteriaPriorities = eigenvalueCalculator.calculateEigenvalues(criteriaComparisonMatrix);
+        CriteriaPrioritiesMap criteriaPriorities =
+                new CriteriaPrioritiesMap(eigenvalueCalculator.calculateEigenvalues(criteriaComparisonMatrix));
         List<Criterion> criteria = new ArrayList<>(List.of(vfm, sights, museums, food, nl));
         //Load destinations
         //TODO: load this from json and remove those example static objects
@@ -34,18 +35,18 @@ public class Main {
 
         //Create a map of PC matrices based on destination ratings for each criterion
         VacationDestinationComparisonMatricesCreator creator = new VacationDestinationComparisonMatricesCreator();
-        Map<Criterion, ComparisonMatrix<VacationDestination>> comparisonsBasedOnCriteria =
+        ComparisonsBasedOnCriteria comparisonsBasedOnCriteria =
                 creator.create(criteria, destinations);
 
         //for each criterion calculate individual score of each destination
         //(score is not yet multiplied with proper criteria priority value)
-        ScoreCalculator calculator = new ScoreCalculator();
-        Map<VacationDestination, CriteriaScores> criteriaScoresMap =
-                calculator.calculateCriteriaScores(destinations, comparisonsBasedOnCriteria);
+        CriteriaScoresCalculator criteriaScoresCalculator = new CriteriaScoresCalculator();
+        VacationCriteriaScoresMap criteriaScoresMap =
+                criteriaScoresCalculator.calculateCriteriaScores(destinations, comparisonsBasedOnCriteria);
 
-        FinalScoreCalculator calculator1 = new FinalScoreCalculator();
+        FinalScoreCalculator finalScoreCalculator = new FinalScoreCalculator();
 
-        System.out.println(calculator1.finalScore(criteriaPriorities, criteriaScoresMap));
+        System.out.println(finalScoreCalculator.calculateFinalScore(criteriaPriorities, criteriaScoresMap));
 
     }
 

@@ -18,8 +18,8 @@ import static java.lang.Math.abs;
  */
 class VacationDestinationComparisonMatricesCreator {
 
-    Map<Criterion, ComparisonMatrix<VacationDestination>> create(List<Criterion> criteria, List<VacationDestination> destinations) {
-        Map<Criterion, ComparisonMatrix<VacationDestination>> result = new HashMap<>();
+    ComparisonsBasedOnCriteria create(List<Criterion> criteria, List<VacationDestination> destinations) {
+        ComparisonsBasedOnCriteria result = new ComparisonsBasedOnCriteria(new HashMap<>());
         IndexMap<VacationDestination> indexMap = creteIndexMap(destinations);
         criteria
                 .forEach(criterion -> {

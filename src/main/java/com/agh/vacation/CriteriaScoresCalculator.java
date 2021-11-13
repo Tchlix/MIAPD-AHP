@@ -9,35 +9,35 @@ import java.util.Map;
  *
  * @author Filip Piwosz
  */
-class ScoreCalculator {
+class CriteriaScoresCalculator {
 
-    Map<VacationDestination, CriteriaScores> calculateCriteriaScores(List<VacationDestination> destinationList,
-                                                                     Map<Criterion, ComparisonMatrix<VacationDestination>>
-                                                                             comparisonsBasedOnCriteria) {
-        Map<VacationDestination, CriteriaScores> result = new HashMap<>();
+    VacationCriteriaScoresMap calculateCriteriaScores(List<VacationDestination> destinationList,
+                                                      ComparisonsBasedOnCriteria comparisonsBasedOnCriteria) {
+        Map<VacationDestination, CriteriaScores> resultMap = new HashMap<>();
         EigenvalueCalculator calculator = new EigenvalueCalculator();
 
         //for every destination put empty map
         destinationList
-                .forEach(dest -> result.put(dest, new CriteriaScores(new HashMap<>())));
+                .forEach(dest -> resultMap.put(dest, new CriteriaScores(new HashMap<>())));
 
         //for each criterion put proper value in CriteriaScores for each destination
-        comparisonsBasedOnCriteria.forEach((criterion, comparisonMatrix) -> {
-
+        comparisonsBasedOnCriteria.stream().forEach(entry -> {
+            Criterion criterion = entry.getKey();
+            ComparisonMatrix<VacationDestination> comparisonMatrix = entry.getValue();
             Map<VacationDestination, Double> scoresBasedOnCriterion =
                     calculator.calculateEigenvalues(comparisonMatrix);
 
-            putCriterionScoreForAllDestinations(criterion, scoresBasedOnCriterion, result);
+            putCriterionScoreForAllDestinations(criterion, scoresBasedOnCriterion, resultMap);
         });
-        return result;
+        return new VacationCriteriaScoresMap(resultMap);
     }
 
     private void putCriterionScoreForAllDestinations(Criterion criterion,
                                                      Map<VacationDestination, Double> scoresBasedOnCriterion,
-                                                     Map<VacationDestination, CriteriaScores> result) {
+                                                     Map<VacationDestination, CriteriaScores> resultMap) {
         scoresBasedOnCriterion.forEach(
                 (destination, score) -> {
-                    CriteriaScores scores = result.get(destination);
+                    CriteriaScores scores = resultMap.get(destination);
                     scores.putScoreFor(criterion, score);
                 }
         );

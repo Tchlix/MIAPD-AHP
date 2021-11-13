@@ -2,25 +2,27 @@ package com.agh.vacation;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Map.Entry;
 
 /**
  * @author Filip Piwosz
  */
 class FinalScoreCalculator {
-    Map<VacationDestination, Double> finalScore(Map<Criterion, Double> criteriaPriorities,
-                                                Map<VacationDestination, CriteriaScores> destinationCriteriaRatingsMap) {
-        Map<VacationDestination, Double> result = new HashMap<>();
-        for (VacationDestination destination : destinationCriteriaRatingsMap.keySet()) {
-            CriteriaScores scores = destinationCriteriaRatingsMap.get(destination);
+    FinalScore calculateFinalScore(CriteriaPrioritiesMap criteriaPriorities,
+                                   VacationCriteriaScoresMap vacationCriteriaScoresMap) {
+        Map<VacationDestination, Double> resultMap = new HashMap<>();
+        for (Entry<VacationDestination, CriteriaScores> destinationScoresEntry : vacationCriteriaScoresMap.entrySet()) {
+            VacationDestination destination = destinationScoresEntry.getKey();
+            CriteriaScores scores = destinationScoresEntry.getValue();
             double sum = 0.;
-            for (Map.Entry<Criterion, Double> entry : criteriaPriorities.entrySet()) {
-                Double score = scores.scoreFor(entry.getKey());
-                Double priority = entry.getValue();
+            for (Entry<Criterion, Double> criterionDoubleEntry : criteriaPriorities.entrySet()) {
+                Double score = scores.scoreFor(criterionDoubleEntry.getKey());
+                Double priority = criterionDoubleEntry.getValue();
 
                 sum += score * priority;
             }
-            result.put(destination, sum);
+            resultMap.put(destination, sum);
         }
-        return result;
+        return new FinalScore(resultMap);
     }
 }
