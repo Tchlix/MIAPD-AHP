@@ -17,4 +17,9 @@ class VacationDestination implements PairwiseComparableObject {
     Integer ratingFor(Criterion criterion) {
         return this.ratings.get(criterion);
     }
+
+    @Override
+    public String toString() {
+        return name;
+    }
 }

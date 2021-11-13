@@ -49,7 +49,7 @@ public class EigenvalueCalculatorTest {
         expected.put(food, .063);
         expected.put(nl, .033);
         // When
-        Map<PairwiseComparableObject, Double> actual = calculator.calculateCriteriaPriorities(comparisonMatrix, 3);
+        Map<PairwiseComparableObject, Double> actual = calculator.calculateEigenvalues(comparisonMatrix, 3);
         // Then
         assertEquals(actual, expected);
     }

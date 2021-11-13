@@ -24,4 +24,9 @@ class IndexMap {
     public Set<PairwiseComparableObject> keySet() {
         return this.map.keySet();
     }
+
+    @Override
+    public String toString() {
+        return map.toString();
+    }
 }

@@ -4,6 +4,7 @@ import org.apache.commons.math3.linear.Array2DRowRealMatrix;
 import org.apache.commons.math3.linear.RealMatrix;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Main {
@@ -38,12 +39,14 @@ public class Main {
 
         //Create a map of PC matrices based on destination ratings for each criterion
 
+        CriteriaComparisonMatricesCreator creator = new CriteriaComparisonMatricesCreator();
 
+        System.out.println(creator.create(List.of(vfm, sights, museums, food, nl), List.of(lisbon, munich)));
 
         //create empty map<Destination, FinalScore>
         //for each destination
         // for each criterion
-        //  calculate final score criterionPrior * eigenvalue of PC matrix for this dest
+        //  calculate final score criterionPriority * eigenvalue of PC matrix for this dest
         // put result in a map
     }
 

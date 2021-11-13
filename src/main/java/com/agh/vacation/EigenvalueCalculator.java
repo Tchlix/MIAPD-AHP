@@ -28,14 +28,14 @@ class EigenvalueCalculator {
      * only positive values
      * we apply a little trick - 1. swap all values in the eigenvector to its absolute values
      * 2. scale them so that they all sum up to 1.0
-     * we can do this, since the respective scale of 2 criteria values doesn't change
+     * we can do this, since the respective scale of 2 comparable object values doesn't change
      *
      * @param comparisonMatrix - Pairwise Comparison matrix for criteria
      * @param truncation       - truncation for double type values
      * @return Map of criteria with respective scaled priorities
      */
 
-    Map<PairwiseComparableObject, Double> calculateCriteriaPriorities(ComparisonMatrix comparisonMatrix, int truncation) {
+    Map<PairwiseComparableObject, Double> calculateEigenvalues(ComparisonMatrix comparisonMatrix, int truncation) {
         RealMatrix matrix = comparisonMatrix.matrix();
         IndexMap indexMap = comparisonMatrix.indexMap();
         EigenDecomposition decomposition = new EigenDecomposition(matrix);
