@@ -6,6 +6,7 @@ import java.util.Map;
 
 /**
  * Calculates a map with key being VacationDestination and value being score
+ *
  * @author Filip Piwosz
  */
 class ScoreCalculator {
@@ -22,15 +23,23 @@ class ScoreCalculator {
 
         //for each criterion put proper value in CriteriaScores for each destination
         comparisonsBasedOnCriteria.forEach((criterion, comparisonMatrix) -> {
-            Map<VacationDestination, Double> comparisonBasedOnCriterion =
+
+            Map<VacationDestination, Double> scoresBasedOnCriterion =
                     calculator.calculateEigenvalues(comparisonMatrix);
-            comparisonBasedOnCriterion.forEach((destination, score) -> {
-                CriteriaScores scores = result.get(destination);
-                scores.putScoreFor(criterion, score);
-            });
 
-
+            putCriterionScoreForAllDestinations(criterion, scoresBasedOnCriterion, result);
         });
         return result;
+    }
+
+    private void putCriterionScoreForAllDestinations(Criterion criterion,
+                                                     Map<VacationDestination, Double> scoresBasedOnCriterion,
+                                                     Map<VacationDestination, CriteriaScores> result) {
+        scoresBasedOnCriterion.forEach(
+                (destination, score) -> {
+                    CriteriaScores scores = result.get(destination);
+                    scores.putScoreFor(criterion, score);
+                }
+        );
     }
 }

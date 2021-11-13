@@ -3,22 +3,21 @@ package com.agh.vacation;
 import java.util.Map;
 
 /**
- *
  * @author Filip Piwosz
  */
 class CriteriaScores {
-    final Map<Criterion, Double> criteriaScores;
+    final Map<Criterion, Double> scores;
 
-    CriteriaScores(Map<Criterion, Double> criteriaScores) {
-        this.criteriaScores = criteriaScores;
+    CriteriaScores(Map<Criterion, Double> scores) {
+        this.scores = scores;
     }
 
     Double scoreFor(Criterion criterion) {
-        return this.criteriaScores.get(criterion);
+        return this.scores.get(criterion);
     }
 
     void putScoreFor(Criterion criterion, Double score) {
-        this.criteriaScores.put(criterion, score);
+        this.scores.put(criterion, score);
     }
 
 }
