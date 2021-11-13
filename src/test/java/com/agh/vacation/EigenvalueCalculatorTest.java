@@ -7,7 +7,7 @@ import org.testng.annotations.Test;
 import java.util.EnumMap;
 import java.util.Map;
 
-import static com.agh.vacation.EnumKeys.*;
+import static com.agh.vacation.Keyword.*;
 import static org.testng.Assert.assertEquals;
 
 /**
@@ -25,7 +25,7 @@ public class EigenvalueCalculatorTest {
                 {1. / 7., 1. / 5., 1. / 3., 1, 3},
                 {1. / 9., 1. / 7., 1. / 5., 1. / 3., 1}
         });
-        Map<EnumKeys, Integer> criterionIndexMap = new EnumMap<>(EnumKeys.class);
+        Map<Keyword, Integer> criterionIndexMap = new EnumMap<>(Keyword.class);
         criterionIndexMap.put(VALUE_FOR_MONEY, 0);
         criterionIndexMap.put(NIGHT_LIFE, 1);
         criterionIndexMap.put(SIGHTS, 2);
@@ -37,14 +37,14 @@ public class EigenvalueCalculatorTest {
         EigenvalueCalculator calculator = new EigenvalueCalculator();
 
         //calculated with matrixcalc.org
-        Map<EnumKeys, Double> expected = new EnumMap<>(EnumKeys.class);
+        Map<Keyword, Double> expected = new EnumMap<>(Keyword.class);
         expected.put(VALUE_FOR_MONEY, .512);
         expected.put(NIGHT_LIFE, .261);
         expected.put(SIGHTS, .128);
         expected.put(MUSEUMS, .063);
         expected.put(FOOD, .033);
         // When
-        Map<EnumKeys, Double> actual = calculator.calculatePriorities(comparisonMatrix, 3);
+        Map<Keyword, Double> actual = calculator.calculatePriorities(comparisonMatrix, 3);
         // Then
         assertEquals(actual, expected);
     }

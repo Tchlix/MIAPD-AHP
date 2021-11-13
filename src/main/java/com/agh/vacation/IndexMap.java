@@ -3,7 +3,7 @@ package com.agh.vacation;
 import java.util.EnumMap;
 import java.util.Map;
 
-import static com.agh.vacation.EnumKeys.*;
+import static com.agh.vacation.Keyword.*;
 
 enum IndexMap {
     CRITERIA(new EnumMap<>(Map.of(
@@ -20,9 +20,9 @@ enum IndexMap {
             MADRID, 3,
             WARSAW, 4
     )));
-    final Map<EnumKeys, Integer> map;
+    final Map<Keyword, Integer> map;
 
-    IndexMap(Map<EnumKeys, Integer> map) {
+    IndexMap(Map<Keyword, Integer> map) {
         this.map = map;
     }
 }

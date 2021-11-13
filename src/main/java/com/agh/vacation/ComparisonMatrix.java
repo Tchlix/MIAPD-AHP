@@ -7,7 +7,7 @@ import java.util.Map;
 /**
  * @author Filip Piwosz
  */
-record ComparisonMatrix(RealMatrix matrix, Map<EnumKeys, Integer> indexMap) {
+record ComparisonMatrix(RealMatrix matrix, Map<Keyword, Integer> indexMap) {
     ComparisonMatrix(PairwiseMatrix pairwiseMatrix, IndexMap map) {
         this(pairwiseMatrix.matrix, map.map);
     }

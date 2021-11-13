@@ -35,20 +35,20 @@ class EigenvalueCalculator {
      * @return Map of criteria with respective scaled priorities
      */
 
-    Map<EnumKeys, Double> calculatePriorities(ComparisonMatrix comparisonMatrix, int truncation) {
+    Map<Keyword, Double> calculatePriorities(ComparisonMatrix comparisonMatrix, int truncation) {
         RealMatrix matrix = comparisonMatrix.matrix();
-        Map<EnumKeys, Integer> indexMap = comparisonMatrix.indexMap();
+        Map<Keyword, Integer> indexMap = comparisonMatrix.indexMap();
         EigenDecomposition decomposition = new EigenDecomposition(matrix);
-        Map<EnumKeys, Double> result = new EnumMap<>(EnumKeys.class);
+        Map<Keyword, Double> result = new EnumMap<>(Keyword.class);
 
         RealVector vector = maxEigenValueVector(decomposition);
         applyScaling(vector);
 
-        for (EnumKeys enumKeys : indexMap.keySet()) {
-            int index = indexMap.get(enumKeys);
+        for (Keyword keyword : indexMap.keySet()) {
+            int index = indexMap.get(keyword);
             double priorityValue = vector.getEntry(index);
             priorityValue = truncateDouble(priorityValue, truncation);
-            result.put(enumKeys, priorityValue);
+            result.put(keyword, priorityValue);
         }
 
         return result;

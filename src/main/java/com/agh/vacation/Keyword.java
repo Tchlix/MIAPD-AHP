@@ -1,6 +1,6 @@
 package com.agh.vacation;
 
-enum EnumKeys {
+enum Keyword {
     //Criteria
     VALUE_FOR_MONEY, NIGHT_LIFE, SIGHTS, MUSEUMS, FOOD,
     //Cities
