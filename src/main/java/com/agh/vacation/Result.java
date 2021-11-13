@@ -11,25 +11,28 @@ public class Result {
 
     private void clean() {
         result.clear();
-        for (EnumKeys city : Data.cityIndexMap.keySet()) {
+        for (EnumKeys city : IndexMap.CITIES.map.keySet()) {
             result.put(city, 0.);
         }
     }
 
     void calculate(Map<EnumKeys, Double> criteriaPriorities,
-                   Map<EnumKeys, Map<EnumKeys, Double>> criteriaMap) {
+                   Map<EnumKeys, Map<EnumKeys, Double>> criteriaMatricesMap) {
         clean();
-        for (EnumKeys criterion : Data.criterionIndexMap.keySet()) {
+        //For each criterion
+        for (EnumKeys criterion : IndexMap.CRITERIA.map.keySet()) {
+            //We get its priority
             double priority = criteriaPriorities.get(criterion);
-            Map<EnumKeys, Double> criteriaValues = criteriaMap.get(criterion);
-
-            for (EnumKeys city : Data.cityIndexMap.keySet()) {
+            //And matrix with result of every city
+            Map<EnumKeys, Double> criteriaValues = criteriaMatricesMap.get(criterion);
+            //Then we update result value for each city by priority * cityCriterionValue
+            for (EnumKeys city : IndexMap.CITIES.map.keySet()) {
                 result.put(city, result.get(city) + priority * criteriaValues.get(city));
             }
         }
     }
 
-    List<Map.Entry<EnumKeys,Double>> getResult() {
+    List<Map.Entry<EnumKeys, Double>> getResult() {
         List<Map.Entry<EnumKeys, Double>> list = new ArrayList<>(result.entrySet());
         list.sort(Map.Entry.comparingByValue(Collections.reverseOrder()));
         return list;

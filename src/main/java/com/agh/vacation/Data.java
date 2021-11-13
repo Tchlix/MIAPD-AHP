@@ -1,31 +1,16 @@
 package com.agh.vacation;
 
-import java.util.EnumMap;
-import java.util.Map;
+enum Data {
+    CRITERIA(new ComparisonMatrix(Matrix.CRITERIA, IndexMap.CRITERIA)),
+    VALUE_FOR_MONEY(new ComparisonMatrix(Matrix.VALUE_FOR_MONEY, IndexMap.CITIES)),
+    NIGHT_LIFE(new ComparisonMatrix(Matrix.NIGHT_LIFE, IndexMap.CITIES)),
+    SIGHTS(new ComparisonMatrix(Matrix.SIGHTS, IndexMap.CITIES)),
+    MUSEUMS(new ComparisonMatrix(Matrix.MUSEUMS, IndexMap.CITIES)),
+    FOOD(new ComparisonMatrix(Matrix.FOOD, IndexMap.CITIES));
 
-import static com.agh.vacation.EnumKeys.*;
+    final ComparisonMatrix comparisonMatrix;
 
-class Data {
-    static final Map<EnumKeys, Integer> criterionIndexMap = new EnumMap<>(Map.of(
-            VALUE_FOR_MONEY, 0,
-            NIGHT_LIFE, 1,
-            SIGHTS, 2,
-            MUSEUMS, 3,
-            FOOD, 4
-    ));
-
-    static final Map<EnumKeys, Integer> cityIndexMap = new EnumMap<>(Map.of(
-            VENICE, 0,
-            ROME, 1,
-            LISBON, 2,
-            MADRID, 3,
-            WARSAW, 4
-    ));
-
-    static final ComparisonMatrix matrixCriteria = new ComparisonMatrix(Matrix.CRITERION, criterionIndexMap);
-    static final ComparisonMatrix matrixValueForMoney = new ComparisonMatrix(Matrix.VALUE_FOR_MONEY, cityIndexMap);
-    static final ComparisonMatrix matrixNightLife = new ComparisonMatrix(Matrix.NIGHT_LIFE, cityIndexMap);
-    static final ComparisonMatrix matrixSights = new ComparisonMatrix(Matrix.SIGHTS, cityIndexMap);
-    static final ComparisonMatrix matrixMuseums = new ComparisonMatrix(Matrix.MUSEUMS, cityIndexMap);
-    static final ComparisonMatrix matrixFood = new ComparisonMatrix(Matrix.FOOD, cityIndexMap);
+    Data(ComparisonMatrix comparisonMatrix) {
+        this.comparisonMatrix = comparisonMatrix;
+    }
 }

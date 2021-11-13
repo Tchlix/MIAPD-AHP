@@ -4,7 +4,7 @@ import org.apache.commons.math3.linear.Array2DRowRealMatrix;
 import org.apache.commons.math3.linear.RealMatrix;
 
 enum Matrix {
-    CRITERION(new Array2DRowRealMatrix(new double[][]{
+    CRITERIA(new Array2DRowRealMatrix(new double[][]{
             {1, 1, 1, 1, 1},
             {1, 1, 1, 1, 1},
             {1, 1, 1, 1, 1},
