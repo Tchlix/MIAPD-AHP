@@ -30,14 +30,14 @@ public class EigenvalueCalculatorTest {
         Criterion food = new Criterion("Food");
         Criterion nl = new Criterion("Night life");
 
-        Map<Criterion, Integer> criterionIndexMap = new HashMap<>();
+        IndexMap criterionIndexMap = new IndexMap(new HashMap<>());
         criterionIndexMap.put(vfm, 0);
         criterionIndexMap.put(sights, 1);
         criterionIndexMap.put(museums, 2);
         criterionIndexMap.put(food, 3);
         criterionIndexMap.put(nl, 4);
 
-        CriteriaComparisonMatrix comparisonMatrix = new CriteriaComparisonMatrix(matrix, criterionIndexMap);
+        ComparisonMatrix comparisonMatrix = new ComparisonMatrix(matrix, criterionIndexMap);
 
         EigenvalueCalculator calculator = new EigenvalueCalculator();
 
@@ -49,7 +49,7 @@ public class EigenvalueCalculatorTest {
         expected.put(food, .063);
         expected.put(nl, .033);
         // When
-        Map<Criterion, Double> actual = calculator.calculateCriteriaPriorities(comparisonMatrix, 3);
+        Map<PairwiseComparableObject, Double> actual = calculator.calculateCriteriaPriorities(comparisonMatrix, 3);
         // Then
         assertEquals(actual, expected);
     }

@@ -4,7 +4,6 @@ import org.apache.commons.math3.linear.EigenDecomposition;
 import org.apache.commons.math3.linear.RealMatrix;
 import org.apache.commons.math3.linear.RealVector;
 
-import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -36,20 +35,20 @@ class EigenvalueCalculator {
      * @return Map of criteria with respective scaled priorities
      */
 
-    Map<Criterion, Double> calculateCriteriaPriorities(CriteriaComparisonMatrix comparisonMatrix, int truncation) {
+    Map<PairwiseComparableObject, Double> calculateCriteriaPriorities(ComparisonMatrix comparisonMatrix, int truncation) {
         RealMatrix matrix = comparisonMatrix.matrix();
-        Map<Criterion, Integer> indexMap = comparisonMatrix.indexMap();
+        IndexMap indexMap = comparisonMatrix.indexMap();
         EigenDecomposition decomposition = new EigenDecomposition(matrix);
-        Map<Criterion, Double> result = new HashMap<>();
+        Map<PairwiseComparableObject, Double> result = new HashMap<>();
 
         RealVector vector = maxEigenValueVector(decomposition);
         applyScaling(vector);
 
-        for (Criterion criterion : indexMap.keySet()) {
-            int index = indexMap.get(criterion);
+        for (PairwiseComparableObject obj : indexMap.keySet()) {
+            int index = indexMap.get(obj);
             double priorityValue = vector.getEntry(index);
             priorityValue = truncateDouble(priorityValue, truncation);
-            result.put(criterion, priorityValue);
+            result.put(obj, priorityValue);
         }
 
         return result;

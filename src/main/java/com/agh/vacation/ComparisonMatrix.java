@@ -7,5 +7,5 @@ import java.util.Map;
 /**
  * @author Filip Piwosz
  */
-record CriteriaComparisonMatrix(RealMatrix matrix, Map<Criterion, Integer> indexMap) {
+record ComparisonMatrix(RealMatrix matrix, IndexMap indexMap) {
 }
