@@ -13,7 +13,7 @@ import static com.agh.vacation.MathUtilFunctions.truncateDouble;
 /**
  * @author Filip Piwosz
  */
-class CriteriaEigenvalueCalculator {
+class EigenvalueCalculator {
 
     /**
      * https://en.wikipedia.org/wiki/Perron%E2%80%93Frobenius_theorem
@@ -35,20 +35,20 @@ class CriteriaEigenvalueCalculator {
      * @return Map of criteria with respective scaled priorities
      */
 
-    Map<Criterion, Double> calculateCriteriaPriorities(CriteriaComparisonMatrix comparisonMatrix, int truncation) {
+    Map<EnumKeys, Double> calculateCriteriaPriorities(ComparisonMatrix comparisonMatrix, int truncation) {
         RealMatrix matrix = comparisonMatrix.matrix();
-        Map<Criterion, Integer> indexMap = comparisonMatrix.indexMap();
+        Map<EnumKeys, Integer> indexMap = comparisonMatrix.indexMap();
         EigenDecomposition decomposition = new EigenDecomposition(matrix);
-        Map<Criterion, Double> result = new EnumMap<>(Criterion.class);
+        Map<EnumKeys, Double> result = new EnumMap<>(EnumKeys.class);
 
         RealVector vector = maxEigenValueVector(decomposition);
         applyScaling(vector);
 
-        for (Criterion criterion : indexMap.keySet()) {
-            int index = indexMap.get(criterion);
+        for (EnumKeys enumKeys : indexMap.keySet()) {
+            int index = indexMap.get(enumKeys);
             double priorityValue = vector.getEntry(index);
             priorityValue = truncateDouble(priorityValue, truncation);
-            result.put(criterion, priorityValue);
+            result.put(enumKeys, priorityValue);
         }
 
         return result;
