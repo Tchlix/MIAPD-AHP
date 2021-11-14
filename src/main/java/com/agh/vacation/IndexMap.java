@@ -17,7 +17,7 @@ class IndexMap<T extends PairwiseComparableObject> {
         this.map.put(key, value);
     }
 
-    public Integer get(Object key) {
+    public Integer get(T key) {
         return this.map.get(key);
     }
 
