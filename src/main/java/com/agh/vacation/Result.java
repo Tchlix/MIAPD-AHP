@@ -22,8 +22,7 @@ class Result {
     public String display() {
         StringBuilder builder = new StringBuilder();
         List<Entry<VacationDestination, Double>> list = new ArrayList<>(map.entrySet());
-        list.sort(comparingByValue());
-        reverse(list);
+        list.sort(comparingByValue(Collections.reverseOrder()));
         list.forEach(entry -> {
             builder.append(entry);
             builder.append(lineSeparator());
