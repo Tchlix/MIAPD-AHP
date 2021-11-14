@@ -8,7 +8,7 @@ import java.util.Set;
  * @author Filip Piwosz
  */
 class VacationCriteriaScoresMap {
-    private Map<VacationDestination, CriteriaScores> map;
+    private final Map<VacationDestination, CriteriaScores> map;
 
     VacationCriteriaScoresMap(Map<VacationDestination, CriteriaScores> map) {
         this.map = map;

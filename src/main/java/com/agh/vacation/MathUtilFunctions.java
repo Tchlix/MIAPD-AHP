@@ -7,9 +7,10 @@ import static java.lang.Math.pow;
  * @author Filip Piwosz
  */
 class MathUtilFunctions {
+    private static final String IMPROPER_ARRAY_EXCEPTION_MESSAGE = "Null or empty array cannot have max value!";
+
     private MathUtilFunctions() {
     }
-    private static final String IMPROPER_ARRAY_EXCEPTION_MESSAGE = "Null or empty array cannot have max value!";
 
     static double truncateDouble(double value, int truncation) {
         double tenToPower = pow(10, truncation);

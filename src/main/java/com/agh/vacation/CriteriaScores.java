@@ -4,6 +4,7 @@ import java.util.Map;
 
 /**
  * Represents a map of scores gained by VacationDestination for each criterion
+ *
  * @author Filip Piwosz
  */
 class CriteriaScores {

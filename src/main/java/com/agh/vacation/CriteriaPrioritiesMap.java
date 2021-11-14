@@ -8,7 +8,7 @@ import java.util.Set;
  * @author Filip Piwosz
  */
 class CriteriaPrioritiesMap {
-    private Map<Criterion, Double> map;
+    private final Map<Criterion, Double> map;
 
     CriteriaPrioritiesMap(Map<Criterion, Double> map) {
         this.map = map;

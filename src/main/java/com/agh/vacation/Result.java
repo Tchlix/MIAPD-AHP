@@ -1,7 +1,6 @@
 package com.agh.vacation;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -14,7 +13,7 @@ import static java.util.Map.Entry.comparingByValue;
  * @author Filip Piwosz
  */
 class Result {
-    private Map<VacationDestination, Double> map;
+    private final Map<VacationDestination, Double> map;
 
     public Result(Map<VacationDestination, Double> map) {
         this.map = map;

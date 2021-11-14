@@ -5,7 +5,6 @@ import org.apache.commons.math3.linear.RealMatrix;
 
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import static com.agh.vacation.RatingDifferenceMapper.mapForAHP;
 import static java.lang.Math.abs;

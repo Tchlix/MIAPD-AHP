@@ -10,11 +10,11 @@ import java.util.Map;
 
 public class Main {
     //EXAMPLE CODE BELOW, THIS IS NOT FINAL
-    private static Criterion vfm = new Criterion("Value for money");
-    private static Criterion sights = new Criterion("Sights");
-    private static Criterion museums = new Criterion("Museums");
-    private static Criterion food = new Criterion("Food");
-    private static Criterion nl = new Criterion("Night life");
+    private static final Criterion vfm = new Criterion("Value for money");
+    private static final Criterion sights = new Criterion("Sights");
+    private static final Criterion museums = new Criterion("Museums");
+    private static final Criterion food = new Criterion("Food");
+    private static final Criterion nl = new Criterion("Night life");
 
     public static void main(String[] args) {
 
