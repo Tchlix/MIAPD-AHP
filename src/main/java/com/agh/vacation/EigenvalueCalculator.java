@@ -14,10 +14,10 @@ import static com.agh.vacation.MathUtilFunctions.truncateDouble;
  * @author Filip Piwosz
  */
 class EigenvalueCalculator {
+    private static final int DEFAULT_TRUNCATION = 3;
+
     private EigenvalueCalculator() {
     }
-
-    private static final int DEFAULT_TRUNCATION = 3;
 
     /**
      * https://en.wikipedia.org/wiki/Perron%E2%80%93Frobenius_theorem

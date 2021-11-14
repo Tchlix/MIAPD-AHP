@@ -10,9 +10,6 @@ import java.util.Map;
  * @author Filip Piwosz
  */
 class RatingDifferenceMapper {
-    private RatingDifferenceMapper() {
-    }
-
     static Map<Integer, Double> mapForAHP = new HashMap<>(Map.of(
             0, 1.,
             1, 3.,
@@ -20,4 +17,7 @@ class RatingDifferenceMapper {
             3, 7.,
             4, 9.
     ));
+
+    private RatingDifferenceMapper() {
+    }
 }

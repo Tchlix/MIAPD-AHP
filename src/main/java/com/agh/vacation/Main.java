@@ -1,12 +1,16 @@
 package com.agh.vacation;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.commons.math3.linear.Array2DRowRealMatrix;
 import org.apache.commons.math3.linear.RealMatrix;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import static com.agh.vacation.CriteriaScoresCalculator.calculateCriteriaScores;
 import static com.agh.vacation.EigenvalueCalculator.calculateEigenvalues;
@@ -26,17 +30,17 @@ public class Main {
         //Load criteria
         //TODO: load this from json and remove this example static object
         ComparisonMatrix<Criterion> criteriaComparisonMatrix = criteriaComparisonMatrix();
-
         //calculate priorities for criteria
         CriteriaPrioritiesMap criteriaPriorities =
                 new CriteriaPrioritiesMap(calculateEigenvalues(criteriaComparisonMatrix));
         List<Criterion> criteria = new ArrayList<>(List.of(vfm, sights, museums, food, nl));
-        //Load destinations
-        //TODO: load this from json and remove those example static objects
-        VacationDestination lisbon = lisbon();
-        VacationDestination munich = munich();
-        List<VacationDestination> destinations = new ArrayList<>(List.of(lisbon, munich));
 
+        //Load destinations
+        List<VacationDestination> destinations = loadDestinations();
+        if (destinations.size() == 0) {
+            System.err.println("No cities !");
+            return;
+        }
         //Create a map of PC matrices based on destination ratings for each criterion
         ComparisonMatricesBasedOnCriteria comparisonMatricesBasedOnCriteria =
                 createComparisonMatricesBasedOnCriteria(criteria, destinations);
@@ -51,26 +55,6 @@ public class Main {
 
     }
 
-    private static VacationDestination lisbon() {
-        Map<Criterion, Integer> lisbonRatings = new HashMap<>();
-        lisbonRatings.put(vfm, 4);
-        lisbonRatings.put(sights, 5);
-        lisbonRatings.put(nl, 4);
-        lisbonRatings.put(food, 4);
-        lisbonRatings.put(museums, 4);
-        return new VacationDestination("Lisbon", lisbonRatings);
-    }
-
-    private static VacationDestination munich() {
-        Map<Criterion, Integer> munichRatings = new HashMap<>();
-        munichRatings.put(vfm, 3);
-        munichRatings.put(sights, 4);
-        munichRatings.put(nl, 4);
-        munichRatings.put(food, 4);
-        munichRatings.put(museums, 3);
-
-        return new VacationDestination("Munich", munichRatings);
-    }
 
     private static ComparisonMatrix<Criterion> criteriaComparisonMatrix() {
         RealMatrix criteriaMatrix = new Array2DRowRealMatrix(new double[][]{
@@ -88,5 +72,24 @@ public class Main {
         indexMap.put(nl, 4);
 
         return new ComparisonMatrix<>(criteriaMatrix, indexMap);
+    }
+
+    static List<VacationDestination> loadDestinations() {
+        ObjectMapper objectMapper = new ObjectMapper();
+        List<VacationDestination> destinations = new ArrayList<>();
+        try {
+            Files.list(Paths.get("Cities"))
+                    .map(Path::toFile)
+                    .forEach(path -> {
+                        try {
+                            destinations.add(objectMapper.readValue(path, VacationDestination.class));
+                        } catch (IOException e) {
+                            System.err.println("There was a problem with: " + path);
+                        }
+                    });
+        } catch (IOException e) {
+            System.err.println(e.getMessage());
+        }
+        return destinations;
     }
 }

@@ -12,7 +12,7 @@ class ResultCalculator {
     }
 
     static Result calculateResult(CriteriaPrioritiesMap criteriaPriorities,
-                           VacationCriteriaScoresMap vacationCriteriaScoresMap) {
+                                  VacationCriteriaScoresMap vacationCriteriaScoresMap) {
         Map<VacationDestination, Double> resultMap = new HashMap<>();
         for (Entry<VacationDestination, CriteriaScores> destinationScoresEntry : vacationCriteriaScoresMap.entrySet()) {
             VacationDestination destination = destinationScoresEntry.getKey();

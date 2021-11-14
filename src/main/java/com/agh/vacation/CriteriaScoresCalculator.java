@@ -10,8 +10,8 @@ import static com.agh.vacation.EigenvalueCalculator.calculateEigenvalues;
  * Given List of VacationDestination and ComparisonMatricesBasedOnCriteria
  * calculates a map with key being VacationDestination and value being scores for each criterion (CriteriaScores)
  *
- * @see VacationCriteriaScoresMap
  * @author Filip Piwosz
+ * @see VacationCriteriaScoresMap
  */
 class CriteriaScoresCalculator {
     private CriteriaScoresCalculator() {
