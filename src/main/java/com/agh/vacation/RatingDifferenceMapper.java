@@ -13,14 +13,11 @@ class RatingDifferenceMapper {
     private RatingDifferenceMapper() {
     }
 
-    static Map<Integer, Double> mapForAHP() {
-        Map<Integer, Double> map = new HashMap<>(Map.of(
-                0, 1.,
-                1, 3.,
-                2, 5.,
-                3, 7.,
-                4, 9.
-        ));
-        return map;
-    }
+    static Map<Integer, Double> mapForAHP = new HashMap<>(Map.of(
+            0, 1.,
+            1, 3.,
+            2, 5.,
+            3, 7.,
+            4, 9.
+    ));
 }

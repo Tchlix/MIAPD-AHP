@@ -8,7 +8,10 @@ import java.util.Map.Entry;
  * @author Filip Piwosz
  */
 class ResultCalculator {
-    Result calculateResult(CriteriaPrioritiesMap criteriaPriorities,
+    private ResultCalculator() {
+    }
+
+    static Result calculateResult(CriteriaPrioritiesMap criteriaPriorities,
                            VacationCriteriaScoresMap vacationCriteriaScoresMap) {
         Map<VacationDestination, Double> resultMap = new HashMap<>();
         for (Entry<VacationDestination, CriteriaScores> destinationScoresEntry : vacationCriteriaScoresMap.entrySet()) {

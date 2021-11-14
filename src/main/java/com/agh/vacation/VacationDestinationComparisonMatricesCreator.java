@@ -11,15 +11,19 @@ import static java.lang.Math.abs;
 
 /**
  * Given a list of criteria and list of possible vacation destinations
- * creates a VacationCriteriaScoresMap object
+ * creates a map of ComparisonMatricesBasedOnCriteria object
  *
  * @author Filip Piwosz
+ * @see ComparisonMatricesBasedOnCriteria
  */
 class VacationDestinationComparisonMatricesCreator {
+    private VacationDestinationComparisonMatricesCreator() {
+    }
 
-    ComparisonsBasedOnCriteria create(List<Criterion> criteria, List<VacationDestination> destinations) {
-        ComparisonsBasedOnCriteria result = new ComparisonsBasedOnCriteria(new HashMap<>());
-        IndexMap<VacationDestination> indexMap = creteIndexMap(destinations);
+    static ComparisonMatricesBasedOnCriteria createComparisonMatricesBasedOnCriteria(List<Criterion> criteria,
+                                                                                     List<VacationDestination> destinations) {
+        ComparisonMatricesBasedOnCriteria result = new ComparisonMatricesBasedOnCriteria(new HashMap<>());
+        IndexMap<VacationDestination> indexMap = createIndexMap(destinations);
         criteria
                 .forEach(criterion -> {
                     ComparisonMatrix<VacationDestination> matrix =
@@ -29,7 +33,7 @@ class VacationDestinationComparisonMatricesCreator {
         return result;
     }
 
-    private IndexMap<VacationDestination> creteIndexMap(List<VacationDestination> destinations) {
+    private static IndexMap<VacationDestination> createIndexMap(List<VacationDestination> destinations) {
         int destinationSize = destinations.size();
         IndexMap<VacationDestination> indexMap = new IndexMap<>(new HashMap<>());
         for (int i = 0; i < destinationSize; i++) {
@@ -39,8 +43,8 @@ class VacationDestinationComparisonMatricesCreator {
         return indexMap;
     }
 
-    private ComparisonMatrix<VacationDestination> createComparisonMatrix(Criterion criterion, List<VacationDestination> destinations,
-                                                                         IndexMap<VacationDestination> indexMap) {
+    private static ComparisonMatrix<VacationDestination> createComparisonMatrix(Criterion criterion, List<VacationDestination> destinations,
+                                                                                IndexMap<VacationDestination> indexMap) {
         int destinationSize = destinations.size();
         double[][] array = new double[destinationSize][destinationSize];
         for (int i = 0; i < destinationSize; i++) {
@@ -52,8 +56,8 @@ class VacationDestinationComparisonMatricesCreator {
         return new ComparisonMatrix<>(matrix, indexMap);
     }
 
-    private void fillSinglePair(Criterion criterion, double[][] array, int firstIndex, int secondIndex,
-                                List<VacationDestination> destinations) {
+    private static void fillSinglePair(Criterion criterion, double[][] array, int firstIndex, int secondIndex,
+                                       List<VacationDestination> destinations) {
         VacationDestination first = destinations.get(firstIndex);
         VacationDestination second = destinations.get(secondIndex);
 
@@ -71,8 +75,8 @@ class VacationDestinationComparisonMatricesCreator {
         }
     }
 
-    private Double ahpValueBasedOnDiff(Integer firstDestinationRating, Integer secondDestinationRating) {
+    private static Double ahpValueBasedOnDiff(Integer firstDestinationRating, Integer secondDestinationRating) {
         Integer diff = abs(firstDestinationRating - secondDestinationRating);
-        return mapForAHP().get(diff);
+        return mapForAHP.get(diff);
     }
 }

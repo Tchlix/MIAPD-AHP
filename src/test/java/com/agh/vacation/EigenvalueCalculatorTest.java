@@ -7,6 +7,7 @@ import org.testng.annotations.Test;
 import java.util.HashMap;
 import java.util.Map;
 
+import static com.agh.vacation.EigenvalueCalculator.calculateEigenvalues;
 import static org.testng.Assert.assertEquals;
 
 /**
@@ -30,16 +31,14 @@ public class EigenvalueCalculatorTest {
         Criterion food = new Criterion("Food");
         Criterion nl = new Criterion("Night life");
 
-        IndexMap criterionIndexMap = new IndexMap(new HashMap<>());
+        IndexMap<Criterion> criterionIndexMap = new IndexMap<>(new HashMap<>());
         criterionIndexMap.put(vfm, 0);
         criterionIndexMap.put(sights, 1);
         criterionIndexMap.put(museums, 2);
         criterionIndexMap.put(food, 3);
         criterionIndexMap.put(nl, 4);
 
-        ComparisonMatrix comparisonMatrix = new ComparisonMatrix(matrix, criterionIndexMap);
-
-        EigenvalueCalculator calculator = new EigenvalueCalculator();
+        ComparisonMatrix<Criterion> comparisonMatrix = new ComparisonMatrix<>(matrix, criterionIndexMap);
 
         //calculated with matrixcalc.org
         Map<Criterion, Double> expected = new HashMap<>();
@@ -49,7 +48,7 @@ public class EigenvalueCalculatorTest {
         expected.put(food, .063);
         expected.put(nl, .033);
         // When
-        Map<PairwiseComparableObject, Double> actual = calculator.calculateEigenvalues(comparisonMatrix);
+        Map<Criterion, Double> actual = calculateEigenvalues(comparisonMatrix);
         // Then
         assertEquals(actual, expected);
     }

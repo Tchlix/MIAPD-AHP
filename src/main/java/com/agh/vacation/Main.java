@@ -8,6 +8,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static com.agh.vacation.CriteriaScoresCalculator.calculateCriteriaScores;
+import static com.agh.vacation.EigenvalueCalculator.calculateEigenvalues;
+import static com.agh.vacation.ResultCalculator.calculateResult;
+import static com.agh.vacation.VacationDestinationComparisonMatricesCreator.createComparisonMatricesBasedOnCriteria;
+
 public class Main {
     //EXAMPLE CODE BELOW, THIS IS NOT FINAL
     private static final Criterion vfm = new Criterion("Value for money");
@@ -23,9 +28,8 @@ public class Main {
         ComparisonMatrix<Criterion> criteriaComparisonMatrix = criteriaComparisonMatrix();
 
         //calculate priorities for criteria
-        EigenvalueCalculator eigenvalueCalculator = new EigenvalueCalculator();
         CriteriaPrioritiesMap criteriaPriorities =
-                new CriteriaPrioritiesMap(eigenvalueCalculator.calculateEigenvalues(criteriaComparisonMatrix));
+                new CriteriaPrioritiesMap(calculateEigenvalues(criteriaComparisonMatrix));
         List<Criterion> criteria = new ArrayList<>(List.of(vfm, sights, museums, food, nl));
         //Load destinations
         //TODO: load this from json and remove those example static objects
@@ -34,18 +38,15 @@ public class Main {
         List<VacationDestination> destinations = new ArrayList<>(List.of(lisbon, munich));
 
         //Create a map of PC matrices based on destination ratings for each criterion
-        VacationDestinationComparisonMatricesCreator creator = new VacationDestinationComparisonMatricesCreator();
-        ComparisonsBasedOnCriteria comparisonsBasedOnCriteria =
-                creator.create(criteria, destinations);
+        ComparisonMatricesBasedOnCriteria comparisonMatricesBasedOnCriteria =
+                createComparisonMatricesBasedOnCriteria(criteria, destinations);
 
         //for each criterion calculate individual score of each destination
         //(score is not yet multiplied with proper criteria priority value)
-        CriteriaScoresCalculator criteriaScoresCalculator = new CriteriaScoresCalculator();
         VacationCriteriaScoresMap criteriaScoresMap =
-                criteriaScoresCalculator.calculateCriteriaScores(destinations, comparisonsBasedOnCriteria);
+                calculateCriteriaScores(destinations, comparisonMatricesBasedOnCriteria);
 
-        ResultCalculator resultCalculator = new ResultCalculator();
-        Result result = resultCalculator.calculateResult(criteriaPriorities, criteriaScoresMap);
+        Result result = calculateResult(criteriaPriorities, criteriaScoresMap);
         System.out.println(result.display());
 
     }

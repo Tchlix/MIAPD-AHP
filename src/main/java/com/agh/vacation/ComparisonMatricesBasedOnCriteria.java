@@ -5,12 +5,13 @@ import java.util.Map.Entry;
 import java.util.stream.Stream;
 
 /**
+ * Holds a map of key being Criterion and value being a ComparisonMatrix for vacation destinations
  * @author Filip Piwosz
  */
-class ComparisonsBasedOnCriteria {
+class ComparisonMatricesBasedOnCriteria {
     private final Map<Criterion, ComparisonMatrix<VacationDestination>> map;
 
-    ComparisonsBasedOnCriteria(Map<Criterion, ComparisonMatrix<VacationDestination>> map) {
+    ComparisonMatricesBasedOnCriteria(Map<Criterion, ComparisonMatrix<VacationDestination>> map) {
         this.map = map;
     }
 

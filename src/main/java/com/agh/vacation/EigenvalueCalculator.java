@@ -14,6 +14,9 @@ import static com.agh.vacation.MathUtilFunctions.truncateDouble;
  * @author Filip Piwosz
  */
 class EigenvalueCalculator {
+    private EigenvalueCalculator() {
+    }
+
     private static final int DEFAULT_TRUNCATION = 3;
 
     /**
@@ -35,7 +38,7 @@ class EigenvalueCalculator {
      * @return Map of criteria with respective scaled priorities
      */
 
-    <T extends PairwiseComparableObject> Map<T, Double> calculateEigenvalues(ComparisonMatrix<T> comparisonMatrix) {
+    static <T extends PairwiseComparableObject> Map<T, Double> calculateEigenvalues(ComparisonMatrix<T> comparisonMatrix) {
         RealMatrix matrix = comparisonMatrix.matrix();
         IndexMap<T> indexMap = comparisonMatrix.indexMap();
         EigenDecomposition decomposition = new EigenDecomposition(matrix);
@@ -53,13 +56,13 @@ class EigenvalueCalculator {
         return result;
     }
 
-    private RealVector maxEigenValueVector(EigenDecomposition decomposition) {
+    private static RealVector maxEigenValueVector(EigenDecomposition decomposition) {
         double[] realEigenValues = decomposition.getRealEigenvalues();
         int maxIndex = maxElementIndex(realEigenValues);
         return decomposition.getEigenvector(maxIndex);
     }
 
-    private void applyScaling(RealVector vector) {
+    private static void applyScaling(RealVector vector) {
         double sum = 0;
         int vectorDimension = vector.getDimension();
         for (int i = 0; i < vectorDimension; i++) {
