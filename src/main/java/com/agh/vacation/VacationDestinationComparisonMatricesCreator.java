@@ -73,8 +73,7 @@ class VacationDestinationComparisonMatricesCreator {
     }
 
     private Double ahpValueBasedOnDiff(Integer firstDestinationRating, Integer secondDestinationRating) {
-        Map<Integer, Double> ahpMap = mapForAHP();
         Integer diff = abs(firstDestinationRating - secondDestinationRating);
-        return ahpMap.get(diff);
+        return mapForAHP().get(diff);
     }
 }
