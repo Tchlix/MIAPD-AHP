@@ -44,9 +44,9 @@ public class Main {
         VacationCriteriaScoresMap criteriaScoresMap =
                 criteriaScoresCalculator.calculateCriteriaScores(destinations, comparisonsBasedOnCriteria);
 
-        FinalScoreCalculator finalScoreCalculator = new FinalScoreCalculator();
-
-        System.out.println(finalScoreCalculator.calculateFinalScore(criteriaPriorities, criteriaScoresMap));
+        ResultCalculator resultCalculator = new ResultCalculator();
+        Result result = resultCalculator.calculateResult(criteriaPriorities, criteriaScoresMap);
+        System.out.println(result.display());
 
     }
 

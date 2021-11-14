@@ -3,7 +3,7 @@ package com.agh.vacation;
 import java.util.Objects;
 
 class Criterion implements PairwiseComparableObject {
-    String name;
+    private final String name;
 
     Criterion(String name) {
         this.name = name;

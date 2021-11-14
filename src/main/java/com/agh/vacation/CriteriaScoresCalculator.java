@@ -5,7 +5,8 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Calculates a map with key being VacationDestination and value being score
+ * Given List of VacationDestination and ComparisonsBasedOnCriteria
+ * calculates a map with key being VacationDestination and value being scores for each criterion (CriteriaScores)
  *
  * @author Filip Piwosz
  */

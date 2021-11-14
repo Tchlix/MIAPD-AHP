@@ -3,10 +3,11 @@ package com.agh.vacation;
 import java.util.Map;
 
 /**
+ * Represents a map of scores gained by VacationDestination for each criterion
  * @author Filip Piwosz
  */
 class CriteriaScores {
-    final Map<Criterion, Double> scores;
+    private final Map<Criterion, Double> scores;
 
     CriteriaScores(Map<Criterion, Double> scores) {
         this.scores = scores;

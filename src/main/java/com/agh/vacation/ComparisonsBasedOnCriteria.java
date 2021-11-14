@@ -8,7 +8,7 @@ import java.util.stream.Stream;
  * @author Filip Piwosz
  */
 class ComparisonsBasedOnCriteria {
-    private Map<Criterion, ComparisonMatrix<VacationDestination>> map;
+    private final Map<Criterion, ComparisonMatrix<VacationDestination>> map;
 
     ComparisonsBasedOnCriteria(Map<Criterion, ComparisonMatrix<VacationDestination>> map) {
         this.map = map;

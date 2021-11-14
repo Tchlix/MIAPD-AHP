@@ -7,9 +7,9 @@ import java.util.Map.Entry;
 /**
  * @author Filip Piwosz
  */
-class FinalScoreCalculator {
-    FinalScore calculateFinalScore(CriteriaPrioritiesMap criteriaPriorities,
-                                   VacationCriteriaScoresMap vacationCriteriaScoresMap) {
+class ResultCalculator {
+    Result calculateResult(CriteriaPrioritiesMap criteriaPriorities,
+                           VacationCriteriaScoresMap vacationCriteriaScoresMap) {
         Map<VacationDestination, Double> resultMap = new HashMap<>();
         for (Entry<VacationDestination, CriteriaScores> destinationScoresEntry : vacationCriteriaScoresMap.entrySet()) {
             VacationDestination destination = destinationScoresEntry.getKey();
@@ -23,6 +23,6 @@ class FinalScoreCalculator {
             }
             resultMap.put(destination, sum);
         }
-        return new FinalScore(resultMap);
+        return new Result(resultMap);
     }
 }

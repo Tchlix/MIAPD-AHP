@@ -12,7 +12,7 @@ import static java.lang.Math.abs;
 
 /**
  * Given a list of criteria and list of possible vacation destinations
- * creates a map with key being a criterion and value being a pairwise comparison matrix between destinations
+ * creates a VacationCriteriaScoresMap object
  *
  * @author Filip Piwosz
  */
