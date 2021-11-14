@@ -46,11 +46,11 @@ class EigenvalueCalculator {
 
         RealVector vector = maxEigenValueVector(decomposition);
         applyScaling(vector);
-        for (T obj : indexMap.keySet()) {
-            int index = indexMap.get(obj);
+        for (T pairwiseComparableObject : indexMap.keySet()) {
+            int index = indexMap.get(pairwiseComparableObject);
             double value = vector.getEntry(index);
             value = truncateDouble(value, DEFAULT_TRUNCATION);
-            result.put(obj, value);
+            result.put(pairwiseComparableObject, value);
         }
 
         return result;
