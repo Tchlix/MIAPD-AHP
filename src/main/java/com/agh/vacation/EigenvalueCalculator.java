@@ -4,7 +4,7 @@ import org.apache.commons.math3.linear.EigenDecomposition;
 import org.apache.commons.math3.linear.RealMatrix;
 import org.apache.commons.math3.linear.RealVector;
 
-import java.util.EnumMap;
+import java.util.HashMap;
 import java.util.Map;
 
 import static com.agh.vacation.MathUtilFunctions.maxElementIndex;
@@ -13,7 +13,11 @@ import static com.agh.vacation.MathUtilFunctions.truncateDouble;
 /**
  * @author Filip Piwosz
  */
-class CriteriaEigenvalueCalculator {
+class EigenvalueCalculator {
+    private EigenvalueCalculator() {
+    }
+
+    private static final int DEFAULT_TRUNCATION = 3;
 
     /**
      * https://en.wikipedia.org/wiki/Perron%E2%80%93Frobenius_theorem
@@ -28,39 +32,37 @@ class CriteriaEigenvalueCalculator {
      * only positive values
      * we apply a little trick - 1. swap all values in the eigenvector to its absolute values
      * 2. scale them so that they all sum up to 1.0
-     * we can do this, since the respective scale of 2 criteria values doesn't change
+     * we can do this, since the respective scale of 2 comparable object values doesn't change
      *
      * @param comparisonMatrix - Pairwise Comparison matrix for criteria
-     * @param truncation       - truncation for double type values
      * @return Map of criteria with respective scaled priorities
      */
 
-    Map<Criterion, Double> calculateCriteriaPriorities(CriteriaComparisonMatrix comparisonMatrix, int truncation) {
+    static <T extends PairwiseComparableObject> Map<T, Double> calculateEigenvalues(ComparisonMatrix<T> comparisonMatrix) {
         RealMatrix matrix = comparisonMatrix.matrix();
-        Map<Criterion, Integer> indexMap = comparisonMatrix.indexMap();
+        IndexMap<T> indexMap = comparisonMatrix.indexMap();
         EigenDecomposition decomposition = new EigenDecomposition(matrix);
-        Map<Criterion, Double> result = new EnumMap<>(Criterion.class);
+        Map<T, Double> result = new HashMap<>();
 
         RealVector vector = maxEigenValueVector(decomposition);
         applyScaling(vector);
-
-        for (Criterion criterion : indexMap.keySet()) {
-            int index = indexMap.get(criterion);
-            double priorityValue = vector.getEntry(index);
-            priorityValue = truncateDouble(priorityValue, truncation);
-            result.put(criterion, priorityValue);
+        for (T obj : indexMap.keySet()) {
+            int index = indexMap.get(obj);
+            double value = vector.getEntry(index);
+            value = truncateDouble(value, DEFAULT_TRUNCATION);
+            result.put(obj, value);
         }
 
         return result;
     }
 
-    private RealVector maxEigenValueVector(EigenDecomposition decomposition) {
+    private static RealVector maxEigenValueVector(EigenDecomposition decomposition) {
         double[] realEigenValues = decomposition.getRealEigenvalues();
         int maxIndex = maxElementIndex(realEigenValues);
         return decomposition.getEigenvector(maxIndex);
     }
 
-    private void applyScaling(RealVector vector) {
+    private static void applyScaling(RealVector vector) {
         double sum = 0;
         int vectorDimension = vector.getDimension();
         for (int i = 0; i < vectorDimension; i++) {
