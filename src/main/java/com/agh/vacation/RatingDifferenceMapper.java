@@ -14,12 +14,13 @@ class RatingDifferenceMapper {
     }
 
     static Map<Integer, Double> mapForAHP() {
-        Map<Integer, Double> map = new HashMap<>();
-        map.put(0, 1.);
-        map.put(1, 3.);
-        map.put(2, 5.);
-        map.put(3, 7.);
-        map.put(4, 9.);
+        Map<Integer, Double> map = new HashMap<>(Map.of(
+                0, 1.,
+                1, 3.,
+                2, 5.,
+                3, 7.,
+                4, 9.
+        ));
         return map;
     }
 }
