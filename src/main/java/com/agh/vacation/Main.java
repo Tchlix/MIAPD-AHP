@@ -18,6 +18,7 @@ import static com.agh.vacation.ResultCalculator.calculateResult;
 import static com.agh.vacation.VacationDestinationComparisonMatricesCreator.createComparisonMatricesBasedOnCriteria;
 
 public class Main {
+    private static final String CITIES_PATH = "Cities";
     //EXAMPLE CODE BELOW, THIS IS NOT FINAL
     private static final Criterion vfm = new Criterion("Value for money");
     private static final Criterion sights = new Criterion("Sights");
@@ -78,7 +79,7 @@ public class Main {
         ObjectMapper objectMapper = new ObjectMapper();
         List<VacationDestination> destinations = new ArrayList<>();
         try {
-            Files.list(Paths.get("Cities"))
+            Files.list(Paths.get(CITIES_PATH))
                     .map(Path::toFile)
                     .forEach(path -> {
                         try {
