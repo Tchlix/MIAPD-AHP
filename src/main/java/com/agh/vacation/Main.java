@@ -11,6 +11,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.stream.Stream;
 
 import static com.agh.vacation.CriteriaScoresCalculator.calculateCriteriaScores;
 import static com.agh.vacation.EigenvalueCalculator.calculateEigenvalues;
@@ -80,7 +81,6 @@ public class Main {
         List<VacationDestination> destinations = new ArrayList<>();
         try (Stream<Path> pathStream = Files.list(Paths.get(CITIES_PATH))) {
             pathStream.map(Path::toFile)
-                    .map(Path::toFile)
                     .forEach(path -> {
                         try {
                             destinations.add(objectMapper.readValue(path, VacationDestination.class));
