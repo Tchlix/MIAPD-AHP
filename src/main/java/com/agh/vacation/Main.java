@@ -78,8 +78,8 @@ public class Main {
     static List<VacationDestination> loadDestinations() {
         ObjectMapper objectMapper = new ObjectMapper();
         List<VacationDestination> destinations = new ArrayList<>();
-        try {
-            Files.list(Paths.get(CITIES_PATH))
+        try (Stream<Path> pathStream = Files.list(Paths.get(CITIES_PATH))) {
+            pathStream.map(Path::toFile)
                     .map(Path::toFile)
                     .forEach(path -> {
                         try {
