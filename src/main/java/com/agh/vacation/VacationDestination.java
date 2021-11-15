@@ -1,18 +1,19 @@
 package com.agh.vacation;
 
+import lombok.Builder;
+import lombok.extern.jackson.Jacksonized;
+
 import java.util.Map;
 
 /**
  * @author Filip Piwosz
  */
+@Jacksonized
+@Builder
 class VacationDestination implements PairwiseComparableObject {
     final String name;
     private final Map<Criterion, Integer> ratings;
 
-    VacationDestination(String name, Map<Criterion, Integer> ratings) {
-        this.name = name;
-        this.ratings = ratings;
-    }
 
     Integer ratingFor(Criterion criterion) {
         return this.ratings.get(criterion);
