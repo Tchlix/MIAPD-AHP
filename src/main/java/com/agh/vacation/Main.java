@@ -13,6 +13,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Stream;
 
+import static com.agh.vacation.CriteriaJSONLoader.loadCriteria;
 import static com.agh.vacation.CriteriaScoresCalculator.calculateCriteriaScores;
 import static com.agh.vacation.EigenvalueCalculator.calculateEigenvalues;
 import static com.agh.vacation.ResultCalculator.calculateResult;
@@ -30,8 +31,14 @@ public class Main {
     public static void main(String[] args) {
 
         //Load criteria
-        //TODO: load this from json and remove this example static object
-        ComparisonMatrix<Criterion> criteriaComparisonMatrix = criteriaComparisonMatrix();
+        ComparisonMatrix<Criterion> criteriaComparisonMatrix;
+        try {
+            criteriaComparisonMatrix = loadCriteria(Path.of("criteria.json"));
+        } catch (IOException e) {
+            System.err.println("Couldn't load criteria!");
+            System.err.println(e.getMessage());
+            return;
+        }
         //calculate priorities for criteria
         CriteriaPrioritiesMap criteriaPriorities =
                 new CriteriaPrioritiesMap(calculateEigenvalues(criteriaComparisonMatrix));
@@ -39,7 +46,7 @@ public class Main {
 
         //Load destinations
         List<VacationDestination> destinations = loadDestinations();
-        if (destinations.size() == 0) {
+        if (destinations.isEmpty()) {
             System.err.println("No cities !");
             return;
         }
@@ -52,6 +59,7 @@ public class Main {
         VacationCriteriaScoresMap criteriaScoresMap =
                 calculateCriteriaScores(destinations, comparisonMatricesBasedOnCriteria);
 
+        //calculate final result - sum(score * criterion priority)
         Result result = calculateResult(criteriaPriorities, criteriaScoresMap);
         System.out.println(result.display());
 
