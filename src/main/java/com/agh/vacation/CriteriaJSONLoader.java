@@ -8,7 +8,9 @@ import org.apache.commons.math3.linear.RealMatrix;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
+import java.util.Map.Entry;
 
 /**
  * @author Filip Piwosz
@@ -25,10 +27,8 @@ class CriteriaJSONLoader {
         JsonNode node = objectMapper.readTree(path.toFile());
 
         JsonNode indexMapJsonNode = node.findValue(INDEX_MAP_FIELD_NAME);
-        //there is a warning for unchecked assignment
-        //afaik the only possible way to fix this is to use reflection
-        Map<Criterion, Integer> map = objectMapper.treeToValue(indexMapJsonNode, HashMap.class);
-        IndexMap<Criterion> indexMap = new IndexMap<>(map);
+
+        IndexMap<Criterion> indexMap = new IndexMap<>(obtainIndexMap(indexMapJsonNode));
 
         JsonNode matrixJsonNode = node.findValue(MATRIX_FIELD_NAME);
         Fraction[][] fractions = objectMapper.treeToValue(matrixJsonNode, Fraction[][].class);
@@ -46,5 +46,17 @@ class CriteriaJSONLoader {
             }
         }
         return result;
+    }
+
+    private static Map<Criterion, Integer> obtainIndexMap(JsonNode indexMapJsonNode) {
+        Map<Criterion, Integer> map = new HashMap<>();
+        Iterator<Entry<String, JsonNode>> iterator = indexMapJsonNode.fields();
+        while (iterator.hasNext()) {
+            Entry<String, JsonNode> entry = iterator.next();
+            Criterion criterion = new Criterion(entry.getKey());
+            Integer index = entry.getValue().intValue();
+            map.put(criterion, index);
+        }
+        return map;
     }
 }

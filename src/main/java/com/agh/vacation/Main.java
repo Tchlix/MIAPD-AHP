@@ -21,6 +21,7 @@ import static com.agh.vacation.VacationDestinationComparisonMatricesCreator.crea
 
 public class Main {
     private static final String CITIES_PATH = "Cities";
+    private static final String CRITERIA_PATH = "criteria.json";
     //EXAMPLE CODE BELOW, THIS IS NOT FINAL
     private static final Criterion vfm = new Criterion("Value for money");
     private static final Criterion sights = new Criterion("Sights");
@@ -30,10 +31,13 @@ public class Main {
 
     public static void main(String[] args) {
 
-        //Load criteria
+        //Load criteria and destinations
         ComparisonMatrix<Criterion> criteriaComparisonMatrix;
+        List<VacationDestination> destinations;
+
         try {
-            criteriaComparisonMatrix = loadCriteria(Path.of("criteria.json"));
+            criteriaComparisonMatrix = loadCriteria(Path.of(CRITERIA_PATH));
+            destinations = loadDestinations();
         } catch (IOException e) {
             System.err.println("Couldn't load criteria!");
             System.err.println(e.getMessage());
@@ -42,17 +46,15 @@ public class Main {
         //calculate priorities for criteria
         CriteriaPrioritiesMap criteriaPriorities =
                 new CriteriaPrioritiesMap(calculateEigenvalues(criteriaComparisonMatrix));
-        List<Criterion> criteria = new ArrayList<>(List.of(vfm, sights, museums, food, nl));
+        List<Criterion> criteriaList = criteriaComparisonMatrix.
+                indexMap().
+                keySet().
+                stream().
+                toList();
 
-        //Load destinations
-        List<VacationDestination> destinations = loadDestinations();
-        if (destinations.isEmpty()) {
-            System.err.println("No cities !");
-            return;
-        }
         //Create a map of PC matrices based on destination ratings for each criterion
         ComparisonMatricesBasedOnCriteria comparisonMatricesBasedOnCriteria =
-                createComparisonMatricesBasedOnCriteria(criteria, destinations);
+                createComparisonMatricesBasedOnCriteria(criteriaList, destinations);
 
         //for each criterion calculate individual score of each destination
         //(score is not yet multiplied with proper criteria priority value)
