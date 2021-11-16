@@ -13,7 +13,7 @@ import static java.lang.Math.abs;
  * Given a list of criteria and list of possible vacation destinations
  * creates a map of ComparisonMatricesBasedOnCriteria object
  *
- * @author Filip Piwosz
+ *
  * @see ComparisonMatricesBasedOnCriteria
  */
 class VacationDestinationComparisonMatricesCreator {

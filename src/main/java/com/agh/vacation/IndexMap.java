@@ -4,7 +4,7 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * @author Filip Piwosz
+ *
  */
 class IndexMap<T extends PairwiseComparableObject> {
     private final Map<T, Integer> map;

@@ -11,7 +11,7 @@ import static com.agh.vacation.MathUtilFunctions.maxElementIndex;
 import static com.agh.vacation.MathUtilFunctions.truncateDouble;
 
 /**
- * @author Filip Piwosz
+ *
  */
 class EigenvalueCalculator {
     private static final int DEFAULT_TRUNCATION = 3;

@@ -6,7 +6,7 @@ import lombok.extern.jackson.Jacksonized;
 import java.util.Map;
 
 /**
- * @author Filip Piwosz
+ *
  */
 @Jacksonized
 @Builder

@@ -5,7 +5,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 /**
- * @author Filip Piwosz
+ *
  */
 class ResultCalculator {
     private ResultCalculator() {

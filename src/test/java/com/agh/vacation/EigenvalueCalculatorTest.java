@@ -11,7 +11,7 @@ import static com.agh.vacation.EigenvalueCalculator.calculateEigenvalues;
 import static org.testng.Assert.assertEquals;
 
 /**
- * @author Filip Piwosz
+ *
  */
 public class EigenvalueCalculatorTest {
 

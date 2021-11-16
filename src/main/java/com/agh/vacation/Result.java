@@ -10,7 +10,7 @@ import static java.lang.System.lineSeparator;
 import static java.util.Map.Entry.comparingByValue;
 
 /**
- * @author Filip Piwosz
+ *
  */
 class Result {
     private final Map<VacationDestination, Double> map;

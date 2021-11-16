@@ -4,7 +4,7 @@ import static java.lang.Math.floor;
 import static java.lang.Math.pow;
 
 /**
- * @author Filip Piwosz
+ *
  */
 class MathUtilFunctions {
     private static final String IMPROPER_ARRAY_EXCEPTION_MESSAGE = "Null or empty array cannot have max value!";

@@ -5,7 +5,7 @@ import java.util.Map.Entry;
 import java.util.Set;
 
 /**
- * @author Filip Piwosz
+ *
  */
 class VacationCriteriaScoresMap {
     private final Map<VacationDestination, CriteriaScores> map;

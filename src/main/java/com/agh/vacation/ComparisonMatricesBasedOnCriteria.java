@@ -7,7 +7,6 @@ import java.util.stream.Stream;
 /**
  * Holds a map of key being Criterion and value being a ComparisonMatrix for vacation destinations
  *
- * @author Filip Piwosz
  */
 class ComparisonMatricesBasedOnCriteria {
     private final Map<Criterion, ComparisonMatrix<VacationDestination>> map;
