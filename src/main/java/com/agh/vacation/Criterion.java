@@ -1,8 +1,5 @@
 package com.agh.vacation;
 
-import lombok.Builder;
-import lombok.extern.jackson.Jacksonized;
-
 import java.util.Objects;
 
 class Criterion implements PairwiseComparableObject {
