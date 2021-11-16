@@ -6,6 +6,7 @@ import static java.lang.Double.parseDouble;
 
 /**
  * Helper class for loading floating point types from .json
+ *
  * @author Filip Piwosz
  */
 @Jacksonized

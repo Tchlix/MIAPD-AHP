@@ -1,15 +1,12 @@
 package com.agh.vacation;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.apache.commons.math3.linear.Array2DRowRealMatrix;
-import org.apache.commons.math3.linear.RealMatrix;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Stream;
 
@@ -22,15 +19,8 @@ import static com.agh.vacation.VacationDestinationComparisonMatricesCreator.crea
 public class Main {
     private static final String CITIES_PATH = "Cities";
     private static final String CRITERIA_PATH = "criteria.json";
-    //EXAMPLE CODE BELOW, THIS IS NOT FINAL
-    private static final Criterion vfm = new Criterion("Value for money");
-    private static final Criterion sights = new Criterion("Sights");
-    private static final Criterion museums = new Criterion("Museums");
-    private static final Criterion food = new Criterion("Food");
-    private static final Criterion nl = new Criterion("Night life");
 
     public static void main(String[] args) {
-
         //Load criteria and destinations
         ComparisonMatrix<Criterion> criteriaComparisonMatrix;
         List<VacationDestination> destinations;
@@ -66,25 +56,6 @@ public class Main {
         Result result = calculateResult(criteriaPriorities, criteriaScoresMap);
         System.out.println(result.display());
 
-    }
-
-
-    private static ComparisonMatrix<Criterion> criteriaComparisonMatrix() {
-        RealMatrix criteriaMatrix = new Array2DRowRealMatrix(new double[][]{
-                {1, 3, 5, 7, 9},
-                {1. / 3., 1, 3, 5, 7},
-                {1. / 5., 1. / 3., 1, 3, 5},
-                {1. / 7., 1. / 5., 1. / 3., 1, 3},
-                {1. / 9., 1. / 7., 1. / 5., 1. / 3., 1}
-        });
-        IndexMap<Criterion> indexMap = new IndexMap<>(new HashMap<>());
-        indexMap.put(vfm, 0);
-        indexMap.put(sights, 1);
-        indexMap.put(museums, 2);
-        indexMap.put(food, 3);
-        indexMap.put(nl, 4);
-
-        return new ComparisonMatrix<>(criteriaMatrix, indexMap);
     }
 
     static List<VacationDestination> loadDestinations() {

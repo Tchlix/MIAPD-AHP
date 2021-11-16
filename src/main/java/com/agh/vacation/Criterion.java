@@ -4,6 +4,7 @@ import lombok.Builder;
 import lombok.extern.jackson.Jacksonized;
 
 import java.util.Objects;
+
 @Jacksonized
 @Builder
 class Criterion implements PairwiseComparableObject {
