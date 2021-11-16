@@ -13,7 +13,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 /**
- * @author Filip Piwosz
+ *
  */
 class CriteriaJSONLoader {
     private static final String INDEX_MAP_FIELD_NAME = "indexMap";
