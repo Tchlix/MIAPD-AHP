@@ -39,13 +39,14 @@ public class Main {
             criteriaComparisonMatrix = loadCriteria(Path.of(CRITERIA_PATH));
             destinations = loadDestinations();
         } catch (IOException e) {
-            System.err.println("Couldn't load criteria!");
+            System.err.println("Couldn't load parameter(s)!");
             System.err.println(e.getMessage());
             return;
         }
         //calculate priorities for criteria
         CriteriaPrioritiesMap criteriaPriorities =
                 new CriteriaPrioritiesMap(calculateEigenvalues(criteriaComparisonMatrix));
+
         List<Criterion> criteriaList = criteriaComparisonMatrix.
                 indexMap().
                 keySet().
