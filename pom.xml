@@ -6,7 +6,7 @@
 
     <groupId>com.agh</groupId>
     <artifactId>vacation</artifactId>
-    <version>0.99</version>
+    <version>1.0</version>
     <build>
         <plugins>
             <plugin>
