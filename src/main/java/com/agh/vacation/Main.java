@@ -50,7 +50,7 @@ public class Main {
         //for each criterion calculate individual score of each destination
         //(score is not yet multiplied with proper criteria priority value)
         VacationCriteriaScoresMap criteriaScoresMap =
-                calculateCriteriaScores(destinations, comparisonMatricesBasedOnCriteria);
+                calculateCriteriaScores(destinations, comparisonMatricesBasedOnCriteria, CalculatorType.HARKER);
 
         //calculate final result - sum(score * criterion priority)
         Result result = calculateResult(criteriaPriorities, criteriaScoresMap);
