@@ -13,7 +13,19 @@ class GMMCalculator extends IncompleteCalculator {
     private GMMCalculator() {
     }
 
-    private static RealMatrix g(RealMatrix incompleteMatrix) {
+    /**
+     * Based on the given incomplete PC matrix C, let us prepare the auxiliary matrix G =[g_ij] such that
+     *        {  1           if c_ij = NO_VALUE_PRESENT and i != j
+     * g_ij = {  0           if c_ij != NO_VALUE_PRESENT and i != j
+     *        {  n - s_i     if i = j
+     * where s_i is the number of missing comparisons in the i-th row of C
+     *
+     * Source Understanding_The_Analytic_Hierarchy_Process 4.2.2
+     *
+     * @param incompleteMatrix with NO_VALUE_PRESENT in empty places
+     * @return auxiliary matrix G
+     */
+ private static RealMatrix g(RealMatrix incompleteMatrix) {
         int dim = incompleteMatrix.getColumnDimension();
         double[][] arrayG = new double[dim][dim];
         for (int y = 0; y < dim; y++) {
@@ -31,16 +43,52 @@ class GMMCalculator extends IncompleteCalculator {
         return new Array2DRowRealMatrix(arrayG);
     }
 
+    /**
+     * We also create constant term vector
+     *     {    Σ(from j = 1 to n) ln(c_1j) }
+     * r = {    ........................... }
+     *     {    Σ(from j = 1 to n) ln(c_nj) }
+     * we skip over c_nj = NO_VALUE_PRESENT
+     *
+     * Source Understanding_The_Analytic_Hierarchy_Process 4.2.2 (4.8)
+     *
+     * @param incompleteMatrix with NO_VALUE_PRESENT in empty places
+     * @return RealVector r - constant term vector
+     */
     private static RealVector r(RealMatrix incompleteMatrix) {
         int dim = incompleteMatrix.getColumnDimension();
         double[] r = new double[dim];
         for (int y = 0; y < dim; y++)
             for (int x = 0; x < dim; x++)
-                if (incompleteMatrix.getEntry(y, x) != 0)
+                if (incompleteMatrix.getEntry(y, x) != NO_VALUE_PRESENT)
                     r[y] += Math.log(incompleteMatrix.getEntry(y, x));
         return new ArrayRealVector(r);
     }
 
+    /**
+     * Then we solve the linear equation system
+     * Gŵ = r
+     * and create the ranking vector w in the form
+     *      {e^ŵ(a_1) }
+     * w =  {........ }
+     *      {e^ŵ(a_n) }
+     *
+     * at last, we rescale w so that all entries sum to 1
+     *
+     *        {       w(a_1)            }
+     *        { --------------------    }
+     *        { Σ( j = 1 to n) w(a_j)   }
+     *        {.....................    }
+     * w_gm = {       w(a_n)            }
+     *        { --------------------    }
+     *        { Σ( j = 1 to n) w(a_j)   }
+     *
+     * Source Understanding_The_Analytic_Hierarchy_Process 4.2.2 (4.9)
+     *
+     * @param vectorR constant term vector
+     * @param matrixG auxiliary matrix G
+     * @return ranking vector w
+     */
     private static RealVector w(RealVector vectorR, RealMatrix matrixG) {
         RealVector vectorW = MatrixUtils.inverse(matrixG).operate(vectorR);
         double sum = 0;
