@@ -5,15 +5,24 @@ import org.apache.commons.math3.linear.RealMatrix;
 
 import java.util.Map;
 
-/**
- * Creates new matrixB from incomplete one and then
- * returns priority vector from EigenValueCalculator.calculateEigenvalues
- */
 class HarkerCalculator extends IncompleteCalculator {
 
     private HarkerCalculator() {
     }
 
+    /**
+     * Based on the given incomplete PC matrix C, let us prepare the auxiliary matrix B =[b_ij] such that
+     *        {  0           if c_ij = NO_VALUE_PRESENT and i != j
+     * b_ij = {  c_ij        if c_ij != NO_VALUE_PRESENT and i != j
+     *        {  s_i + 1     if i = j
+     * where s_i is the number of missing comparisons in the i-th row of C
+     * then I just pass this new matrix to EigenvalueCalculator get priorities
+     *
+     * Source Understanding_The_Analytic_Hierarchy_Process 4.1.2
+     *
+     * @param incompleteMatrix with NO_VALUE_PRESENT in empty places
+     * @return auxiliary matrix B
+     */
     private static RealMatrix b(RealMatrix incompleteMatrix) {
         int dim = incompleteMatrix.getColumnDimension();
         double[][] arrayG = new double[dim][dim];
