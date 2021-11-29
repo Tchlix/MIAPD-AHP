@@ -4,14 +4,11 @@ import org.apache.commons.math3.linear.*;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Random;
 
 import static com.agh.vacation.MathUtilFunctions.truncateDouble;
 
-class GMMCalculator {
-    private static final Random random = new Random();
+class GMMCalculator extends IncompleteCalculator {
     private static final int DEFAULT_TRUNCATION = 3;
-    private static final int PERCENTAGE_REMOVED = 30;
 
     private GMMCalculator() {
     }
@@ -23,7 +20,7 @@ class GMMCalculator {
             arrayG[y][y] = dim;
             for (int x = 0; x < dim; x++)
                 if (y != x) {
-                    if (incompleteMatrix.getEntry(y, x) == 0) {
+                    if (incompleteMatrix.getEntry(y, x) == NO_VALUE_PRESENT) {
                         arrayG[y][x] = 1;
                         arrayG[y][y]--;
                     } else {
@@ -60,25 +57,9 @@ class GMMCalculator {
         return vectorW;
     }
 
-    //Because with our stars there is no way for incomplete matrix, that's why I made this function to 'uncomplete' one
-    //0 in matrix is treated as no value
-    private static void uncompleteMatrix(RealMatrix completeMatrix, int howMany) {
-        int x;
-        int y;
-        int dim = completeMatrix.getColumnDimension();
-        while (howMany > 0) {
-            x = random.nextInt(dim);
-            y = random.nextInt(dim);
-            if (x != y && completeMatrix.getEntry(y, x) != 0) {
-                completeMatrix.setEntry(y, x, 0);
-                completeMatrix.setEntry(x, y, 0);
-                howMany--;
-            }
-        }
-    }
 
     private static RealVector gmm(RealMatrix matrix) {
-        uncompleteMatrix(matrix, (matrix.getRowDimension() * matrix.getRowDimension() - matrix.getRowDimension()) * PERCENTAGE_REMOVED / 200);
+        uncompleteMatrix(matrix);
         RealMatrix matrixG = g(matrix);
         RealVector vectorR = r(matrix);
         return w(vectorR, matrixG);
