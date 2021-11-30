@@ -10,9 +10,6 @@ import java.util.Map;
 import static com.agh.vacation.MathUtilFunctions.maxElementIndex;
 import static com.agh.vacation.MathUtilFunctions.truncateDouble;
 
-/**
- *
- */
 class EigenvalueCalculator {
     private static final int DEFAULT_TRUNCATION = 3;
 

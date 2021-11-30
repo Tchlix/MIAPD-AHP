@@ -4,8 +4,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static com.agh.vacation.EigenvalueCalculator.calculateEigenvalues;
-
 /**
  * Given List of VacationDestination and ComparisonMatricesBasedOnCriteria
  * calculates a map with key being VacationDestination and value being scores for each criterion (CriteriaScores)
@@ -17,7 +15,8 @@ class CriteriaScoresCalculator {
     }
 
     static VacationCriteriaScoresMap calculateCriteriaScores(List<VacationDestination> destinationList,
-                                                             ComparisonMatricesBasedOnCriteria comparisonMatricesBasedOnCriteria) {
+                                                             ComparisonMatricesBasedOnCriteria comparisonMatricesBasedOnCriteria,
+                                                             CalculatorType calculatorType) {
         Map<VacationDestination, CriteriaScores> resultMap = new HashMap<>();
 
         //for every destination put empty map
@@ -28,8 +27,7 @@ class CriteriaScoresCalculator {
         comparisonMatricesBasedOnCriteria.stream().forEach(entry -> {
             Criterion criterion = entry.getKey();
             ComparisonMatrix<VacationDestination> comparisonMatrix = entry.getValue();
-            Map<VacationDestination, Double> scoresBasedOnCriterion =
-                    calculateEigenvalues(comparisonMatrix);
+            Map<VacationDestination, Double> scoresBasedOnCriterion = calculate(calculatorType, comparisonMatrix);
 
             putCriterionScoreForAllDestinations(criterion, scoresBasedOnCriterion, resultMap);
         });
@@ -45,5 +43,14 @@ class CriteriaScoresCalculator {
                     scores.putScoreFor(criterion, score);
                 }
         );
+    }
+
+    private static Map<VacationDestination, Double> calculate(CalculatorType calculatorType,
+                                                              ComparisonMatrix<VacationDestination> comparisonMatrix) {
+        return switch (calculatorType) {
+            case GMM -> GMMCalculator.calculateGMMValues(comparisonMatrix);
+            case HARKER -> HarkerCalculator.calculateHarkerValues(comparisonMatrix);
+            case EIGENVALUE -> EigenvalueCalculator.calculateEigenvalues(comparisonMatrix);
+        };
     }
 }
