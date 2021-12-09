@@ -4,9 +4,7 @@ import org.apache.commons.math3.linear.RealMatrix;
 
 import java.util.Arrays;
 
-/**
- *
- */
+
 record ComparisonMatrix<T extends PairwiseComparableObject>(RealMatrix matrix, IndexMap<T> indexMap) {
     @Override
     public String toString() {
