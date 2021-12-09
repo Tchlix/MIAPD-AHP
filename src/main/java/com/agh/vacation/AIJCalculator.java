@@ -23,13 +23,11 @@ class AIJCalculator {
             return expertMatrices.get(0);
 
         Map<Criterion, ComparisonMatrix<VacationDestination>> map = new HashMap<>();
-        var indexMap = expertMatrices.get(0).stream().findAny().get().getValue().indexMap();
+        var indexMap = expertMatrices.get(0).getIndexMap();
         var matrixSize = indexMap.keySet().size();
-        for (Criterion criterion : criteria) {
+        for (final Criterion criterion : criteria) {
             RealMatrix resultMatrix = new Array2DRowRealMatrix(matrixSize, matrixSize);
-            //OH GOD, WHY (╯°□°)╯︵ ┻━┻
-            List<RealMatrix> matrices = expertMatrices.stream().map(s -> s.stream().filter(x -> x.getKey().equals(criterion)).
-                    map(r -> r.getValue().matrix()).findAny().get()).toList();
+            List<RealMatrix> matrices = expertMatrices.stream().map(s -> s.getMatrix(criterion)).toList();
             for (int i = 0; i < matrixSize; i++) {
                 for (int j = 0; j < matrixSize; j++) {
                     double newValue = 1;
