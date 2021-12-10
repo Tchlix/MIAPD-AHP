@@ -6,7 +6,7 @@ import org.apache.commons.math3.linear.RealMatrix;
 import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
-
+import static java.lang.Math.max;
 public class InconsistencyCalculator {
     private static final Double[] RCI = {null, null, null, 0.58, 0.9, 1.12, 1.24, 1.32, 1.41, 1.45, 1.49, 1.51, 1.48, 1.56, 1.57, 1.59};
 
