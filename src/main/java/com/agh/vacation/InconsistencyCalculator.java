@@ -24,7 +24,7 @@ public class InconsistencyCalculator {
         int n = matrix.getRowDimension();
         double principalEigenvalue = decomposition.getRealEigenvalue(0);
         for (double x : decomposition.getRealEigenvalues()) {
-            principalEigenvalue = x > principalEigenvalue ? x : principalEigenvalue;
+            principalEigenvalue = max(x, principalEigenvalue);
         }
 
         return (principalEigenvalue - n) / (n - 1);
