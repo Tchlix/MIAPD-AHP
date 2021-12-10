@@ -56,6 +56,7 @@ public class Main {
         Result result = calculateResult(criteriaPriorities, criteriaScoresMap);
         System.out.println(result.display());
         //Calculate inconsistency
+        System.out.println(comparisonMatricesBasedOnCriteria.stream().map(s->s.getKey()).toList());
         System.out.println("Saaty CI: " + InconsistencyCalculator.calculateSaatyCI(comparisonMatricesBasedOnCriteria));
         System.out.println("CR: " + InconsistencyCalculator.calculateCR(comparisonMatricesBasedOnCriteria));
         System.out.println("Koczkodaj Index: " + InconsistencyCalculator.calculateKoczkodajIndexes(comparisonMatricesBasedOnCriteria));
