@@ -75,7 +75,7 @@ public class InconsistencyCalculator {
             }
         }
         var globalKI = localCIList.stream().max(Comparator.naturalOrder());
-        return globalKI.isPresent() ? globalKI.get() : null;
+        return globalKI.orElse(null);
     }
 
     public static List<Double> calculateKoczkodajIndexes(ComparisonMatricesBasedOnCriteria comparisonMatricesBasedOnCriteria) {
