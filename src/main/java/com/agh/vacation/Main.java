@@ -6,7 +6,7 @@ import java.util.List;
 
 import static com.agh.vacation.CriteriaJSONLoader.loadCriteria;
 import static com.agh.vacation.CriteriaScoresCalculator.calculateCriteriaScores;
-import static com.agh.vacation.DestinationLoader.*;
+import static com.agh.vacation.DestinationLoader.loadMultipleExpertsDestinationRatings;
 import static com.agh.vacation.EigenvalueCalculator.calculateEigenvalues;
 import static com.agh.vacation.ResultCalculator.calculateResult;
 import static com.agh.vacation.VacationDestinationComparisonMatricesCreator.createComparisonMatricesBasedOnCriteria;
@@ -55,6 +55,10 @@ public class Main {
         //calculate final result - sum(score * criterion priority)
         Result result = calculateResult(criteriaPriorities, criteriaScoresMap);
         System.out.println(result.display());
-
+        //Calculate inconsistency
+        System.out.println(comparisonMatricesBasedOnCriteria.stream().map(s->s.getKey()).toList());
+        System.out.println("Saaty CI: " + InconsistencyCalculator.calculateSaatyCI(comparisonMatricesBasedOnCriteria));
+        System.out.println("CR: " + InconsistencyCalculator.calculateCR(comparisonMatricesBasedOnCriteria));
+        System.out.println("Koczkodaj Index: " + InconsistencyCalculator.calculateKoczkodajIndexes(comparisonMatricesBasedOnCriteria));
     }
 }
