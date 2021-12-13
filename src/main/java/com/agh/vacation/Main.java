@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.util.List;
 
-import static com.agh.vacation.CriteriaJSONLoader.loadCriteria;
+import static com.agh.vacation.fileloading.CriteriaJSONLoader.loadCriteria;
 import static com.agh.vacation.CriteriaScoresCalculator.calculateCriteriaScores;
 import static com.agh.vacation.DestinationLoader.loadMultipleExpertsDestinationRatings;
 import static com.agh.vacation.EigenvalueCalculator.calculateEigenvalues;

@@ -6,7 +6,7 @@ import java.util.Set;
 /**
  *
  */
-class IndexMap<T extends PairwiseComparableObject> {
+public class IndexMap<T extends PairwiseComparableObject> {
     private final Map<T, Integer> map;
 
     public IndexMap(Map<T, Integer> map) {

@@ -1,4 +1,4 @@
-package com.agh.vacation;
+package com.agh.vacation.fileloading;
 
 import lombok.extern.jackson.Jacksonized;
 

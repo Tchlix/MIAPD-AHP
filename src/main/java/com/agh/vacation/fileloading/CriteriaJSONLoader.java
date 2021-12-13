@@ -1,5 +1,8 @@
-package com.agh.vacation;
+package com.agh.vacation.fileloading;
 
+import com.agh.vacation.ComparisonMatrix;
+import com.agh.vacation.Criterion;
+import com.agh.vacation.IndexMap;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.commons.math3.linear.Array2DRowRealMatrix;
@@ -15,14 +18,14 @@ import java.util.Map.Entry;
 /**
  *
  */
-class CriteriaJSONLoader {
+public class CriteriaJSONLoader {
     private static final String INDEX_MAP_FIELD_NAME = "indexMap";
     private static final String MATRIX_FIELD_NAME = "matrix";
 
     private CriteriaJSONLoader() {
     }
 
-    static ComparisonMatrix<Criterion> loadCriteria(Path path) throws IOException {
+    public static ComparisonMatrix<Criterion> loadCriteria(Path path) throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();
         JsonNode node = objectMapper.readTree(path.toFile());
 
