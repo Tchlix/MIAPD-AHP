@@ -22,7 +22,7 @@ public class Main {
 
         try {
             //criteriaComparisonMatrix = loadCriteria(Path.of(CRITERIA_PATH));
-            criteriaPriorities = CriteriaJSONLoader.loadCriteriaaa(Path.of(CRITERIA_PATH));
+            criteriaPriorities = CriteriaJSONLoader.loadCriteria(Path.of(CRITERIA_PATH));
             multipleExpertsDestinationRatings = loadMultipleExpertsDestinationRatings();
         } catch (IOException e) {
             System.err.println("Couldn't load parameter(s)!");
