@@ -15,11 +15,11 @@ class GMMCalculator extends IncompleteCalculator {
 
     /**
      * Based on the given incomplete PC matrix C, let us prepare the auxiliary matrix G =[g_ij] such that
-     * {  1           if c_ij = NO_VALUE_PRESENT and i != j
+     *        {  1           if c_ij = NO_VALUE_PRESENT and i != j
      * g_ij = {  0           if c_ij != NO_VALUE_PRESENT and i != j
-     * {  n - s_i     if i = j
+     *        {  n - s_i     if i = j
      * where s_i is the number of missing comparisons in the i-th row of C
-     * <p>
+     *
      * Source Understanding_The_Analytic_Hierarchy_Process 4.2.2
      *
      * @param incompleteMatrix with NO_VALUE_PRESENT in empty places
@@ -45,11 +45,11 @@ class GMMCalculator extends IncompleteCalculator {
 
     /**
      * We also create constant term vector
-     * {    Σ(from j = 1 to n) ln(c_1j) }
+     *     {    Σ(from j = 1 to n) ln(c_1j) }
      * r = {    ........................... }
-     * {    Σ(from j = 1 to n) ln(c_nj) }
+     *     {    Σ(from j = 1 to n) ln(c_nj) }
      * we skip over c_nj = NO_VALUE_PRESENT
-     * <p>
+     *
      * Source Understanding_The_Analytic_Hierarchy_Process 4.2.2 (4.8)
      *
      * @param incompleteMatrix with NO_VALUE_PRESENT in empty places
@@ -69,20 +69,20 @@ class GMMCalculator extends IncompleteCalculator {
      * Then we solve the linear equation system
      * Gŵ = r
      * and create the ranking vector w in the form
-     * {e^ŵ(a_1) }
+     *      {e^ŵ(a_1) }
      * w =  {........ }
-     * {e^ŵ(a_n) }
-     * <p>
+     *      {e^ŵ(a_n) }
+     *
      * at last, we rescale w so that all entries sum to 1
-     * <p>
-     * {       w(a_1)            }
-     * { --------------------    }
-     * { Σ( j = 1 to n) w(a_j)   }
-     * {.....................    }
+     *
+     *        {       w(a_1)            }
+     *        { --------------------    }
+     *        { Σ( j = 1 to n) w(a_j)   }
+     *        {.....................    }
      * w_gm = {       w(a_n)            }
-     * { --------------------    }
-     * { Σ( j = 1 to n) w(a_j)   }
-     * <p>
+     *        { --------------------    }
+     *        { Σ( j = 1 to n) w(a_j)   }
+     *
      * Source Understanding_The_Analytic_Hierarchy_Process 4.2.2 (4.9)
      *
      * @param vectorR constant term vector
