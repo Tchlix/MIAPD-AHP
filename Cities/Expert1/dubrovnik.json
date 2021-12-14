@@ -2,9 +2,12 @@
   "name": "Dubrovnik",
   "ratings": {
     "Value for money": 3,
-    "Night life": 1,
-    "Museums": 4,
     "Food": 1,
-    "Sights": 4
+    "Sights": 4,
+    "Museums Modern": 4,
+    "Museums Historical": 5,
+    "Night life Music Sound quality": 1,
+    "Night life Music Taste": 2,
+    "Night life Dance": 3
   }
 }

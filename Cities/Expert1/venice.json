@@ -2,9 +2,12 @@
   "name": "Venice",
   "ratings": {
     "Value for money": 1,
-    "Night life": 2,
-    "Museums": 4,
     "Food": 3,
-    "Sights": 4
+    "Sights": 4,
+    "Museums Modern": 4,
+    "Museums Historical": 5,
+    "Night life Music Sound quality": 1,
+    "Night life Music Taste": 2,
+    "Night life Dance": 3
   }
 }
