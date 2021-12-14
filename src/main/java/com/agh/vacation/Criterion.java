@@ -2,10 +2,10 @@ package com.agh.vacation;
 
 import java.util.Objects;
 
-class Criterion implements PairwiseComparableObject {
+public class Criterion implements PairwiseComparableObject {
     private final String name;
 
-    Criterion(String name) {
+    public Criterion(String name) {
         this.name = name;
     }
 

@@ -10,7 +10,7 @@ import java.util.Map;
 import static com.agh.vacation.MathUtilFunctions.maxElementIndex;
 import static com.agh.vacation.MathUtilFunctions.truncateDouble;
 
-class EigenvalueCalculator {
+public class EigenvalueCalculator {
     private static final int DEFAULT_TRUNCATION = 3;
 
     private EigenvalueCalculator() {
@@ -35,7 +35,7 @@ class EigenvalueCalculator {
      * @return Map of criteria with respective scaled priorities
      */
 
-    static <T extends PairwiseComparableObject> Map<T, Double> calculateEigenvalues(ComparisonMatrix<T> comparisonMatrix) {
+    public static <T extends PairwiseComparableObject> Map<T, Double> calculateEigenvalues(ComparisonMatrix<T> comparisonMatrix) {
         RealMatrix matrix = comparisonMatrix.matrix();
         IndexMap<T> indexMap = comparisonMatrix.indexMap();
         EigenDecomposition decomposition = new EigenDecomposition(matrix);

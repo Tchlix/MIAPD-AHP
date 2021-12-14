@@ -1,4 +1,4 @@
-package com.agh.vacation;
+package com.agh.vacation.fileloading;
 
 import lombok.extern.jackson.Jacksonized;
 
@@ -6,7 +6,6 @@ import static java.lang.Double.parseDouble;
 
 /**
  * Helper class for loading floating point types from .json
- *
  */
 @Jacksonized
 class Fraction {

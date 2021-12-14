@@ -25,7 +25,7 @@ class GMMCalculator extends IncompleteCalculator {
      * @param incompleteMatrix with NO_VALUE_PRESENT in empty places
      * @return auxiliary matrix G
      */
- private static RealMatrix g(RealMatrix incompleteMatrix) {
+    private static RealMatrix g(RealMatrix incompleteMatrix) {
         int dim = incompleteMatrix.getColumnDimension();
         double[][] arrayG = new double[dim][dim];
         for (int y = 0; y < dim; y++) {

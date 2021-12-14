@@ -2,9 +2,12 @@
   "name": "Istanbul",
   "ratings": {
     "Value for money": 4,
-    "Night life": 4,
-    "Museums": 4,
     "Food": 5,
-    "Sights": 4
+    "Sights": 4,
+    "Museums Modern": 3,
+    "Museums Historical": 2,
+    "Night life Music Sound quality": 1,
+    "Night life Music Taste": 5,
+    "Night life Dance": 5
   }
 }

@@ -2,9 +2,12 @@
   "name": "Berlin",
   "ratings": {
     "Value for money": 3,
-    "Night life": 5,
-    "Museums": 4,
     "Food": 3,
-    "Sights": 3
+    "Sights": 3,
+    "Museums Modern": 5,
+    "Museums Historical": 1,
+    "Night life Music Sound quality": 2,
+    "Night life Music Taste": 3,
+    "Night life Dance": 4
   }
 }

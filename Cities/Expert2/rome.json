@@ -2,9 +2,12 @@
   "name": "Rome",
   "ratings": {
     "Value for money": 3,
-    "Night life": 3,
-    "Museums": 5,
     "Food": 4,
-    "Sights": 5
+    "Sights": 5,
+    "Museums Modern": 1,
+    "Museums Historical": 5,
+    "Night life Music Sound quality": 4,
+    "Night life Music Taste": 3,
+    "Night life Dance": 2
   }
 }
