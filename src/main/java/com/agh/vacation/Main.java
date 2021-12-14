@@ -1,13 +1,14 @@
 package com.agh.vacation;
 
+import com.agh.vacation.fileloading.CriteriaJSONLoader;
+
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.List;
+import java.util.Map;
 
-import static com.agh.vacation.fileloading.CriteriaJSONLoader.loadCriteria;
 import static com.agh.vacation.CriteriaScoresCalculator.calculateCriteriaScores;
 import static com.agh.vacation.DestinationLoader.loadMultipleExpertsDestinationRatings;
-import static com.agh.vacation.EigenvalueCalculator.calculateEigenvalues;
 import static com.agh.vacation.ResultCalculator.calculateResult;
 import static com.agh.vacation.VacationDestinationComparisonMatricesCreator.createComparisonMatricesBasedOnCriteria;
 
@@ -16,23 +17,22 @@ public class Main {
 
     public static void main(String[] args) {
         //Load criteria and destinations
-        ComparisonMatrix<Criterion> criteriaComparisonMatrix;
+        CriteriaPrioritiesMap criteriaPriorities;
         List<List<VacationDestination>> multipleExpertsDestinationRatings;
 
         try {
-            criteriaComparisonMatrix = loadCriteria(Path.of(CRITERIA_PATH));
+            //criteriaComparisonMatrix = loadCriteria(Path.of(CRITERIA_PATH));
+            criteriaPriorities = CriteriaJSONLoader.loadCriteriaaa(Path.of(CRITERIA_PATH));
             multipleExpertsDestinationRatings = loadMultipleExpertsDestinationRatings();
         } catch (IOException e) {
             System.err.println("Couldn't load parameter(s)!");
             System.err.println(e.getMessage());
             return;
         }
+        System.out.println(criteriaPriorities);
         //calculate priorities for criteria
-        CriteriaPrioritiesMap criteriaPriorities =
-                new CriteriaPrioritiesMap(calculateEigenvalues(criteriaComparisonMatrix));
 
-        List<Criterion> criteriaList = criteriaComparisonMatrix.
-                indexMap().
+        List<Criterion> criteriaList = criteriaPriorities.
                 keySet().
                 stream().
                 toList();
@@ -56,7 +56,7 @@ public class Main {
         Result result = calculateResult(criteriaPriorities, criteriaScoresMap);
         System.out.println(result.display());
         //Calculate inconsistency
-        System.out.println(comparisonMatricesBasedOnCriteria.stream().map(s->s.getKey()).toList());
+        System.out.println(comparisonMatricesBasedOnCriteria.stream().map(Map.Entry::getKey).toList());
         System.out.println("Saaty CI: " + InconsistencyCalculator.calculateSaatyCI(comparisonMatricesBasedOnCriteria));
         System.out.println("CR: " + InconsistencyCalculator.calculateCR(comparisonMatricesBasedOnCriteria));
         System.out.println("Koczkodaj Index: " + InconsistencyCalculator.calculateKoczkodajIndexes(comparisonMatricesBasedOnCriteria));

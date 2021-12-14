@@ -4,6 +4,7 @@ import org.apache.commons.math3.linear.Array2DRowRealMatrix;
 import org.apache.commons.math3.linear.RealMatrix;
 import org.testng.annotations.Test;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -25,11 +26,11 @@ public class EigenvalueCalculatorTest {
                 {1. / 7., 1. / 5., 1. / 3., 1, 3},
                 {1. / 9., 1. / 7., 1. / 5., 1. / 3., 1}
         });
-        Criterion vfm = new Criterion("Value for money");
-        Criterion sights = new Criterion("Sights");
-        Criterion museums = new Criterion("Museums");
-        Criterion food = new Criterion("Food");
-        Criterion nl = new Criterion("Night life");
+        Criterion vfm = new Criterion("Value for money", new ArrayList<>());
+        Criterion sights = new Criterion("Sights", new ArrayList<>());
+        Criterion museums = new Criterion("Museums", new ArrayList<>());
+        Criterion food = new Criterion("Food", new ArrayList<>());
+        Criterion nl = new Criterion("Night life", new ArrayList<>());
 
         IndexMap<Criterion> criterionIndexMap = new IndexMap<>(new HashMap<>());
         criterionIndexMap.put(vfm, 0);
