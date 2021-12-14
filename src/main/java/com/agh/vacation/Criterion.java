@@ -1,25 +1,12 @@
 package com.agh.vacation;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 public class Criterion implements PairwiseComparableObject {
     private final String name;
 
-    List<Criterion> subCriteria;
-
-    public Criterion(String name, List<Criterion> subCriteria) {
-        this.name = name;
-        this.subCriteria = subCriteria;
-    }
-
     public Criterion(String name) {
-        this(name, new ArrayList<>());
-    }
-
-    public boolean hasSubCriteria() {
-        return this.subCriteria.isEmpty();
+        this.name = name;
     }
 
     @Override
