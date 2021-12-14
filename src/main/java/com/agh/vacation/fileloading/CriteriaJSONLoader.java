@@ -20,7 +20,7 @@ import java.util.Map.Entry;
 import static com.agh.vacation.EigenvalueCalculator.calculateEigenvalues;
 
 /**
- *
+ * Holder for function that loads criteria from properly formatted .json file
  */
 public class CriteriaJSONLoader {
     private static final String INDEX_MAP_FIELD_NAME = "indexMap";

@@ -21,17 +21,4 @@ public class CriteriaPrioritiesMap {
     Set<Criterion> keySet() {
         return this.map.keySet();
     }
-
-    @Override
-    public String toString() {
-        StringBuilder builder = new StringBuilder();
-        for (Entry<Criterion, Double> entry : map.entrySet()) {
-            builder.append(entry);
-            builder.append(System.lineSeparator());
-        }
-        if (map.size() != 0) {
-            builder.delete(builder.length() - 1, builder.length());
-        }
-        return builder.toString();
-    }
 }
