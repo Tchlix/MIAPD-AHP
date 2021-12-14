@@ -12,12 +12,12 @@ class HarkerCalculator extends IncompleteCalculator {
 
     /**
      * Based on the given incomplete PC matrix C, let us prepare the auxiliary matrix B =[b_ij] such that
-     *        {  0           if c_ij = NO_VALUE_PRESENT and i != j
+     * {  0           if c_ij = NO_VALUE_PRESENT and i != j
      * b_ij = {  c_ij        if c_ij != NO_VALUE_PRESENT and i != j
-     *        {  s_i + 1     if i = j
+     * {  s_i + 1     if i = j
      * where s_i is the number of missing comparisons in the i-th row of C
      * then I just pass this new matrix to EigenvalueCalculator get priorities
-     *
+     * <p>
      * Source Understanding_The_Analytic_Hierarchy_Process 4.1.2
      *
      * @param incompleteMatrix with NO_VALUE_PRESENT in empty places

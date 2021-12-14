@@ -43,7 +43,7 @@ class DestinationLoader {
                     expertRatings.add(loadDestinations(file.getFileName().toString()))
             );
         }
-        if(expertRatings.isEmpty())
+        if (expertRatings.isEmpty())
             throw new IOException("There are no expert files !");
         return expertRatings;
     }
