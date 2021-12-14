@@ -5,7 +5,7 @@ import java.util.Map.Entry;
 import java.util.Set;
 
 /**
- *
+ *  Wrapper for map of Criteria and Priority represented by Double
  */
 public class CriteriaPrioritiesMap {
     private final Map<Criterion, Double> map;
