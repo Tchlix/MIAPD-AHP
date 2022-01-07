@@ -29,7 +29,6 @@ public class Main {
             System.err.println(e.getMessage());
             return;
         }
-        //calculate priorities for criteria
 
         List<Criterion> criteriaList = criteriaPriorities.
                 keySet().
