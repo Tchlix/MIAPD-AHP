@@ -18,7 +18,7 @@ public class Main {
     public static void main(String[] args) {
         //Load criteria and destinations
         CriteriaPrioritiesMap criteriaPriorities;
-        List<List<VacationDestination>> multipleExpertsDestinationRatings;
+        List<ExpertDestinationRatings> multipleExpertsDestinationRatings;
 
         try {
             //criteriaComparisonMatrix = loadCriteria(Path.of(CRITERIA_PATH));
@@ -38,12 +38,12 @@ public class Main {
 
         //Create a list of maps of PC matrices based on destination ratings for each criterion
         List<ComparisonMatricesBasedOnCriteria> expertMatrices = multipleExpertsDestinationRatings.stream().
-                map(destinationsRating -> createComparisonMatricesBasedOnCriteria(criteriaList, destinationsRating)).toList();
+                map(expert -> createComparisonMatricesBasedOnCriteria(criteriaList, expert.ratings)).toList();
 
         ComparisonMatricesBasedOnCriteria comparisonMatricesBasedOnCriteria = AIJCalculator.calculate(criteriaList, expertMatrices);
 
         //Variable for cities names
-        var destinations = multipleExpertsDestinationRatings.get(0);
+        var destinations = multipleExpertsDestinationRatings.get(0).ratings;
 
         //for each criterion calculate individual score of each destination
         //(score is not yet multiplied with proper criteria priority value)

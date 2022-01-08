@@ -8,6 +8,6 @@ import javax.swing.*;
 class PickExpertDirectoryButton extends JButton {
     PickExpertDirectoryButton(){
         super();
-        setText("LOAD EXPERT RATING");
+        setText("LOAD DIRECTORY WITH EXPERT RATING");
     }
 }
