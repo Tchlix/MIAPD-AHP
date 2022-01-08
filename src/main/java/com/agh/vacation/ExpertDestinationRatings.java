@@ -11,4 +11,9 @@ public class ExpertDestinationRatings {
     public ExpertDestinationRatings(List<VacationDestination> ratings) {
         this.ratings = ratings;
     }
+
+    @Override
+    public String toString() {
+        return "expert";
+    }
 }
