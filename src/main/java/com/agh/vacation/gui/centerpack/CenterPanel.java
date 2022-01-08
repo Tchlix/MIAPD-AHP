@@ -8,7 +8,7 @@ import java.awt.*;
  */
 public class CenterPanel extends JPanel {
     public CenterPanel() {
-        this.setBackground(new Color(0xD344DD));
+        this.setBackground(new Color(0xDEAADD));
         this.setVisible(true);
     }
 }
