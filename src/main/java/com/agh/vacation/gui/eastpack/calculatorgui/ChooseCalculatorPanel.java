@@ -1,5 +1,8 @@
 package com.agh.vacation.gui.eastpack.calculatorgui;
 
+import com.agh.vacation.CalculatorType;
+import com.agh.vacation.gui.GeneralMediator;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -8,18 +11,18 @@ import java.awt.*;
  */
 public class ChooseCalculatorPanel extends JPanel {
 
-    public ChooseCalculatorPanel(int width, int height) {
+    public ChooseCalculatorPanel(int width, int height, GeneralMediator mediator) {
         super();
         this.setBackground(Color.DARK_GRAY);
         this.setPreferredSize(new Dimension(width, height));
         ButtonGroup group = new ButtonGroup();
-        JRadioButton gmmButton = new JRadioButton("GMM Calculator");
-        JRadioButton eigenvalueButton = new JRadioButton("Eigenvalue Calculator");
-        JRadioButton harkerButton = new JRadioButton("Harker Calculator");
+        CalculatorButton gmmButton = new CalculatorButton("GMM Calculator", CalculatorType.GMM);
+        CalculatorButton eigenvalueButton = new CalculatorButton("Eigenvalue Calculator", CalculatorType.EIGENVALUE);
+        eigenvalueButton.doClick();
+        CalculatorButton harkerButton = new CalculatorButton("Harker Calculator", CalculatorType.HARKER);
         group.add(gmmButton);
         group.add(eigenvalueButton);
         group.add(harkerButton);
-
         this.add(gmmButton);
         this.add(eigenvalueButton);
         this.add(harkerButton);

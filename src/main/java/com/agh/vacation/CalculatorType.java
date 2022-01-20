@@ -1,5 +1,5 @@
 package com.agh.vacation;
 
-enum CalculatorType {
+public enum CalculatorType {
     EIGENVALUE, HARKER, GMM
 }

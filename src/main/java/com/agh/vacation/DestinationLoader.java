@@ -37,10 +37,15 @@ class DestinationLoader {
     }
 
     static List<ExpertDestinationRatings> loadMultipleExpertsDestinationRatings() throws IOException {
+        return loadMultipleExpertsDestinationRatings(Paths.get(CITIES_PATH));
+    }
+
+    static List<ExpertDestinationRatings> loadMultipleExpertsDestinationRatings(Path path) throws IOException {
         List<ExpertDestinationRatings> expertRatings = new LinkedList<>();
-        try (Stream<Path> pathStream = Files.list(Paths.get(CITIES_PATH))) {
+        try (Stream<Path> pathStream = Files.list(path)) {
             pathStream.filter(Files::isDirectory).forEach(file ->
-                    expertRatings.add(new ExpertDestinationRatings(loadDestinations(file.getFileName().toString())))
+                    expertRatings.add(new ExpertDestinationRatings(file.getFileName().toString(),
+                            loadDestinations(file.getFileName().toString())))
             );
         }
         if (expertRatings.isEmpty())

@@ -2,7 +2,7 @@ package com.agh.vacation.gui.eastpack.fileloadingui;
 
 import com.agh.vacation.CriteriaPrioritiesMap;
 import com.agh.vacation.fileloading.CriteriaJSONLoader;
-import com.agh.vacation.gui.CenterPanelMediator;
+import com.agh.vacation.gui.GeneralMediator;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -14,11 +14,11 @@ import java.io.IOException;
  * @author Filip Piwosz
  */
 class ChooseCriteriaFileButton extends JButton implements ActionListener {
-    private CenterPanelMediator centerPanelMediator;
+    private GeneralMediator generalMediator;
 
-    ChooseCriteriaFileButton(CenterPanelMediator centerPanelMediator) {
+    ChooseCriteriaFileButton(GeneralMediator generalMediator) {
         super();
-        this.centerPanelMediator = centerPanelMediator;
+        this.generalMediator = generalMediator;
         setText("CHOOSE CRITERIA");
         this.addActionListener(this);
     }
@@ -38,11 +38,12 @@ class ChooseCriteriaFileButton extends JButton implements ActionListener {
                     try {
                         CriteriaPrioritiesMap criteriaPrioritiesMap =
                                 CriteriaJSONLoader.loadCriteria(jFileChooser.getSelectedFile().toPath());
-                        centerPanelMediator.showCriteria(criteriaPrioritiesMap);
+                        generalMediator.saveCriteria(criteriaPrioritiesMap);
                     } catch (IOException ex) {
                         System.err.println(ex.getMessage());
                     }
                 }
+
             }
         }
     }

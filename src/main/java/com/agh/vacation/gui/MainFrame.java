@@ -22,8 +22,8 @@ public class MainFrame extends JFrame {
         this.setLayout(new BorderLayout());
         CenterPanel centerPanel = new CenterPanel();
         this.add(centerPanel, BorderLayout.CENTER);
-        CenterPanelMediator centerPanelMediator = new CenterPanelConcreteMediator(centerPanel);
-        this.add(new EastPanel(scaledWidth(this, 0.3f), this.getHeight(), centerPanelMediator),
+        GeneralMediator generalConcreteMediator = new GeneralConcreteMediator(centerPanel);
+        this.add(new EastPanel(scaledWidth(this, 0.3f), this.getHeight(), generalConcreteMediator),
                 BorderLayout.EAST);
         this.add(new SouthPanel(this.getWidth(), scaledHeight(this, 0.15f)),
                 BorderLayout.SOUTH);
