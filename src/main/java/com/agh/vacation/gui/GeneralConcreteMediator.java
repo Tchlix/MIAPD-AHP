@@ -47,7 +47,9 @@ class GeneralConcreteMediator implements GeneralMediator {
         if (this.expertDestinationRatings == null) {
             throw new IllegalStateException("Expert ratings were not loaded!");
         }
-
+        centerPanel.removeAll();
+        centerPanel.add(new JTextArea(expertDestinationRatings.toString()));
+        centerPanel.revalidate();
     }
 
     @Override

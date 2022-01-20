@@ -8,6 +8,7 @@ import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.io.IOException;
 
 /**
@@ -29,6 +30,7 @@ class ChooseCriteriaFileButton extends JButton implements ActionListener {
             JFileChooser jFileChooser = new JFileChooser();
 
             jFileChooser.setFileFilter(new FileNameExtensionFilter("Select json file with criteria", "json"));
+            jFileChooser.setCurrentDirectory(new File("."));
             int returnVal = jFileChooser.showOpenDialog(this);
 
             switch (returnVal) {

@@ -15,6 +15,7 @@ class ShowExpertRatingsButton extends JButton implements ActionListener {
     ShowExpertRatingsButton(GeneralMediator mediator) {
         super("SHOW EXPERT RATINGS");
         this.mediator = mediator;
+        this.addActionListener(this);
     }
 
     @Override

@@ -11,7 +11,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Stream;
 
-class DestinationLoader {
+public class DestinationLoader {
     private static final String CITIES_PATH = "Cities\\";
 
     private DestinationLoader() {
@@ -36,11 +36,11 @@ class DestinationLoader {
         return destinations;
     }
 
-    static List<ExpertDestinationRatings> loadMultipleExpertsDestinationRatings() throws IOException {
+    public static List<ExpertDestinationRatings> loadMultipleExpertsDestinationRatings() throws IOException {
         return loadMultipleExpertsDestinationRatings(Paths.get(CITIES_PATH));
     }
 
-    static List<ExpertDestinationRatings> loadMultipleExpertsDestinationRatings(Path path) throws IOException {
+    public static List<ExpertDestinationRatings> loadMultipleExpertsDestinationRatings(Path path) throws IOException {
         List<ExpertDestinationRatings> expertRatings = new LinkedList<>();
         try (Stream<Path> pathStream = Files.list(path)) {
             pathStream.filter(Files::isDirectory).forEach(file ->
