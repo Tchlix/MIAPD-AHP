@@ -43,7 +43,7 @@ class HarkerCalculator extends IncompleteCalculator {
 
     static <T extends PairwiseComparableObject> Map<T, Double> calculateHarkerValues(ComparisonMatrix<T> comparisonMatrix) {
         RealMatrix matrix = comparisonMatrix.matrix();
-        uncompleteMatrix(matrix);
+        //uncompleteMatrix(matrix);
         RealMatrix matrixB = b(matrix);
 
         return EigenvalueCalculator.calculateEigenvalues(new ComparisonMatrix<>(matrixB, comparisonMatrix.indexMap()));

@@ -22,8 +22,6 @@ public interface GeneralMediator {
 
     void setExpertRatingList(JList<ExpertDestinationRatings> expertRatingList);
 
-    void saveMatrices(List<ComparisonMatricesBasedOnCriteria> expertRatings);
-
     void showExpertMatrices();
 
     void saveButtonGroup(ButtonGroup buttonGroup);

@@ -15,12 +15,12 @@ import static java.lang.Math.abs;
  *
  * @see ComparisonMatricesBasedOnCriteria
  */
-class VacationDestinationComparisonMatricesCreator {
+public class VacationDestinationComparisonMatricesCreator {
     private VacationDestinationComparisonMatricesCreator() {
     }
 
-    static ComparisonMatricesBasedOnCriteria createComparisonMatricesBasedOnCriteria(List<Criterion> criteria,
-                                                                                     List<VacationDestination> destinations) {
+    public static ComparisonMatricesBasedOnCriteria createComparisonMatricesBasedOnCriteria(List<Criterion> criteria,
+                                                                                            List<VacationDestination> destinations) {
         ComparisonMatricesBasedOnCriteria result = new ComparisonMatricesBasedOnCriteria(new HashMap<>());
         IndexMap<VacationDestination> indexMap = createIndexMap(destinations);
         criteria

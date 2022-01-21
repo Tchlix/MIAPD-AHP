@@ -25,6 +25,10 @@ public class IndexMap<T extends PairwiseComparableObject> {
         return this.map.keySet();
     }
 
+    public Set<Map.Entry<T, Integer>> entrySet() {
+        return map.entrySet();
+    }
+
     @Override
     public String toString() {
         return map.toString();

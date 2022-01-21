@@ -20,7 +20,7 @@ public class CriteriaPrioritiesMap {
         return this.map.entrySet();
     }
 
-    Set<Criterion> keySet() {
+    public Set<Criterion> keySet() {
         return this.map.keySet();
     }
 

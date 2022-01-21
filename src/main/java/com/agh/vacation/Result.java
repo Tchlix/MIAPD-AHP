@@ -20,10 +20,10 @@ class Result {
         StringBuilder builder = new StringBuilder();
         List<Entry<VacationDestination, Double>> list = new ArrayList<>(map.entrySet());
         list.sort(comparingByValue(Collections.reverseOrder()));
-        list.forEach(entry -> {
-            builder.append(entry);
-            builder.append(lineSeparator());
-        });
+        list.forEach(entry -> builder.append(entry.getKey().name)
+                .append(" = ")
+                .append(entry.getValue())
+                .append(lineSeparator()));
         return builder.toString();
     }
 

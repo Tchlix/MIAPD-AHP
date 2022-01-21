@@ -1,4 +1,4 @@
-package com.agh.vacation.gui.eastpack.choosecontextpanel;
+package com.agh.vacation.gui.eastpack.fileloadingui;
 
 import com.agh.vacation.gui.GeneralMediator;
 

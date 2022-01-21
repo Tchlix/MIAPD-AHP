@@ -2,12 +2,17 @@ package com.agh.vacation.gui;
 
 import com.agh.vacation.ComparisonMatricesBasedOnCriteria;
 import com.agh.vacation.CriteriaPrioritiesMap;
+import com.agh.vacation.Criterion;
 import com.agh.vacation.ExpertDestinationRatings;
 import com.agh.vacation.gui.centerpack.CenterPanel;
+import com.agh.vacation.gui.centerpack.ComparisonMatrixTabbedPane;
 import com.agh.vacation.gui.centerpack.ExpertRatingsTabbedPane;
 
 import javax.swing.*;
+import java.awt.*;
 import java.util.List;
+
+import static com.agh.vacation.VacationDestinationComparisonMatricesCreator.createComparisonMatricesBasedOnCriteria;
 
 /**
  * @author Filip Piwosz
@@ -18,7 +23,10 @@ class GeneralConcreteMediator implements GeneralMediator {
     private ButtonGroup group;
     private JList<ExpertDestinationRatings> expertDestinationRatingsJList;
     private List<ExpertDestinationRatings> expertDestinationRatings;
+    private List<ComparisonMatricesBasedOnCriteria> comparisonMatricesBasedOnCriteria;
     private int expertIndex = 0;
+
+    boolean isShowingRatings = true;
 
     GeneralConcreteMediator(CenterPanel centerPanel) {
         this.centerPanel = centerPanel;
@@ -45,10 +53,18 @@ class GeneralConcreteMediator implements GeneralMediator {
         this.expertDestinationRatings = expertDestinationRatings;
         this.expertDestinationRatingsJList.setListData(expertDestinationRatings
                 .toArray(new ExpertDestinationRatings[0]));
+        List<Criterion> criteriaList = criteriaPrioritiesMap.
+                keySet().
+                stream().
+                toList();
+
+        this.comparisonMatricesBasedOnCriteria = expertDestinationRatings.stream().
+                map(expert -> createComparisonMatricesBasedOnCriteria(criteriaList, expert.ratings)).toList();
     }
 
     @Override
     public void showExpertRatings() {
+        this.isShowingRatings = true;
         if (this.expertDestinationRatings == null) {
             throw new IllegalStateException("Expert ratings were not loaded!");
         }
@@ -65,13 +81,18 @@ class GeneralConcreteMediator implements GeneralMediator {
     }
 
     @Override
-    public void saveMatrices(List<ComparisonMatricesBasedOnCriteria> expertRatings) {
-
-    }
-
-    @Override
     public void showExpertMatrices() {
-
+        this.isShowingRatings = false;
+        if (this.expertDestinationRatings == null) {
+            throw new IllegalStateException("Expert ratings were not loaded!");
+        }
+        centerPanel.removeAll();
+        Dimension dimension = centerPanel.getPreferredSize();
+        dimension.setSize((int) (dimension.width * 0.9), (int) (dimension.height * 0.9));
+        centerPanel.add(new ComparisonMatrixTabbedPane(dimension,
+                comparisonMatricesBasedOnCriteria.get(expertIndex)));
+        centerPanel.repaint();
+        centerPanel.revalidate();
     }
 
     @Override
@@ -82,7 +103,11 @@ class GeneralConcreteMediator implements GeneralMediator {
     @Override
     public void setExpertIndex(int index) {
         this.expertIndex = index;
-        this.showExpertRatings();
+        if (isShowingRatings) {
+            this.showExpertRatings();
+        } else {
+            this.showExpertMatrices();
+        }
     }
 
 }

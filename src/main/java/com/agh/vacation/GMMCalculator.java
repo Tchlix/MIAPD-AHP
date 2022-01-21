@@ -107,7 +107,7 @@ class GMMCalculator extends IncompleteCalculator {
 
 
     private static RealVector gmm(RealMatrix matrix) {
-        uncompleteMatrix(matrix);
+        //uncompleteMatrix(matrix);
         RealMatrix matrixG = g(matrix);
         RealVector vectorR = r(matrix);
         return w(vectorR, matrixG);

@@ -25,8 +25,6 @@ public class MainFrame extends JFrame {
         GeneralMediator generalConcreteMediator = new GeneralConcreteMediator(centerPanel);
         this.add(new EastPanel(scaledWidth(this, 0.3f), this.getHeight(), generalConcreteMediator),
                 BorderLayout.EAST);
-        this.add(new SouthPanel(this.getWidth(), scaledHeight(this, 0.15f)),
-                BorderLayout.SOUTH);
         this.setVisible(true);
     }
 
