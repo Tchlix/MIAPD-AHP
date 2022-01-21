@@ -13,7 +13,6 @@ public class ChooseCalculatorPanel extends JPanel {
 
     public ChooseCalculatorPanel(int width, int height, GeneralMediator mediator) {
         super();
-        this.setBackground(Color.DARK_GRAY);
         this.setPreferredSize(new Dimension(width, height));
         ButtonGroup group = new ButtonGroup();
         CalculatorButton gmmButton = new CalculatorButton("GMM Calculator", CalculatorType.GMM);
@@ -27,5 +26,6 @@ public class ChooseCalculatorPanel extends JPanel {
         this.add(eigenvalueButton);
         this.add(harkerButton);
         this.setVisible(true);
+        mediator.saveButtonGroup(group);
     }
 }

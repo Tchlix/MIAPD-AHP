@@ -10,11 +10,11 @@ import java.util.Map;
  *
  * @see VacationCriteriaScoresMap
  */
-class CriteriaScoresCalculator {
+public class CriteriaScoresCalculator {
     private CriteriaScoresCalculator() {
     }
 
-    static VacationCriteriaScoresMap calculateCriteriaScores(List<VacationDestination> destinationList,
+    public static VacationCriteriaScoresMap calculateCriteriaScores(List<VacationDestination> destinationList,
                                                              ComparisonMatricesBasedOnCriteria comparisonMatricesBasedOnCriteria,
                                                              CalculatorType calculatorType) {
         Map<VacationDestination, CriteriaScores> resultMap = new HashMap<>();

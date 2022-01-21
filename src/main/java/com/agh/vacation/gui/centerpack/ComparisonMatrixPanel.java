@@ -28,7 +28,9 @@ class ComparisonMatrixPanel extends JPanel {
                 .toList());
         entries.sort(comparingByValue());
         for (Map.Entry<VacationDestination, Integer> entry : entries) {
-            this.add(new JTextField(entry.getKey().name));
+            JTextField jTextField = new JTextField(entry.getKey().name);
+            jTextField.setEditable(false);
+            this.add(jTextField);
         }
         RealMatrix matrix = comparisonMatrix.matrix();
         MatrixTextField[][] matrixTextFields = new MatrixTextField[entries.size()][entries.size()];

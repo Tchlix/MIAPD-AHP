@@ -7,7 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-class AIJCalculator {
+public class AIJCalculator {
     private AIJCalculator() {
     }
 
@@ -18,7 +18,7 @@ class AIJCalculator {
      * @param expertMatrices multiple matrices to be aggregated
      * @return single matrix calculated from geometric mean
      */
-    static ComparisonMatricesBasedOnCriteria calculate(List<Criterion> criteria, List<ComparisonMatricesBasedOnCriteria> expertMatrices) {
+    public static ComparisonMatricesBasedOnCriteria calculate(List<Criterion> criteria, List<ComparisonMatricesBasedOnCriteria> expertMatrices) {
         if (expertMatrices.size() == 1)
             return expertMatrices.get(0);
 

@@ -9,11 +9,11 @@ import java.awt.event.ActionListener;
 /**
  * @author Filip Piwosz
  */
-class CalculateButton extends JButton implements ActionListener {
+class ShowResultsButton extends JButton implements ActionListener {
     private final GeneralMediator mediator;
 
-    CalculateButton(GeneralMediator mediator) {
-        super("CALCULATE!");
+    ShowResultsButton(GeneralMediator mediator) {
+        super("SHOW RESULTS");
         this.mediator = mediator;
         this.addActionListener(this);
     }
@@ -21,7 +21,7 @@ class CalculateButton extends JButton implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == this) {
-            mediator.calculateResults();
+            mediator.showResults();
         }
     }
 }

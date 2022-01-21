@@ -2,12 +2,10 @@ package com.agh.vacation.gui;
 
 import com.agh.vacation.gui.centerpack.CenterPanel;
 import com.agh.vacation.gui.eastpack.EastPanel;
-import com.agh.vacation.gui.southpack.SouthPanel;
 
 import javax.swing.*;
 import java.awt.*;
 
-import static com.agh.vacation.gui.GUIUtils.scaledHeight;
 import static com.agh.vacation.gui.GUIUtils.scaledWidth;
 
 /**
@@ -31,7 +29,6 @@ public class MainFrame extends JFrame {
     @Override
     public void update(Graphics g) {
         super.update(g);
-
     }
 
 

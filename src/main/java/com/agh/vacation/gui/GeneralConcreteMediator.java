@@ -1,17 +1,19 @@
 package com.agh.vacation.gui;
 
-import com.agh.vacation.ComparisonMatricesBasedOnCriteria;
-import com.agh.vacation.CriteriaPrioritiesMap;
-import com.agh.vacation.Criterion;
-import com.agh.vacation.ExpertDestinationRatings;
+import com.agh.vacation.*;
 import com.agh.vacation.gui.centerpack.CenterPanel;
 import com.agh.vacation.gui.centerpack.ComparisonMatrixTabbedPane;
 import com.agh.vacation.gui.centerpack.ExpertRatingsTabbedPane;
+import com.agh.vacation.gui.eastpack.calculatorgui.CalculatorButton;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.Enumeration;
 import java.util.List;
 
+import static com.agh.vacation.CriteriaScoresCalculator.calculateCriteriaScores;
+import static com.agh.vacation.InconsistencyCalculator.*;
+import static com.agh.vacation.ResultCalculator.calculateResult;
 import static com.agh.vacation.VacationDestinationComparisonMatricesCreator.createComparisonMatricesBasedOnCriteria;
 
 /**
@@ -20,10 +22,12 @@ import static com.agh.vacation.VacationDestinationComparisonMatricesCreator.crea
 class GeneralConcreteMediator implements GeneralMediator {
     private CenterPanel centerPanel;
     private CriteriaPrioritiesMap criteriaPrioritiesMap;
-    private ButtonGroup group;
+    private ButtonGroup buttonGroup;
     private JList<ExpertDestinationRatings> expertDestinationRatingsJList;
     private List<ExpertDestinationRatings> expertDestinationRatings;
-    private List<ComparisonMatricesBasedOnCriteria> comparisonMatricesBasedOnCriteria;
+    private List<ComparisonMatricesBasedOnCriteria> multipleExpertMatrices;
+    private Result result;
+    private InconsistencyResult inconsistencyResult;
     private int expertIndex = 0;
 
     boolean isShowingRatings = true;
@@ -58,7 +62,7 @@ class GeneralConcreteMediator implements GeneralMediator {
                 stream().
                 toList();
 
-        this.comparisonMatricesBasedOnCriteria = expertDestinationRatings.stream().
+        this.multipleExpertMatrices = expertDestinationRatings.stream().
                 map(expert -> createComparisonMatricesBasedOnCriteria(criteriaList, expert.ratings)).toList();
     }
 
@@ -90,14 +94,14 @@ class GeneralConcreteMediator implements GeneralMediator {
         Dimension dimension = centerPanel.getPreferredSize();
         dimension.setSize((int) (dimension.width * 0.9), (int) (dimension.height * 0.9));
         centerPanel.add(new ComparisonMatrixTabbedPane(dimension,
-                comparisonMatricesBasedOnCriteria.get(expertIndex)));
+                multipleExpertMatrices.get(expertIndex)));
         centerPanel.repaint();
         centerPanel.revalidate();
     }
 
     @Override
     public void saveButtonGroup(ButtonGroup group) {
-        this.group = group;
+        this.buttonGroup = group;
     }
 
     @Override
@@ -110,4 +114,56 @@ class GeneralConcreteMediator implements GeneralMediator {
         }
     }
 
+    @Override
+    public void calculateResults() {
+        CalculatorType calculatorType = fromButtonGroup();
+        ComparisonMatricesBasedOnCriteria finalCompairsonMatrix;
+
+        if (multipleExpertMatrices.size() == 1) {
+            finalCompairsonMatrix = multipleExpertMatrices.get(0);
+        } else {
+            List<Criterion> criteriaList = criteriaPrioritiesMap.
+                    keySet().
+                    stream().
+                    toList();
+            finalCompairsonMatrix = AIJCalculator.calculate(criteriaList, multipleExpertMatrices);
+        }
+        List<VacationDestination> destinations = expertDestinationRatings.get(0).ratings;
+        VacationCriteriaScoresMap criteriaScoresMap =
+                calculateCriteriaScores(destinations, finalCompairsonMatrix, calculatorType);
+
+        //calculate final result - sum(score * criterion priority)
+        result = calculateResult(criteriaPrioritiesMap, criteriaScoresMap);
+        List<Criterion> criteriaList = criteriaPrioritiesMap.
+                keySet().
+                stream().
+                toList();
+        inconsistencyResult = new InconsistencyResult(calculateSaatyCI(finalCompairsonMatrix),
+                calculateCR(finalCompairsonMatrix),
+                calculateKoczkodajIndexes(finalCompairsonMatrix),
+                criteriaList);
+    }
+
+    @Override
+    public void showResults() {
+        if (result == null) {
+            throw new IllegalStateException("Result was not calculated!");
+        }
+        centerPanel.removeAll();
+        centerPanel.add(new JTextArea(result.display() + "\n" + inconsistencyResult.display()));
+        centerPanel.revalidate();
+        centerPanel.repaint();
+    }
+
+    private CalculatorType fromButtonGroup() {
+        for (Enumeration<AbstractButton> enumeration = this.buttonGroup.getElements(); enumeration.hasMoreElements(); ) {
+            AbstractButton button = enumeration.nextElement();
+            if (button.isSelected()) {
+                if (button instanceof CalculatorButton) {
+                    return ((CalculatorButton) button).calculatorType;
+                }
+            }
+        }
+        throw new IllegalStateException("No button was found!");
+    }
 }

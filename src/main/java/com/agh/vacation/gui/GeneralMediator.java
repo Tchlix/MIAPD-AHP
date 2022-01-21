@@ -1,7 +1,5 @@
 package com.agh.vacation.gui;
 
-import com.agh.vacation.CalculatorType;
-import com.agh.vacation.ComparisonMatricesBasedOnCriteria;
 import com.agh.vacation.CriteriaPrioritiesMap;
 import com.agh.vacation.ExpertDestinationRatings;
 
@@ -27,4 +25,8 @@ public interface GeneralMediator {
     void saveButtonGroup(ButtonGroup buttonGroup);
 
     void setExpertIndex(int index);
+
+    void calculateResults();
+
+    void showResults();
 }

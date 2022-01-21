@@ -7,11 +7,11 @@ import java.util.Map.Entry;
 /**
  *
  */
-class ResultCalculator {
+public class ResultCalculator {
     private ResultCalculator() {
     }
 
-    static Result calculateResult(CriteriaPrioritiesMap criteriaPriorities,
+    public static Result calculateResult(CriteriaPrioritiesMap criteriaPriorities,
                                   VacationCriteriaScoresMap vacationCriteriaScoresMap) {
         Map<VacationDestination, Double> resultMap = new HashMap<>();
         for (Entry<VacationDestination, CriteriaScores> destinationScoresEntry : vacationCriteriaScoresMap.entrySet()) {

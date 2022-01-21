@@ -12,7 +12,6 @@ public class FileLoadingPanel extends JPanel {
     public FileLoadingPanel(int width, int height, GeneralMediator generalMediator) {
         super();
         this.setPreferredSize(new Dimension(width, height));
-        this.setBackground(new Color(0xB2ACCC));
         this.add(new ChooseCriteriaFileButton(generalMediator));
         this.add(new PickExpertDirectoryButton(generalMediator));
         this.add(new ShowCriteriaButton(generalMediator));

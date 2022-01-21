@@ -9,7 +9,7 @@ import java.util.Map.Entry;
 import static java.lang.System.lineSeparator;
 import static java.util.Map.Entry.comparingByValue;
 
-class Result {
+public class Result {
     private final Map<VacationDestination, Double> map;
 
     public Result(Map<VacationDestination, Double> map) {

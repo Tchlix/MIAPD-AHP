@@ -7,10 +7,12 @@ import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
 
+import static com.agh.vacation.MathUtilFunctions.truncateDouble;
 import static java.lang.Math.max;
 
 public class InconsistencyCalculator {
     private static final Double[] RCI = {null, null, null, 0.58, 0.9, 1.12, 1.24, 1.32, 1.41, 1.45, 1.49, 1.51, 1.48, 1.56, 1.57, 1.59};
+    private static final int DEFAULT_TRUNCATION = 3;
 
     private InconsistencyCalculator() {
     }
@@ -29,7 +31,7 @@ public class InconsistencyCalculator {
             principalEigenvalue = max(x, principalEigenvalue);
         }
 
-        return (principalEigenvalue - n) / (n - 1);
+        return truncateDouble((principalEigenvalue - n) / (n - 1), DEFAULT_TRUNCATION);
     }
 
     public static List<Double> calculateSaatyCI(ComparisonMatricesBasedOnCriteria comparisonMatricesBasedOnCriteria) {
@@ -48,7 +50,7 @@ public class InconsistencyCalculator {
         LinkedList<Double> ciValues = new LinkedList<>(calculateSaatyCI(comparisonMatricesBasedOnCriteria));
         var size = comparisonMatricesBasedOnCriteria.getIndexMap().keySet().size();
         for (int i = 0; i < ciValues.size(); i++) {
-            ciValues.set(i, ciValues.get(i) / RCI[size]);
+            ciValues.set(i, truncateDouble(ciValues.get(i) / RCI[size], DEFAULT_TRUNCATION));
         }
         return ciValues;
     }
@@ -72,7 +74,7 @@ public class InconsistencyCalculator {
                             Math.abs(1 - (cXY * cYZ) / cXZ),
                             Math.abs(1 - cXZ / (cXY * cYZ))
                     );
-                    localCIList.add(localCI);
+                    localCIList.add(truncateDouble(localCI, DEFAULT_TRUNCATION));
                 }
             }
         }

@@ -13,7 +13,6 @@ import java.awt.*;
 public class ExpertListPanel extends JPanel {
     public ExpertListPanel(int width, int height, GeneralMediator mediator) {
         super();
-        this.setBackground(new Color(0xC0C000));
         this.setPreferredSize(new Dimension(width, height));
         this.add(new ExpertRatingsListGUI(
                 width, (int) (height * 0.85f), mediator));
