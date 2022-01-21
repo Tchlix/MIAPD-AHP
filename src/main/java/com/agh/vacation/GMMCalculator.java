@@ -7,8 +7,9 @@ import java.util.Map;
 
 import static com.agh.vacation.MathUtilFunctions.truncateDouble;
 
-class GMMCalculator extends IncompleteCalculator {
+class GMMCalculator {
     private static final int DEFAULT_TRUNCATION = 3;
+    private static final double NO_VALUE_PRESENT = 0.0;
 
     private GMMCalculator() {
     }

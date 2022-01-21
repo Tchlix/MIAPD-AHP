@@ -5,7 +5,8 @@ import org.apache.commons.math3.linear.RealMatrix;
 
 import java.util.Map;
 
-class HarkerCalculator extends IncompleteCalculator {
+class HarkerCalculator {
+    private static final double NO_VALUE_PRESENT = 0.0d;
 
     private HarkerCalculator() {
     }
