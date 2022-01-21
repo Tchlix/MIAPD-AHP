@@ -44,9 +44,6 @@ class ComparisonMatrixPanel extends JPanel {
                 MatrixTextField matrixTextField = new MatrixTextField(i, j, listener, val);
                 matrixTextFields[i][j] = matrixTextField;
                 this.add(matrixTextField);
-                if (j <= i) {
-                    matrixTextFields[i][j].setEditable(false);
-                }
             }
         }
     }

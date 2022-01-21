@@ -119,25 +119,19 @@ class GeneralConcreteMediator implements GeneralMediator {
         CalculatorType calculatorType = fromButtonGroup();
         ComparisonMatricesBasedOnCriteria finalCompairsonMatrix;
 
-        if (multipleExpertMatrices.size() == 1) {
-            finalCompairsonMatrix = multipleExpertMatrices.get(0);
-        } else {
-            List<Criterion> criteriaList = criteriaPrioritiesMap.
-                    keySet().
-                    stream().
-                    toList();
-            finalCompairsonMatrix = AIJCalculator.calculate(criteriaList, multipleExpertMatrices);
-        }
+
+        List<Criterion> criteriaList = criteriaPrioritiesMap.
+                keySet().
+                stream().
+                toList();
+        finalCompairsonMatrix = AIJCalculator.calculate(criteriaList, multipleExpertMatrices);
+
         List<VacationDestination> destinations = expertDestinationRatings.get(0).ratings;
         VacationCriteriaScoresMap criteriaScoresMap =
                 calculateCriteriaScores(destinations, finalCompairsonMatrix, calculatorType);
 
         //calculate final result - sum(score * criterion priority)
         result = calculateResult(criteriaPrioritiesMap, criteriaScoresMap);
-        List<Criterion> criteriaList = criteriaPrioritiesMap.
-                keySet().
-                stream().
-                toList();
         inconsistencyResult = new InconsistencyResult(calculateSaatyCI(finalCompairsonMatrix),
                 calculateCR(finalCompairsonMatrix),
                 calculateKoczkodajIndexes(finalCompairsonMatrix),
