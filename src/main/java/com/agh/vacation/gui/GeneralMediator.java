@@ -20,6 +20,8 @@ public interface GeneralMediator {
 
     void showExpertRatings();
 
+    void setExpertRatingList(JList<ExpertDestinationRatings> expertRatingList);
+
     void saveMatrices(List<ComparisonMatricesBasedOnCriteria> expertRatings);
 
     void showExpertMatrices();

@@ -5,14 +5,16 @@ import lombok.extern.jackson.Jacksonized;
 
 import java.util.Map;
 
+import static java.lang.System.lineSeparator;
+
 /**
  *
  */
 @Jacksonized
 @Builder
-class VacationDestination implements PairwiseComparableObject {
-    final String name;
-    private final Map<Criterion, Integer> ratings;
+public class VacationDestination implements PairwiseComparableObject {
+    public final String name;
+    public final Map<Criterion, Integer> ratings;
 
 
     Integer ratingFor(Criterion criterion) {
@@ -21,6 +23,15 @@ class VacationDestination implements PairwiseComparableObject {
 
     @Override
     public String toString() {
-        return name;
+        StringBuilder builder = new StringBuilder();
+        ratings.forEach(((criterion, integer) -> builder
+                .append(criterion)
+                .append(" : ")
+                .append(integer)
+                .append(lineSeparator())));
+        if (!ratings.isEmpty()) {
+            builder.delete(builder.length() - 1, builder.length());
+        }
+        return builder.toString();
     }
 }

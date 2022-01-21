@@ -4,6 +4,7 @@ import com.agh.vacation.ComparisonMatricesBasedOnCriteria;
 import com.agh.vacation.CriteriaPrioritiesMap;
 import com.agh.vacation.ExpertDestinationRatings;
 import com.agh.vacation.gui.centerpack.CenterPanel;
+import com.agh.vacation.gui.centerpack.ExpertRatingsTabbedPane;
 
 import javax.swing.*;
 import java.util.List;
@@ -15,6 +16,7 @@ class GeneralConcreteMediator implements GeneralMediator {
     private CenterPanel centerPanel;
     private CriteriaPrioritiesMap criteriaPrioritiesMap;
     private ButtonGroup group;
+    private JList<ExpertDestinationRatings> expertDestinationRatingsJList;
     private List<ExpertDestinationRatings> expertDestinationRatings;
     private int expertIndex = 0;
 
@@ -33,6 +35,7 @@ class GeneralConcreteMediator implements GeneralMediator {
             throw new IllegalStateException("Criteria were not loaded!");
         }
         centerPanel.removeAll();
+        centerPanel.repaint();
         centerPanel.add(new JTextArea(criteriaPrioritiesMap.toString()));
         centerPanel.revalidate();
     }
@@ -40,6 +43,8 @@ class GeneralConcreteMediator implements GeneralMediator {
     @Override
     public void saveExpertRatings(List<ExpertDestinationRatings> expertDestinationRatings) {
         this.expertDestinationRatings = expertDestinationRatings;
+        this.expertDestinationRatingsJList.setListData(expertDestinationRatings
+                .toArray(new ExpertDestinationRatings[0]));
     }
 
     @Override
@@ -48,8 +53,15 @@ class GeneralConcreteMediator implements GeneralMediator {
             throw new IllegalStateException("Expert ratings were not loaded!");
         }
         centerPanel.removeAll();
-        centerPanel.add(new JTextArea(expertDestinationRatings.toString()));
+        centerPanel.add(new ExpertRatingsTabbedPane(centerPanel.getPreferredSize(),
+                expertDestinationRatings.get(expertIndex)));
+        centerPanel.repaint();
         centerPanel.revalidate();
+    }
+
+    @Override
+    public void setExpertRatingList(JList<ExpertDestinationRatings> expertRatingList) {
+        this.expertDestinationRatingsJList = expertRatingList;
     }
 
     @Override
@@ -70,7 +82,7 @@ class GeneralConcreteMediator implements GeneralMediator {
     @Override
     public void setExpertIndex(int index) {
         this.expertIndex = index;
-        System.out.println(index);
+        this.showExpertRatings();
     }
 
 }

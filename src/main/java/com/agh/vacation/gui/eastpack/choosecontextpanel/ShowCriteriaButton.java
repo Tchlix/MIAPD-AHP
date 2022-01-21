@@ -9,12 +9,13 @@ import java.awt.event.ActionListener;
 /**
  * @author Filip Piwosz
  */
-class ViewCriteriaButton extends JButton implements ActionListener {
+class ShowCriteriaButton extends JButton implements ActionListener {
     private GeneralMediator mediator;
 
-    ViewCriteriaButton(GeneralMediator mediator) {
+    ShowCriteriaButton(GeneralMediator mediator) {
         super("SHOW CRITERIA");
         this.mediator = mediator;
+        this.addActionListener(this);
     }
 
     @Override

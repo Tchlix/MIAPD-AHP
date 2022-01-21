@@ -14,15 +14,16 @@ import java.util.List;
  */
 class ExpertRatingsListGUI extends JList<ExpertDestinationRatings> implements ListSelectionListener {
     private GeneralMediator mediator;
-    ExpertRatingsListGUI(List<ExpertDestinationRatings> list, int width, int height, GeneralMediator mediator) {
+
+    ExpertRatingsListGUI(int width, int height, GeneralMediator mediator) {
         //this is how you convert list to array
         super();
-        this.setListData(list.toArray(new ExpertDestinationRatings[0]));
 
         this.addListSelectionListener(this);
         this.setPreferredSize(new Dimension(width, height));
         this.setVisible(true);
         this.mediator = mediator;
+        mediator.setExpertRatingList(this);
     }
 
     @Override
