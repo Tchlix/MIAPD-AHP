@@ -1,11 +1,11 @@
 package com.agh.vacation;
 
 import com.agh.vacation.fileloading.CriteriaJSONLoader;
+import com.agh.vacation.gui.MainFrame;
 
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.List;
-import java.util.Map;
 
 import static com.agh.vacation.CriteriaScoresCalculator.calculateCriteriaScores;
 import static com.agh.vacation.DestinationLoader.loadMultipleExpertsDestinationRatings;
@@ -16,6 +16,12 @@ public class Main {
     private static final String CRITERIA_PATH = "criteria.json";
 
     public static void main(String[] args) {
+        if (args.length == 1) {
+            if (args[0].equalsIgnoreCase("gui")) {
+                new MainFrame();
+                return;
+            }
+        }
         //Load criteria and destinations
         CriteriaPrioritiesMap criteriaPriorities;
         List<ExpertDestinationRatings> multipleExpertsDestinationRatings;
