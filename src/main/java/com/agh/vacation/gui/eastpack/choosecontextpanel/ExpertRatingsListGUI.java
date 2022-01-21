@@ -23,11 +23,11 @@ class ExpertRatingsListGUI extends JList<ExpertDestinationRatings> implements Li
         this.setVisible(true);
         this.mediator = mediator;
         mediator.setExpertRatingList(this);
-        this.setSelectedIndex(0);
     }
 
     @Override
     public void valueChanged(ListSelectionEvent e) {
-        mediator.setExpertIndex(this.getSelectedIndex());
+        int index = this.getSelectedIndex() == -1 ? 0 : this.getSelectedIndex();
+        mediator.setExpertIndex(index);
     }
 }
