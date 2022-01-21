@@ -21,7 +21,7 @@ public class DestinationLoader {
     static List<VacationDestination> loadDestinations(String expertDirectoryName) {
         ObjectMapper objectMapper = new ObjectMapper();
         List<VacationDestination> destinations = new ArrayList<>();
-        try (Stream<Path> pathStream = Files.list(Paths.get(CITIES_PATH + expertDirectoryName))) {
+        try (Stream<Path> pathStream = Files.list(Paths.get(expertDirectoryName))) {
             pathStream.map(Path::toFile)
                     .forEach(path -> {
                         try {
@@ -45,7 +45,7 @@ public class DestinationLoader {
         try (Stream<Path> pathStream = Files.list(path)) {
             pathStream.filter(Files::isDirectory).forEach(file ->
                     expertRatings.add(new ExpertDestinationRatings(file.getFileName().toString(),
-                            loadDestinations(file.getFileName().toString())))
+                            loadDestinations(file.toFile().getAbsolutePath())))
             );
         }
         if (expertRatings.isEmpty())

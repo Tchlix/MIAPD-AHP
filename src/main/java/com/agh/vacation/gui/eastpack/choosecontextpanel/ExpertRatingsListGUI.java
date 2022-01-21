@@ -7,7 +7,6 @@ import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import java.awt.*;
-import java.util.List;
 
 /**
  * @author Filip Piwosz
@@ -24,6 +23,7 @@ class ExpertRatingsListGUI extends JList<ExpertDestinationRatings> implements Li
         this.setVisible(true);
         this.mediator = mediator;
         mediator.setExpertRatingList(this);
+        this.setSelectedIndex(0);
     }
 
     @Override
