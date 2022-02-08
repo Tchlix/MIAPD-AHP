@@ -1,5 +1,8 @@
-package com.agh.vacation;
+package com.agh.vacation.calculator;
 
+import com.agh.vacation.something.ComparisonMatrix;
+import com.agh.vacation.something.Criterion;
+import com.agh.vacation.something.IndexMap;
 import org.apache.commons.math3.linear.Array2DRowRealMatrix;
 import org.apache.commons.math3.linear.RealMatrix;
 import org.testng.annotations.Test;
@@ -7,12 +10,9 @@ import org.testng.annotations.Test;
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.agh.vacation.EigenvalueCalculator.calculateEigenvalues;
+import static com.agh.vacation.calculator.EigenvalueCalculator.calculateEigenvalues;
 import static org.testng.Assert.assertEquals;
 
-/**
- *
- */
 public class EigenvalueCalculatorTest {
 
     @Test

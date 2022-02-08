@@ -1,4 +1,4 @@
-package com.agh.vacation;
+package com.agh.vacation.something;
 
 import java.util.List;
 

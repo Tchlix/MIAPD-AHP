@@ -1,6 +1,6 @@
 package com.agh.vacation.gui.eastpack.fileloadingui;
 
-import com.agh.vacation.CriteriaPrioritiesMap;
+import com.agh.vacation.fileloading.CriteriaPrioritiesMap;
 import com.agh.vacation.fileloading.CriteriaJSONLoader;
 import com.agh.vacation.gui.GeneralMediator;
 

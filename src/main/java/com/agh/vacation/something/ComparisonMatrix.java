@@ -1,4 +1,4 @@
-package com.agh.vacation;
+package com.agh.vacation.something;
 
 import org.apache.commons.math3.linear.RealMatrix;
 

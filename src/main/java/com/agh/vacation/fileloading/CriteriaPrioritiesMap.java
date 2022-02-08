@@ -1,4 +1,6 @@
-package com.agh.vacation;
+package com.agh.vacation.fileloading;
+
+import com.agh.vacation.something.Criterion;
 
 import java.util.Map;
 import java.util.Map.Entry;
@@ -16,7 +18,7 @@ public class CriteriaPrioritiesMap {
         this.map = map;
     }
 
-    Set<Entry<Criterion, Double>> entrySet() {
+    public Set<Entry<Criterion, Double>> entrySet() {
         return this.map.entrySet();
     }
 

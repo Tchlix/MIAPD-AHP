@@ -1,5 +1,6 @@
-package com.agh.vacation;
+package com.agh.vacation.fileloading;
 
+import com.agh.vacation.something.VacationDestination;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.IOException;

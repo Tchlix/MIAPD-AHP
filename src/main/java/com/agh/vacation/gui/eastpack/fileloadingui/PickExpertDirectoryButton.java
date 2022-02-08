@@ -1,17 +1,16 @@
 package com.agh.vacation.gui.eastpack.fileloadingui;
 
-import com.agh.vacation.ExpertDestinationRatings;
+import com.agh.vacation.fileloading.ExpertDestinationRatings;
 import com.agh.vacation.gui.GeneralMediator;
 
 import javax.swing.*;
-import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
-import static com.agh.vacation.DestinationLoader.loadMultipleExpertsDestinationRatings;
+import static com.agh.vacation.fileloading.DestinationLoader.loadMultipleExpertsDestinationRatings;
 
 /**
  * @author Filip Piwosz

@@ -1,6 +1,6 @@
 package com.agh.vacation.gui.eastpack.calculatorgui;
 
-import com.agh.vacation.CalculatorType;
+import com.agh.vacation.calculator.Calculator.CalculatorType;
 import com.agh.vacation.gui.GeneralMediator;
 
 import javax.swing.*;

@@ -1,4 +1,6 @@
-package com.agh.vacation;
+package com.agh.vacation.calculator;
+
+import com.agh.vacation.something.VacationDestination;
 
 import java.util.ArrayList;
 import java.util.Collections;

@@ -1,12 +1,13 @@
-package com.agh.vacation;
+package com.agh.vacation.something;
 
+import com.agh.vacation.calculator.ComparisonMatricesBasedOnCriteria;
 import org.apache.commons.math3.linear.Array2DRowRealMatrix;
 import org.apache.commons.math3.linear.RealMatrix;
 
 import java.util.HashMap;
 import java.util.List;
 
-import static com.agh.vacation.RatingDifferenceMapper.mapForAHP;
+import static com.agh.vacation.something.RatingDifferenceMapper.mapForAHP;
 import static java.lang.Math.abs;
 
 /**

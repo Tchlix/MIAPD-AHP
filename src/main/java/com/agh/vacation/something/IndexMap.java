@@ -1,11 +1,8 @@
-package com.agh.vacation;
+package com.agh.vacation.something;
 
 import java.util.Map;
 import java.util.Set;
 
-/**
- *
- */
 public class IndexMap<T extends PairwiseComparableObject> {
     private final Map<T, Integer> map;
 

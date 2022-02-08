@@ -1,4 +1,4 @@
-package com.agh.vacation;
+package com.agh.vacation.something;
 
 import lombok.Builder;
 import lombok.extern.jackson.Jacksonized;
@@ -7,9 +7,7 @@ import java.util.Map;
 
 import static java.lang.System.lineSeparator;
 
-/**
- *
- */
+
 @Jacksonized
 @Builder
 public class VacationDestination implements PairwiseComparableObject {

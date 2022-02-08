@@ -1,5 +1,9 @@
-package com.agh.vacation;
+package com.agh.vacation.calculator;
 
+import com.agh.vacation.something.ComparisonMatrix;
+import com.agh.vacation.something.Criterion;
+import com.agh.vacation.something.IndexMap;
+import com.agh.vacation.something.VacationDestination;
 import org.apache.commons.math3.linear.RealMatrix;
 
 import java.util.Map;
@@ -12,7 +16,7 @@ import java.util.stream.Stream;
 public class ComparisonMatricesBasedOnCriteria {
     private final Map<Criterion, ComparisonMatrix<VacationDestination>> map;
 
-    ComparisonMatricesBasedOnCriteria(Map<Criterion, ComparisonMatrix<VacationDestination>> map) {
+    public ComparisonMatricesBasedOnCriteria(Map<Criterion, ComparisonMatrix<VacationDestination>> map) {
         this.map = map;
     }
 
