@@ -1,4 +1,4 @@
-package com.agh.vacation.something;
+package com.agh.vacation.ds;
 
 import com.agh.vacation.calculator.ComparisonMatricesBasedOnCriteria;
 import org.apache.commons.math3.linear.Array2DRowRealMatrix;

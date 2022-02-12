@@ -1,4 +1,4 @@
-package com.agh.vacation.something;
+package com.agh.vacation.ds;
 
 import lombok.Builder;
 import lombok.extern.jackson.Jacksonized;

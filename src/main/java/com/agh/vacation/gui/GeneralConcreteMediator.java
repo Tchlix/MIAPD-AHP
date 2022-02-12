@@ -8,9 +8,9 @@ import com.agh.vacation.gui.centerpack.CenterPanel;
 import com.agh.vacation.gui.centerpack.ComparisonMatrixTabbedPane;
 import com.agh.vacation.gui.centerpack.ExpertRatingsTabbedPane;
 import com.agh.vacation.gui.eastpack.calculatorgui.CalculatorButton;
-import com.agh.vacation.something.Criterion;
+import com.agh.vacation.ds.Criterion;
 import com.agh.vacation.calculator.InconsistencyResult;
-import com.agh.vacation.something.VacationDestination;
+import com.agh.vacation.ds.VacationDestination;
 
 import javax.swing.*;
 import java.awt.*;
@@ -19,7 +19,7 @@ import java.util.List;
 
 import static com.agh.vacation.calculator.Calculator.InconsistencyType.*;
 import static com.agh.vacation.calculator.Calculator.calculateCriteriaScores;
-import static com.agh.vacation.something.VacationDestinationComparisonMatricesCreator.createComparisonMatricesBasedOnCriteria;
+import static com.agh.vacation.ds.VacationDestinationComparisonMatricesCreator.createComparisonMatricesBasedOnCriteria;
 
 /**
  * @author Filip Piwosz

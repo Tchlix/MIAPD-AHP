@@ -1,6 +1,6 @@
 package com.agh.vacation.calculator;
 
-import com.agh.vacation.something.VacationDestination;
+import com.agh.vacation.ds.VacationDestination;
 
 import java.util.Map;
 import java.util.Map.Entry;

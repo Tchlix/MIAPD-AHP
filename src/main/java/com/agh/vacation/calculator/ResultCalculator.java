@@ -1,8 +1,8 @@
 package com.agh.vacation.calculator;
 
 import com.agh.vacation.fileloading.CriteriaPrioritiesMap;
-import com.agh.vacation.something.Criterion;
-import com.agh.vacation.something.VacationDestination;
+import com.agh.vacation.ds.Criterion;
+import com.agh.vacation.ds.VacationDestination;
 
 import java.util.HashMap;
 import java.util.Map;

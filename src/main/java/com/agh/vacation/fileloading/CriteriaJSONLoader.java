@@ -1,9 +1,9 @@
 package com.agh.vacation.fileloading;
 
 import com.agh.vacation.calculator.Calculator;
-import com.agh.vacation.something.ComparisonMatrix;
-import com.agh.vacation.something.Criterion;
-import com.agh.vacation.something.IndexMap;
+import com.agh.vacation.ds.ComparisonMatrix;
+import com.agh.vacation.ds.Criterion;
+import com.agh.vacation.ds.IndexMap;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;

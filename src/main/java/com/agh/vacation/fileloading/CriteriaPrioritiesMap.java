@@ -1,6 +1,6 @@
 package com.agh.vacation.fileloading;
 
-import com.agh.vacation.something.Criterion;
+import com.agh.vacation.ds.Criterion;
 
 import java.util.Map;
 import java.util.Map.Entry;

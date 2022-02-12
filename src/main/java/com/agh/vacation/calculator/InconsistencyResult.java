@@ -1,6 +1,6 @@
 package com.agh.vacation.calculator;
 
-import com.agh.vacation.something.Criterion;
+import com.agh.vacation.ds.Criterion;
 import org.sk.PrettyTable;
 
 import java.util.List;
@@ -18,28 +18,6 @@ public record InconsistencyResult(List<Double> saatyResult, List<Double> crResul
             table.addRow(criteria.get(i).toString(), saatyResult.get(i).toString(),
                     crResult.get(i).toString(), koczkodajResult.get(i).toString());
         return table.toString();
-        /*
-        StringBuilder builder = new StringBuilder();
-        builder
-                .append("\t")
-                .append("Saaty")
-                .append("  CR")
-                .append("  Koczkodaj")
-                .append(lineSeparator());
-        for (int i = 0; i < criteria.size(); i++) {
-            builder
-                    .append(criteria.get(i))
-                    .append("  ")
-                    .append(saatyResult.get(i))
-                    .append("  ")
-                    .append(crResult.get(i))
-                    .append("  ")
-                    .append(koczkodajResult.get(i))
-                    .append(lineSeparator());
-        }
-        return builder.toString();
-*/
-
     }
 
 }

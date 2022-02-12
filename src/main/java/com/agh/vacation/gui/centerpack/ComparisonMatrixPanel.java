@@ -1,7 +1,7 @@
 package com.agh.vacation.gui.centerpack;
 
-import com.agh.vacation.something.ComparisonMatrix;
-import com.agh.vacation.something.VacationDestination;
+import com.agh.vacation.ds.ComparisonMatrix;
+import com.agh.vacation.ds.VacationDestination;
 import org.apache.commons.math3.linear.RealMatrix;
 
 import javax.swing.*;

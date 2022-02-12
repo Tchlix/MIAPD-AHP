@@ -1,4 +1,4 @@
-package com.agh.vacation.something;
+package com.agh.vacation.ds;
 
 import java.util.Map;
 import java.util.Set;

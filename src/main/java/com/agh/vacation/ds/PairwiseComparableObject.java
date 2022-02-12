@@ -1,4 +1,4 @@
-package com.agh.vacation.something;
+package com.agh.vacation.ds;
 
 
 public interface PairwiseComparableObject {

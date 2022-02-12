@@ -1,7 +1,7 @@
 package com.agh.vacation.calculator;
 
-import com.agh.vacation.something.ComparisonMatrix;
-import com.agh.vacation.something.PairwiseComparableObject;
+import com.agh.vacation.ds.ComparisonMatrix;
+import com.agh.vacation.ds.PairwiseComparableObject;
 import org.apache.commons.math3.linear.Array2DRowRealMatrix;
 import org.apache.commons.math3.linear.RealMatrix;
 

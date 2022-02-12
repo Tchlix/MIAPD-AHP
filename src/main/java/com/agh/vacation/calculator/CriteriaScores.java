@@ -1,6 +1,6 @@
 package com.agh.vacation.calculator;
 
-import com.agh.vacation.something.Criterion;
+import com.agh.vacation.ds.Criterion;
 
 import java.util.Map;
 

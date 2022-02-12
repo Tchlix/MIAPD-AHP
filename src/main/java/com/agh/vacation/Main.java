@@ -5,7 +5,7 @@ import com.agh.vacation.fileloading.CriteriaJSONLoader;
 import com.agh.vacation.fileloading.CriteriaPrioritiesMap;
 import com.agh.vacation.fileloading.ExpertDestinationRatings;
 import com.agh.vacation.gui.MainFrame;
-import com.agh.vacation.something.Criterion;
+import com.agh.vacation.ds.Criterion;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -15,7 +15,7 @@ import static com.agh.vacation.calculator.Calculator.CalculatorType.*;
 import static com.agh.vacation.calculator.Calculator.InconsistencyType.*;
 import static com.agh.vacation.calculator.Calculator.calculateCriteriaScores;
 import static com.agh.vacation.fileloading.DestinationLoader.loadMultipleExpertsDestinationRatings;
-import static com.agh.vacation.something.VacationDestinationComparisonMatricesCreator.createComparisonMatricesBasedOnCriteria;
+import static com.agh.vacation.ds.VacationDestinationComparisonMatricesCreator.createComparisonMatricesBasedOnCriteria;
 
 public class Main {
     private static final String CRITERIA_PATH = "criteria.json";

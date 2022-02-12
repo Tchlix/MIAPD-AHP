@@ -1,6 +1,6 @@
 package com.agh.vacation.gui.centerpack;
 
-import com.agh.vacation.something.VacationDestination;
+import com.agh.vacation.ds.VacationDestination;
 
 import javax.swing.*;
 
