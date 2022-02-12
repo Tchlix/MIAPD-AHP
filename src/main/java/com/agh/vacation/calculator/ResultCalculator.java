@@ -1,7 +1,6 @@
 package com.agh.vacation.calculator;
 
 import com.agh.vacation.fileloading.CriteriaPrioritiesMap;
-import com.agh.vacation.something.CriteriaScores;
 import com.agh.vacation.something.Criterion;
 import com.agh.vacation.something.VacationDestination;
 

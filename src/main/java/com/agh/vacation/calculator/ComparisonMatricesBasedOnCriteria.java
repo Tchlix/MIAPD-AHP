@@ -28,11 +28,11 @@ public class ComparisonMatricesBasedOnCriteria {
         return this.map.entrySet().stream();
     }
 
-    public RealMatrix getMatrix(Criterion criterion) {
+    RealMatrix getMatrix(Criterion criterion) {
         return map.get(criterion).matrix();
     }
 
-    public IndexMap<VacationDestination> getIndexMap() {
+    IndexMap<VacationDestination> getIndexMap() {
         return map.entrySet().iterator().next().getValue().indexMap();
     }
 }

@@ -2,12 +2,7 @@ package com.agh.vacation.something;
 
 import java.util.Objects;
 
-public class Criterion implements PairwiseComparableObject {
-    private final String name;
-
-    public Criterion(String name) {
-        this.name = name;
-    }
+public record Criterion(String name) implements PairwiseComparableObject {
 
     @Override
     public String toString() {

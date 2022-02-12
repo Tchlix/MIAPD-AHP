@@ -14,7 +14,7 @@ import static java.util.Map.Entry.comparingByValue;
 public class Result {
     private final Map<VacationDestination, Double> map;
 
-    public Result(Map<VacationDestination, Double> map) {
+    Result(Map<VacationDestination, Double> map) {
         this.map = map;
     }
 
