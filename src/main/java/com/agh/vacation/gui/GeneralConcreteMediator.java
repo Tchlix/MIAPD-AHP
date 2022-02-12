@@ -150,7 +150,9 @@ class GeneralConcreteMediator implements GeneralMediator {
             throw new IllegalStateException("Result was not calculated!");
         }
         centerPanel.removeAll();
-        centerPanel.add(new JTextArea(result.toString() + "\n" + inconsistencyResult));
+        var area = new JTextArea(result.toString() + "\n" + inconsistencyResult);
+        area.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 12));
+        centerPanel.add(area);
         centerPanel.revalidate();
         centerPanel.repaint();
     }
