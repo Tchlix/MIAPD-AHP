@@ -12,7 +12,7 @@ import static java.lang.System.lineSeparator;
 @Builder
 public class VacationDestination implements PairwiseComparableObject {
     public final String name;
-    public final Map<Criterion, Integer> ratings;
+    private final Map<Criterion, Integer> ratings;
 
 
     Integer ratingFor(Criterion criterion) {

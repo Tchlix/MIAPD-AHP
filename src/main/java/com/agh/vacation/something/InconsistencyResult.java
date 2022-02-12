@@ -7,20 +7,11 @@ import static java.lang.System.lineSeparator;
 /**
  * @author Filip Piwosz
  */
-public class InconsistencyResult {
-    public final List<Double> saatyResult;
-    public final List<Double> crResult;
-    public final List<Double> koczkodajResult;
-    public final List<Criterion> criteria;
+public record InconsistencyResult(List<Double> saatyResult, List<Double> crResult,
+                                  List<Double> koczkodajResult, List<Criterion> criteria) {
 
-    public InconsistencyResult(List<Double> saatyResult, List<Double> crResult, List<Double> koczkodajResult, List<Criterion> criteria) {
-        this.saatyResult = saatyResult;
-        this.crResult = crResult;
-        this.koczkodajResult = koczkodajResult;
-        this.criteria = criteria;
-    }
-
-    public String display() {
+    @Override
+    public String toString() {
         StringBuilder builder = new StringBuilder();
         builder
                 .append("\t")
