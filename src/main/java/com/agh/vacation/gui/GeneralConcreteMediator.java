@@ -9,7 +9,7 @@ import com.agh.vacation.gui.centerpack.ComparisonMatrixTabbedPane;
 import com.agh.vacation.gui.centerpack.ExpertRatingsTabbedPane;
 import com.agh.vacation.gui.eastpack.calculatorgui.CalculatorButton;
 import com.agh.vacation.something.Criterion;
-import com.agh.vacation.something.InconsistencyResult;
+import com.agh.vacation.calculator.InconsistencyResult;
 import com.agh.vacation.something.VacationDestination;
 
 import javax.swing.*;
@@ -150,7 +150,7 @@ class GeneralConcreteMediator implements GeneralMediator {
             throw new IllegalStateException("Result was not calculated!");
         }
         centerPanel.removeAll();
-        centerPanel.add(new JTextArea(result.display() + "\n" + inconsistencyResult));
+        centerPanel.add(new JTextArea(result.toString() + "\n" + inconsistencyResult));
         centerPanel.revalidate();
         centerPanel.repaint();
     }

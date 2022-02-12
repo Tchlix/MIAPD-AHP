@@ -7,7 +7,6 @@ import org.apache.commons.math3.linear.RealMatrix;
 import java.util.HashMap;
 import java.util.List;
 
-import static com.agh.vacation.something.RatingDifferenceMapper.mapForAHP;
 import static java.lang.Math.abs;
 
 /**
@@ -77,6 +76,6 @@ public class VacationDestinationComparisonMatricesCreator {
 
     private static Double ahpValueBasedOnDiff(Integer firstDestinationRating, Integer secondDestinationRating) {
         Integer diff = abs(firstDestinationRating - secondDestinationRating);
-        return mapForAHP.get(diff);
+        return RatingDifferenceMapper.getDifference(diff);
     }
 }

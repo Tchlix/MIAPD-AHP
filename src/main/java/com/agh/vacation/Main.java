@@ -60,11 +60,13 @@ public class Main {
 
         //calculate final result - sum(score * criterion priority)
         Result result = Calculator.calculateResult(criteriaPriorities, criteriaScoresMap);
-        Logging.info(result.display());
+        Logging.info(result);
         //Calculate inconsistency
-        Logging.info(criteriaList);
-        Logging.info("Saaty CI: " + Calculator.calculateInconsistency(SAATY, comparisonMatricesBasedOnCriteria));
-        Logging.info("CR: " + Calculator.calculateInconsistency(CR, comparisonMatricesBasedOnCriteria));
-        Logging.info("Koczkodaj Index: " + Calculator.calculateInconsistency(KOCZKODAJ, comparisonMatricesBasedOnCriteria));
+        var inconsistencyResult = new InconsistencyResult(
+                Calculator.calculateInconsistency(SAATY, comparisonMatricesBasedOnCriteria),
+                Calculator.calculateInconsistency(CR, comparisonMatricesBasedOnCriteria),
+                Calculator.calculateInconsistency(KOCZKODAJ, comparisonMatricesBasedOnCriteria),
+                criteriaList);
+        Logging.info(inconsistencyResult);
     }
 }
