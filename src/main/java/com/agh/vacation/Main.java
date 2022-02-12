@@ -33,8 +33,8 @@ public class Main {
             criteriaPriorities = CriteriaJSONLoader.loadCriteria(Path.of(CRITERIA_PATH));
             multipleExpertsDestinationRatings = loadMultipleExpertsDestinationRatings();
         } catch (IOException e) {
-            System.err.println("Couldn't load parameter(s)!");
-            System.err.println(e.getMessage());
+            Logging.error("Couldn't load parameter(s)!");
+            Logging.error(e.getMessage());
             return;
         }
 
@@ -60,11 +60,11 @@ public class Main {
 
         //calculate final result - sum(score * criterion priority)
         Result result = Calculator.calculateResult(criteriaPriorities, criteriaScoresMap);
-        System.out.println(result.display());
+        Logging.info(result.display());
         //Calculate inconsistency
-        System.out.println(criteriaList);
-        System.out.println("Saaty CI: " + Calculator.calculateInconsistency(SAATY, comparisonMatricesBasedOnCriteria));
-        System.out.println("CR: " + Calculator.calculateInconsistency(CR, comparisonMatricesBasedOnCriteria));
-        System.out.println("Koczkodaj Index: " + Calculator.calculateInconsistency(KOCZKODAJ, comparisonMatricesBasedOnCriteria));
+        Logging.info(criteriaList);
+        Logging.info("Saaty CI: " + Calculator.calculateInconsistency(SAATY, comparisonMatricesBasedOnCriteria));
+        Logging.info("CR: " + Calculator.calculateInconsistency(CR, comparisonMatricesBasedOnCriteria));
+        Logging.info("Koczkodaj Index: " + Calculator.calculateInconsistency(KOCZKODAJ, comparisonMatricesBasedOnCriteria));
     }
 }

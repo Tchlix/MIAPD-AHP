@@ -1,7 +1,8 @@
 package com.agh.vacation.gui.eastpack.fileloadingui;
 
-import com.agh.vacation.fileloading.CriteriaPrioritiesMap;
+import com.agh.vacation.Logging;
 import com.agh.vacation.fileloading.CriteriaJSONLoader;
+import com.agh.vacation.fileloading.CriteriaPrioritiesMap;
 import com.agh.vacation.gui.GeneralMediator;
 
 import javax.swing.*;
@@ -15,7 +16,7 @@ import java.io.IOException;
  * @author Filip Piwosz
  */
 class ChooseCriteriaFileButton extends JButton implements ActionListener {
-    private GeneralMediator generalMediator;
+    private final transient GeneralMediator generalMediator;
 
     ChooseCriteriaFileButton(GeneralMediator generalMediator) {
         super();
@@ -34,19 +35,21 @@ class ChooseCriteriaFileButton extends JButton implements ActionListener {
             int returnVal = jFileChooser.showOpenDialog(this);
 
             switch (returnVal) {
-                case JFileChooser.CANCEL_OPTION -> System.err.println("No criteria file has been chosen!");
-                case JFileChooser.ERROR_OPTION -> System.err.println("File Chooser Error");
-                case JFileChooser.APPROVE_OPTION -> {
-                    try {
-                        CriteriaPrioritiesMap criteriaPrioritiesMap =
-                                CriteriaJSONLoader.loadCriteria(jFileChooser.getSelectedFile().toPath());
-                        generalMediator.saveCriteria(criteriaPrioritiesMap);
-                    } catch (IOException ex) {
-                        System.err.println(ex.getMessage());
-                    }
-                }
-
+                case JFileChooser.CANCEL_OPTION -> Logging.error("No criteria file has been chosen!");
+                case JFileChooser.ERROR_OPTION -> Logging.error("File Chooser Error");
+                case JFileChooser.APPROVE_OPTION -> loadCriteria(jFileChooser);
+                default -> Logging.error("Unknown enum");
             }
+        }
+    }
+
+    private void loadCriteria(JFileChooser jFileChooser) {
+        try {
+            CriteriaPrioritiesMap criteriaPrioritiesMap =
+                    CriteriaJSONLoader.loadCriteria(jFileChooser.getSelectedFile().toPath());
+            generalMediator.saveCriteria(criteriaPrioritiesMap);
+        } catch (IOException ex) {
+            Logging.error(ex.getMessage());
         }
     }
 }

@@ -1,5 +1,6 @@
 package com.agh.vacation.gui.eastpack.fileloadingui;
 
+import com.agh.vacation.Logging;
 import com.agh.vacation.fileloading.ExpertDestinationRatings;
 import com.agh.vacation.gui.GeneralMediator;
 
@@ -16,7 +17,7 @@ import static com.agh.vacation.fileloading.DestinationLoader.loadMultipleExperts
  * @author Filip Piwosz
  */
 class PickExpertDirectoryButton extends JButton implements ActionListener {
-    private GeneralMediator mediator;
+    private final transient GeneralMediator mediator;
 
     PickExpertDirectoryButton(GeneralMediator mediator) {
         super();
@@ -36,19 +37,21 @@ class PickExpertDirectoryButton extends JButton implements ActionListener {
             int returnVal = jFileChooser.showOpenDialog(this);
 
             switch (returnVal) {
-                case JFileChooser.CANCEL_OPTION -> System.err.println("No directory has been chosen!");
-                case JFileChooser.ERROR_OPTION -> System.err.println("File Chooser Error");
-                case JFileChooser.APPROVE_OPTION -> {
-                    try {
-                        List<ExpertDestinationRatings> multipleExpertsDestinationRatings =
-                                loadMultipleExpertsDestinationRatings(jFileChooser.getSelectedFile().toPath());
-                        mediator.saveExpertRatings(multipleExpertsDestinationRatings);
-                    } catch (IOException ex) {
-                        System.err.println(ex.getMessage());
-                    }
-                }
-
+                case JFileChooser.CANCEL_OPTION -> Logging.error("No directory has been chosen!");
+                case JFileChooser.ERROR_OPTION -> Logging.error("File Chooser Error");
+                case JFileChooser.APPROVE_OPTION -> loadExperts(jFileChooser);
+                default -> Logging.error("Unknown enum");
             }
+        }
+    }
+
+    private void loadExperts(JFileChooser jFileChooser) {
+        try {
+            List<ExpertDestinationRatings> multipleExpertsDestinationRatings =
+                    loadMultipleExpertsDestinationRatings(jFileChooser.getSelectedFile().toPath());
+            mediator.saveExpertRatings(multipleExpertsDestinationRatings);
+        } catch (IOException ex) {
+            Logging.error(ex.getMessage());
         }
     }
 }

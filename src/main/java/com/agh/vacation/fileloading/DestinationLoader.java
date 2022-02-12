@@ -1,5 +1,6 @@
 package com.agh.vacation.fileloading;
 
+import com.agh.vacation.Logging;
 import com.agh.vacation.something.VacationDestination;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -28,11 +29,11 @@ public class DestinationLoader {
                         try {
                             destinations.add(objectMapper.readValue(path, VacationDestination.class));
                         } catch (IOException e) {
-                            System.err.println("There was a problem with: " + path);
+                            Logging.error("There was a problem with: " + path);
                         }
                     });
         } catch (IOException e) {
-            System.err.println(e.getMessage());
+            Logging.error(e.getMessage());
         }
         return destinations;
     }
