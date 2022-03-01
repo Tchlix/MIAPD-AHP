@@ -1,4 +1,6 @@
-package com.agh.vacation;
+package com.agh.vacation.calculator;
+
+import com.agh.vacation.ds.Criterion;
 
 import java.util.Map;
 

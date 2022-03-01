@@ -1,6 +1,6 @@
 package com.agh.vacation.gui.eastpack.choosecontextpanel;
 
-import com.agh.vacation.ExpertDestinationRatings;
+import com.agh.vacation.fileloading.ExpertDestinationRatings;
 import com.agh.vacation.gui.GeneralMediator;
 
 import javax.swing.*;

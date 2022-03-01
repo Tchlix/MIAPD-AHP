@@ -1,11 +1,8 @@
-package com.agh.vacation;
+package com.agh.vacation.calculator;
 
 import static java.lang.Math.floor;
 import static java.lang.Math.pow;
 
-/**
- *
- */
 class MathUtilFunctions {
     private static final String IMPROPER_ARRAY_EXCEPTION_MESSAGE = "Null or empty array cannot have max value!";
 

@@ -1,11 +1,14 @@
-package com.agh.vacation;
+package com.agh.vacation.calculator;
 
+import com.agh.vacation.ds.ComparisonMatrix;
+import com.agh.vacation.ds.IndexMap;
+import com.agh.vacation.ds.PairwiseComparableObject;
 import org.apache.commons.math3.linear.*;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.agh.vacation.MathUtilFunctions.truncateDouble;
+import static com.agh.vacation.calculator.MathUtilFunctions.truncateDouble;
 
 class GMMCalculator {
     private static final int DEFAULT_TRUNCATION = 3;
@@ -108,7 +111,6 @@ class GMMCalculator {
 
 
     private static RealVector gmm(RealMatrix matrix) {
-        //uncompleteMatrix(matrix);
         RealMatrix matrixG = g(matrix);
         RealVector vectorR = r(matrix);
         return w(vectorR, matrixG);

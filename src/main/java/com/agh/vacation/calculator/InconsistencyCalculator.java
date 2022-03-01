@@ -1,4 +1,4 @@
-package com.agh.vacation;
+package com.agh.vacation.calculator;
 
 import org.apache.commons.math3.linear.EigenDecomposition;
 import org.apache.commons.math3.linear.RealMatrix;
@@ -7,10 +7,10 @@ import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
 
-import static com.agh.vacation.MathUtilFunctions.truncateDouble;
+import static com.agh.vacation.calculator.MathUtilFunctions.truncateDouble;
 import static java.lang.Math.max;
 
-public class InconsistencyCalculator {
+class InconsistencyCalculator {
     private static final Double[] RCI = {null, null, null, 0.58, 0.9, 1.12, 1.24, 1.32, 1.41, 1.45, 1.49, 1.51, 1.48, 1.56, 1.57, 1.59};
     private static final int DEFAULT_TRUNCATION = 3;
 
@@ -34,7 +34,7 @@ public class InconsistencyCalculator {
         return truncateDouble((principalEigenvalue - n) / (n - 1), DEFAULT_TRUNCATION);
     }
 
-    public static List<Double> calculateSaatyCI(ComparisonMatricesBasedOnCriteria comparisonMatricesBasedOnCriteria) {
+    static List<Double> calculateSaatyCI(ComparisonMatricesBasedOnCriteria comparisonMatricesBasedOnCriteria) {
         return comparisonMatricesBasedOnCriteria.stream().
                 map(s -> s.getValue().matrix()).
                 map(InconsistencyCalculator::calculateSingleSaatyCI).toList();
@@ -46,7 +46,7 @@ public class InconsistencyCalculator {
      * @param comparisonMatricesBasedOnCriteria
      * @return CR values of Saaty CI
      */
-    public static List<Double> calculateCR(ComparisonMatricesBasedOnCriteria comparisonMatricesBasedOnCriteria) {
+    static List<Double> calculateCR(ComparisonMatricesBasedOnCriteria comparisonMatricesBasedOnCriteria) {
         LinkedList<Double> ciValues = new LinkedList<>(calculateSaatyCI(comparisonMatricesBasedOnCriteria));
         var size = comparisonMatricesBasedOnCriteria.getIndexMap().keySet().size();
         for (int i = 0; i < ciValues.size(); i++) {
@@ -82,7 +82,7 @@ public class InconsistencyCalculator {
         return globalKI.orElse(null);
     }
 
-    public static List<Double> calculateKoczkodajIndexes(ComparisonMatricesBasedOnCriteria comparisonMatricesBasedOnCriteria) {
+    static List<Double> calculateKoczkodajIndexes(ComparisonMatricesBasedOnCriteria comparisonMatricesBasedOnCriteria) {
         return comparisonMatricesBasedOnCriteria.stream().
                 map(s -> s.getValue().matrix()).
                 map(InconsistencyCalculator::calculateSingleKoczkodajIndex).toList();

@@ -1,12 +1,12 @@
-package com.agh.vacation;
+package com.agh.vacation.ds;
 
+import com.agh.vacation.calculator.ComparisonMatricesBasedOnCriteria;
 import org.apache.commons.math3.linear.Array2DRowRealMatrix;
 import org.apache.commons.math3.linear.RealMatrix;
 
 import java.util.HashMap;
 import java.util.List;
 
-import static com.agh.vacation.RatingDifferenceMapper.mapForAHP;
 import static java.lang.Math.abs;
 
 /**
@@ -76,6 +76,6 @@ public class VacationDestinationComparisonMatricesCreator {
 
     private static Double ahpValueBasedOnDiff(Integer firstDestinationRating, Integer secondDestinationRating) {
         Integer diff = abs(firstDestinationRating - secondDestinationRating);
-        return mapForAHP.get(diff);
+        return RatingDifferenceMapper.getDifference(diff);
     }
 }

@@ -1,5 +1,8 @@
-package com.agh.vacation;
+package com.agh.vacation.calculator;
 
+import com.agh.vacation.ds.ComparisonMatrix;
+import com.agh.vacation.ds.Criterion;
+import com.agh.vacation.ds.VacationDestination;
 import org.apache.commons.math3.linear.Array2DRowRealMatrix;
 import org.apache.commons.math3.linear.RealMatrix;
 
@@ -7,18 +10,19 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class AIJCalculator {
+class AIJCalculator {
     private AIJCalculator() {
     }
 
     /**
+     * Aggregation of Individual Judgments
      * We just return geometric mean of matrices
      *
      * @param criteria       list of criteria for loop
      * @param expertMatrices multiple matrices to be aggregated
      * @return single matrix calculated from geometric mean
      */
-    public static ComparisonMatricesBasedOnCriteria calculate(List<Criterion> criteria, List<ComparisonMatricesBasedOnCriteria> expertMatrices) {
+    static ComparisonMatricesBasedOnCriteria calculateAIJ(List<Criterion> criteria, List<ComparisonMatricesBasedOnCriteria> expertMatrices) {
         if (expertMatrices.size() == 1)
             return expertMatrices.get(0);
 

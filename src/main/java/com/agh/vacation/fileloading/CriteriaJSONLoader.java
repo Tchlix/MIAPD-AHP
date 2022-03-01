@@ -1,9 +1,9 @@
 package com.agh.vacation.fileloading;
 
-import com.agh.vacation.ComparisonMatrix;
-import com.agh.vacation.CriteriaPrioritiesMap;
-import com.agh.vacation.Criterion;
-import com.agh.vacation.IndexMap;
+import com.agh.vacation.calculator.Calculator;
+import com.agh.vacation.ds.ComparisonMatrix;
+import com.agh.vacation.ds.Criterion;
+import com.agh.vacation.ds.IndexMap;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -16,8 +16,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
-
-import static com.agh.vacation.EigenvalueCalculator.calculateEigenvalues;
 
 /**
  * Holder for function that loads criteria from properly formatted .json file
@@ -64,7 +62,8 @@ public class CriteriaJSONLoader {
                 obtainComparisonMatrixOfCurrentLevel(comparisonMatrixNode);
 
         //2. calculate priorities in this level
-        Map<Criterion, Double> currentLevelCriteriaPriorities = calculateEigenvalues(criterionComparisonMatrix);
+        Map<Criterion, Double> currentLevelCriteriaPriorities = Calculator.
+                calculateCriteriaLevelPriorities(criterionComparisonMatrix);
 
         //3. obtain father priority if exists
         Double fatherPriority = 1.0;

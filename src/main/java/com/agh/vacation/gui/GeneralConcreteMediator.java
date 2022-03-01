@@ -1,20 +1,25 @@
 package com.agh.vacation.gui;
 
-import com.agh.vacation.*;
+import com.agh.vacation.calculator.*;
+import com.agh.vacation.calculator.Calculator.CalculatorType;
+import com.agh.vacation.fileloading.CriteriaPrioritiesMap;
+import com.agh.vacation.fileloading.ExpertDestinationRatings;
 import com.agh.vacation.gui.centerpack.CenterPanel;
 import com.agh.vacation.gui.centerpack.ComparisonMatrixTabbedPane;
 import com.agh.vacation.gui.centerpack.ExpertRatingsTabbedPane;
 import com.agh.vacation.gui.eastpack.calculatorgui.CalculatorButton;
+import com.agh.vacation.ds.Criterion;
+import com.agh.vacation.calculator.InconsistencyResult;
+import com.agh.vacation.ds.VacationDestination;
 
 import javax.swing.*;
 import java.awt.*;
 import java.util.Enumeration;
 import java.util.List;
 
-import static com.agh.vacation.CriteriaScoresCalculator.calculateCriteriaScores;
-import static com.agh.vacation.InconsistencyCalculator.*;
-import static com.agh.vacation.ResultCalculator.calculateResult;
-import static com.agh.vacation.VacationDestinationComparisonMatricesCreator.createComparisonMatricesBasedOnCriteria;
+import static com.agh.vacation.calculator.Calculator.InconsistencyType.*;
+import static com.agh.vacation.calculator.Calculator.calculateCriteriaScores;
+import static com.agh.vacation.ds.VacationDestinationComparisonMatricesCreator.createComparisonMatricesBasedOnCriteria;
 
 /**
  * @author Filip Piwosz
@@ -124,17 +129,18 @@ class GeneralConcreteMediator implements GeneralMediator {
                 keySet().
                 stream().
                 toList();
-        finalCompairsonMatrix = AIJCalculator.calculate(criteriaList, multipleExpertMatrices);
+        finalCompairsonMatrix = Calculator.calculateAIJ(criteriaList, multipleExpertMatrices);
 
         List<VacationDestination> destinations = expertDestinationRatings.get(0).ratings;
         VacationCriteriaScoresMap criteriaScoresMap =
                 calculateCriteriaScores(destinations, finalCompairsonMatrix, calculatorType);
 
         //calculate final result - sum(score * criterion priority)
-        result = calculateResult(criteriaPrioritiesMap, criteriaScoresMap);
-        inconsistencyResult = new InconsistencyResult(calculateSaatyCI(finalCompairsonMatrix),
-                calculateCR(finalCompairsonMatrix),
-                calculateKoczkodajIndexes(finalCompairsonMatrix),
+        result = Calculator.calculateResult(criteriaPrioritiesMap, criteriaScoresMap);
+        inconsistencyResult = new InconsistencyResult(
+                Calculator.calculateInconsistency(SAATY, finalCompairsonMatrix),
+                Calculator.calculateInconsistency(CR, finalCompairsonMatrix),
+                Calculator.calculateInconsistency(KOCZKODAJ, finalCompairsonMatrix),
                 criteriaList);
     }
 
@@ -144,7 +150,9 @@ class GeneralConcreteMediator implements GeneralMediator {
             throw new IllegalStateException("Result was not calculated!");
         }
         centerPanel.removeAll();
-        centerPanel.add(new JTextArea(result.display() + "\n" + inconsistencyResult.display()));
+        var area = new JTextArea(result.toString() + "\n" + inconsistencyResult);
+        area.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 12));
+        centerPanel.add(area);
         centerPanel.revalidate();
         centerPanel.repaint();
     }
@@ -152,10 +160,8 @@ class GeneralConcreteMediator implements GeneralMediator {
     private CalculatorType fromButtonGroup() {
         for (Enumeration<AbstractButton> enumeration = this.buttonGroup.getElements(); enumeration.hasMoreElements(); ) {
             AbstractButton button = enumeration.nextElement();
-            if (button.isSelected()) {
-                if (button instanceof CalculatorButton) {
-                    return ((CalculatorButton) button).calculatorType;
-                }
+            if (button.isSelected() && button instanceof CalculatorButton btn) {
+                return btn.calculatorType;
             }
         }
         throw new IllegalStateException("No button was found!");

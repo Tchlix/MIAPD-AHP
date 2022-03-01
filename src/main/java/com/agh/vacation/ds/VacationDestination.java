@@ -1,4 +1,4 @@
-package com.agh.vacation;
+package com.agh.vacation.ds;
 
 import lombok.Builder;
 import lombok.extern.jackson.Jacksonized;
@@ -7,14 +7,12 @@ import java.util.Map;
 
 import static java.lang.System.lineSeparator;
 
-/**
- *
- */
+
 @Jacksonized
 @Builder
 public class VacationDestination implements PairwiseComparableObject {
     public final String name;
-    public final Map<Criterion, Integer> ratings;
+    private final Map<Criterion, Integer> ratings;
 
 
     Integer ratingFor(Criterion criterion) {

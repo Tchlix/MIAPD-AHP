@@ -1,7 +1,7 @@
 package com.agh.vacation.gui;
 
-import com.agh.vacation.CriteriaPrioritiesMap;
-import com.agh.vacation.ExpertDestinationRatings;
+import com.agh.vacation.fileloading.CriteriaPrioritiesMap;
+import com.agh.vacation.fileloading.ExpertDestinationRatings;
 
 import javax.swing.*;
 import java.util.List;

@@ -1,5 +1,8 @@
-package com.agh.vacation;
+package com.agh.vacation.calculator;
 
+import com.agh.vacation.ds.ComparisonMatrix;
+import com.agh.vacation.ds.IndexMap;
+import com.agh.vacation.ds.PairwiseComparableObject;
 import org.apache.commons.math3.linear.EigenDecomposition;
 import org.apache.commons.math3.linear.RealMatrix;
 import org.apache.commons.math3.linear.RealVector;
@@ -7,10 +10,10 @@ import org.apache.commons.math3.linear.RealVector;
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.agh.vacation.MathUtilFunctions.maxElementIndex;
-import static com.agh.vacation.MathUtilFunctions.truncateDouble;
+import static com.agh.vacation.calculator.MathUtilFunctions.maxElementIndex;
+import static com.agh.vacation.calculator.MathUtilFunctions.truncateDouble;
 
-public class EigenvalueCalculator {
+class EigenvalueCalculator {
     private static final int DEFAULT_TRUNCATION = 3;
 
     private EigenvalueCalculator() {
@@ -35,7 +38,7 @@ public class EigenvalueCalculator {
      * @return Map of criteria with respective scaled priorities
      */
 
-    public static <T extends PairwiseComparableObject> Map<T, Double> calculateEigenvalues(ComparisonMatrix<T> comparisonMatrix) {
+    static <T extends PairwiseComparableObject> Map<T, Double> calculateEigenvalues(ComparisonMatrix<T> comparisonMatrix) {
         RealMatrix matrix = comparisonMatrix.matrix();
         IndexMap<T> indexMap = comparisonMatrix.indexMap();
         EigenDecomposition decomposition = new EigenDecomposition(matrix);

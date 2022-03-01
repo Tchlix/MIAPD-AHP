@@ -1,4 +1,4 @@
-package com.agh.vacation;
+package com.agh.vacation.ds;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -8,7 +8,7 @@ import java.util.Map;
  * Contains a map, that returns proper value from fundamental AHP scale given a difference in rating
  */
 class RatingDifferenceMapper {
-    static Map<Integer, Double> mapForAHP = new HashMap<>(Map.of(
+    private static final Map<Integer, Double> mapForAHP = new HashMap<>(Map.of(
             0, 1.,
             1, 3.,
             2, 5.,
@@ -17,5 +17,9 @@ class RatingDifferenceMapper {
     ));
 
     private RatingDifferenceMapper() {
+    }
+
+    static Double getDifference(Integer integer) {
+        return mapForAHP.get(integer);
     }
 }

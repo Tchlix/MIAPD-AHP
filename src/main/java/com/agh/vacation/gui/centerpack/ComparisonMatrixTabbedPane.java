@@ -1,6 +1,6 @@
 package com.agh.vacation.gui.centerpack;
 
-import com.agh.vacation.ComparisonMatricesBasedOnCriteria;
+import com.agh.vacation.calculator.ComparisonMatricesBasedOnCriteria;
 
 import javax.swing.*;
 import java.awt.*;

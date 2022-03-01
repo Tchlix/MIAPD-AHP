@@ -1,18 +1,19 @@
-package com.agh.vacation;
+package com.agh.vacation.calculator;
+
+import com.agh.vacation.fileloading.CriteriaPrioritiesMap;
+import com.agh.vacation.ds.Criterion;
+import com.agh.vacation.ds.VacationDestination;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
-/**
- *
- */
-public class ResultCalculator {
+class ResultCalculator {
     private ResultCalculator() {
     }
 
-    public static Result calculateResult(CriteriaPrioritiesMap criteriaPriorities,
-                                  VacationCriteriaScoresMap vacationCriteriaScoresMap) {
+    static Result calculateResult(CriteriaPrioritiesMap criteriaPriorities,
+                                         VacationCriteriaScoresMap vacationCriteriaScoresMap) {
         Map<VacationDestination, Double> resultMap = new HashMap<>();
         for (Entry<VacationDestination, CriteriaScores> destinationScoresEntry : vacationCriteriaScoresMap.entrySet()) {
             VacationDestination destination = destinationScoresEntry.getKey();
