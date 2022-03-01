@@ -1,21 +1,20 @@
 package com.agh.vacation;
 
 import com.agh.vacation.calculator.*;
+import com.agh.vacation.ds.Criterion;
 import com.agh.vacation.fileloading.CriteriaJSONLoader;
 import com.agh.vacation.fileloading.CriteriaPrioritiesMap;
 import com.agh.vacation.fileloading.ExpertDestinationRatings;
 import com.agh.vacation.gui.MainFrame;
-import com.agh.vacation.ds.Criterion;
 
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.List;
 
-import static com.agh.vacation.calculator.Calculator.CalculatorType.*;
 import static com.agh.vacation.calculator.Calculator.InconsistencyType.*;
 import static com.agh.vacation.calculator.Calculator.calculateCriteriaScores;
-import static com.agh.vacation.fileloading.DestinationLoader.loadMultipleExpertsDestinationRatings;
 import static com.agh.vacation.ds.VacationDestinationComparisonMatricesCreator.createComparisonMatricesBasedOnCriteria;
+import static com.agh.vacation.fileloading.DestinationLoader.loadMultipleExpertsDestinationRatings;
 
 public class Main {
     private static final String CRITERIA_PATH = "criteria.json";
@@ -56,7 +55,8 @@ public class Main {
         //for each criterion calculate individual score of each destination
         //(score is not yet multiplied with proper criteria priority value)
         VacationCriteriaScoresMap criteriaScoresMap =
-                calculateCriteriaScores(destinations, comparisonMatricesBasedOnCriteria, EIGENVALUE);
+                calculateCriteriaScores(destinations, comparisonMatricesBasedOnCriteria,
+                        Calculator.CalculatorType.EIGENVALUE);
 
         //calculate final result - sum(score * criterion priority)
         Result result = Calculator.calculateResult(criteriaPriorities, criteriaScoresMap);
